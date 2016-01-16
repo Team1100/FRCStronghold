@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends Subsystem {
     
-   private Shooter Shooter;
+   private static Shooter Shooter;
    
-   public Shooter getInstance(){
+   public static Shooter getInstance(){
 	   if(Shooter==null)
 		   Shooter = new Shooter();
 	   return Shooter;

@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
     
-	private Intake Intake;
+	private static Intake Intake;
 	
-    public Intake getInstance(){
+    public static Intake getInstance(){
     	if(Intake==null)
     		Intake = new Intake();
     	return Intake;

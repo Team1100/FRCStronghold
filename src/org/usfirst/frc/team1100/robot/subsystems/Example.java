@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Example extends Subsystem {
     
-    private Example Example;
+    private static Example Example;
     
-    public Example getInstance(){
+    public static Example getInstance(){
     	if(Example==null)
     		Example = new Example();
     	return Example;

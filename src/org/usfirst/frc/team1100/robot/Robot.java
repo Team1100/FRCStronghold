@@ -1,12 +1,14 @@
 
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Intake;
+import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team1100.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1100.robot.subsystems.Example;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,8 +19,6 @@ import org.usfirst.frc.team1100.robot.subsystems.Example;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
-
     Command autonomousCommand;
 
     /**
@@ -26,7 +26,12 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	//Initialize Subsystems and OI
 		OI.getInstance();
+		Drive.getInstance();
+		Intake.getInstance();
+		Shooter.getInstance();
+		
         //TODO: set autonomousCommand
     }
 	
