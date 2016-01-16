@@ -6,13 +6,24 @@ package org.usfirst.frc.team1100.robot;
  * floating around.
  */
 public class RobotMap {
-    // For example to map the left and right motors, you could define the
-    // following variables to use with your drivetrain subsystem.
-    // public static int leftMotor = 1;
-    // public static int rightMotor = 2;
-    
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
+	//t indicates temporary value
+	
+	//[D]RIVE TRAIN
+	public static final int D_LEFT_FRONT = 1; //t
+	public static final int D_LEFT_MID = 2;//t
+	public static final int D_LEFT_BACK = 3;//t
+	public static final int D_RIGHT_FRONT = 1;//t
+	public static final int D_RIGHT_MID = 2;//t
+	public static final int D_RIGHT_BACK = 3;//t
+	public static final int D_GYRO = 42;//t
+	//[V]ISION
+	public static final int V_CAMERA = 314;//t
+	//[S]HOOTER
+	//[I]NTAKE
+	//[J]OYSTICKS
+	public static final int J_LEFT = 0;//t
+	public static final int J_RIGHT = 1;//t
+	public static final int J_X = 2;//t
+	//[E]NCODERS
+	public static final int E_POLAR_SHOOTER = 17;//t
 }
