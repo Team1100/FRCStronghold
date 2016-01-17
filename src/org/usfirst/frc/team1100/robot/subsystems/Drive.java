@@ -53,8 +53,8 @@ public class Drive extends Subsystem {
 		// Initialize Drive
 		drive = new RobotDrive(LeftVVV, RightVVV);
 		//Initialize Gyro
-		//TODO: make sure that this is right, not 100% gyro is analog
 		gyro = new AnalogGyro(RobotMap.D_GYRO);
+		gyro.reset();
 	}
 	//method called to make robot move
 	public void driveTank(double left, double right){
@@ -72,7 +72,7 @@ public class Drive extends Subsystem {
 		setDefaultCommand(new UserDrive());
 	}
 
-	public class VVV implements SpeedController {//class manages one side of speed controllers
+	public class VVV implements SpeedController {//class manages a side of speed controllers
 		
 		//In this class "Sanic" indicates enhanced loop variable
 		
@@ -127,7 +127,9 @@ public class Drive extends Subsystem {
 
 		@Override
 		public void disable() {
-			// TODO Auto-generated method stub
+			for(SpeedController Sanic: this.vics){
+				Sanic.disable();
+			}
 
 		}
 
