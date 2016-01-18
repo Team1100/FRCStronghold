@@ -7,7 +7,7 @@ import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -18,16 +18,18 @@ public class Drive extends Subsystem {
 
 	private static Drive DriveChain;// create drive train object
 
-	// Declare Victors(motor controllers)
-	private Victor RightFrontVictor;
+	// Declare Talons (motor controllers)
+	/*private Victor RightFrontVictor;
 	private Victor RightMidVictor;
 	private Victor RightBackVictor;
 	private Victor LeftFrontVictor;
 	private Victor LeftMidVictor;
-	private Victor LeftBackVictor;
+	private Victor LeftBackVictor;*/
+	private Talon leftT;
+	private Talon rightT;
 	// Declare VVVs
-	private VVV LeftVVV;
-	private VVV RightVVV;
+	/*private VVV LeftVVV;
+	private VVV RightVVV;*/
 	// Declare Robot Drive
 	private RobotDrive drive;
 	//Declare Gyro
@@ -40,8 +42,10 @@ public class Drive extends Subsystem {
 	}
 
 	public Drive() {
-		// Initialize Victors
-		RightFrontVictor = new Victor(RobotMap.D_RIGHT_FRONT);
+		// Initialize Talons
+		leftT = new Talon(RobotMap.D_LEFT_MID);
+		rightT = new Talon(RobotMap.D_RIGHT_MID);
+		/*RightFrontVictor = new Victor(RobotMap.D_RIGHT_FRONT);
 		RightMidVictor = new Victor(RobotMap.D_RIGHT_MID);
 		RightBackVictor = new Victor(RobotMap.D_RIGHT_BACK);
 		LeftFrontVictor = new Victor(RobotMap.D_LEFT_FRONT);
@@ -49,9 +53,9 @@ public class Drive extends Subsystem {
 		LeftBackVictor = new Victor(RobotMap.D_LEFT_BACK);
 		// Initialize VVVs
 		LeftVVV = new VVV(LeftFrontVictor, LeftMidVictor, LeftBackVictor);
-		RightVVV = new VVV(RightFrontVictor, RightMidVictor, RightBackVictor);
+		RightVVV = new VVV(RightFrontVictor, RightMidVictor, RightBackVictor);*/
 		// Initialize Drive
-		drive = new RobotDrive(LeftVVV, RightVVV);
+		drive = new RobotDrive(leftT, rightT);
 		//Initialize Gyro
 		gyro = new AnalogGyro(RobotMap.D_GYRO);
 		gyro.reset();
