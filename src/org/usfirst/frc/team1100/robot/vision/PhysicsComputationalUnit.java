@@ -1,3 +1,5 @@
+package org.usfirst.frc.team1100.robot.vision;
+
 public class PhysicsComputationalUnit {
 	private final double THETA = Math.toRadians(30); //Special thanks to Jacob for solving this problem after 90 minutes of stalling
 	private final float SPRING_CONSTANT = 4000;
