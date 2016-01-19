@@ -19,6 +19,9 @@ public class RobotMap {
 	//[V]ISION
 	public static final int V_CAMERA = 314;//t
 	//[S]HOOTER
+	public static final int S_BELT = 69;//t
+	public static final int S_FIRE_1 = 16;//t
+	public static final int S_FIRE_2 = 1;//t
 	//[I]NTAKE
 	//[J]OYSTICKS
 	public static final int J_LEFT = 0;//t

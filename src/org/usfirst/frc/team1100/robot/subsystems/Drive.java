@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -18,15 +19,17 @@ public class Drive extends Subsystem {
 
 	private static Drive DriveChain;// create drive train object
 
-	// Declare Talons (motor controllers)
+	// Declare Speed Controllers (motor controllers)
 	/*private Victor RightFrontVictor;
 	private Victor RightMidVictor;
 	private Victor RightBackVictor;
 	private Victor LeftFrontVictor;
 	private Victor LeftMidVictor;
 	private Victor LeftBackVictor;*/
-	private Talon leftT;
-	private Talon rightT;
+	private SpeedController leftT;
+	//private SpeedController leftT2;
+	private SpeedController rightT;
+	//private SpeedController rightT2;
 	// Declare VVVs
 	/*private VVV LeftVVV;
 	private VVV RightVVV;*/
@@ -42,9 +45,11 @@ public class Drive extends Subsystem {
 	}
 
 	public Drive() {
-		// Initialize Talons
-		leftT = new Talon(RobotMap.D_LEFT_MID);
-		rightT = new Talon(RobotMap.D_RIGHT_MID);
+		// Initialize Jaguars
+		leftT = new Jaguar(RobotMap.D_LEFT_FRONT);
+		//leftT2 = new Jaguar(RobotMap.D_LEFT_BACK);
+		rightT = new Jaguar(RobotMap.D_RIGHT_FRONT);
+		//rightT2 = new Jaguar(RobotMap.D_RIGHT_BACK);
 		/*RightFrontVictor = new Victor(RobotMap.D_RIGHT_FRONT);
 		RightMidVictor = new Victor(RobotMap.D_RIGHT_MID);
 		RightBackVictor = new Victor(RobotMap.D_RIGHT_BACK);
