@@ -20,7 +20,7 @@ public class TurnCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	startAngle = Drive.getInstance().getAngle();
+    	startAngle = 0;//Drive.getInstance().getAngle();
     	rightSpeed = -.5;
     	leftSpeed = .5;
     	if(targetAngle<0){
@@ -37,7 +37,7 @@ public class TurnCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Drive.getInstance().getAngle()-startAngle>targetAngle-Epsilon;
+        return false;//Drive.getInstance().getAngle()-startAngle>targetAngle-Epsilon;
     }
 
     // Called once after isFinished returns true

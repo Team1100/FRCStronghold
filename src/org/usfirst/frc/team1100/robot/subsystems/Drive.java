@@ -36,7 +36,7 @@ public class Drive extends Subsystem {
 	// Declare Robot Drive
 	private RobotDrive drive;
 	//Declare Gyro
-	private Gyro gyro;
+	//private Gyro gyro;
 
 	public static Drive getInstance() {// make drive accessible from anywhere
 		if (DriveChain == null)
@@ -62,18 +62,18 @@ public class Drive extends Subsystem {
 		// Initialize Drive
 		drive = new RobotDrive(leftT, rightT);
 		//Initialize Gyro
-		gyro = new AnalogGyro(RobotMap.D_GYRO);
-		gyro.reset();
+		//gyro = new AnalogGyro(RobotMap.D_GYRO);
+		//gyro.reset();
 	}
 	//method called to make robot move
 	public void driveTank(double left, double right){
 		drive.tankDrive(left, right);
 	}
 	//get the angle on the gyro
-	public double getAngle(){
+	/*public double getAngle(){
 		return gyro.getAngle();
 		
-	}
+	}*/
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -84,6 +84,7 @@ public class Drive extends Subsystem {
 	public class VVV implements SpeedController {//class manages a side of speed controllers
 		
 		//In this class "Sanic" indicates enhanced loop variable
+		//Gotta go fast
 		
 		private SpeedController[] vics;
 		private double speed;

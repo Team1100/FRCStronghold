@@ -20,12 +20,12 @@ public class OI{
 	
 	private AttackThree LeftStick;
 	private AttackThree RightStick;
-	private XboxController Peasant;
+	private XboxController Peasant; //Help! Help! I'm being repressed!
 	
 	private OI(){
-		LeftStick = new AttackThree(RobotMap.J_LEFT, 0);//TODO: set deadband
-		RightStick = new AttackThree(RobotMap.J_RIGHT, 0);//TODO: set deadband
-		Peasant = new XboxController(RobotMap.J_X, 0);//TODO:set deadband
+		LeftStick = new AttackThree(RobotMap.J_LEFT, .1);//TODO: set deadband
+		RightStick = new AttackThree(RobotMap.J_RIGHT, .1);//TODO: set deadband
+		Peasant = new XboxController(RobotMap.J_X, .2);//TODO:set deadband
 		
 		//Control button sets go here. Like, literally in this section of the constructor.
 		Peasant.getButtonX().whileHeld(new ShootCommand());
