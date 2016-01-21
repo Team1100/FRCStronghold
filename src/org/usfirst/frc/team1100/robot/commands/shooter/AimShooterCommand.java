@@ -8,11 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootCommand extends Command {
+public class AimShooterCommand extends Command {
+
 	private double speed;
-    public ShootCommand(double speed) {
-       requires(Shooter.getInstance());
-       this.speed = speed;
+    public AimShooterCommand(double speed) {
+        requires(Shooter.getInstance());
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +22,7 @@ public class ShootCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Shooter.getInstance().Shoot(speed);
+    	Shooter.getInstance().ChangeAngle(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

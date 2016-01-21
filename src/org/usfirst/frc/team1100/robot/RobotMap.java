@@ -22,6 +22,7 @@ public class RobotMap {
 	public static final int S_BELT = 4;//t
 	public static final int S_FIRE_1 = 5;//t
 	public static final int S_FIRE_2 = 6;//t
+	public static final int S_HEIGHT = 7;//t
 	//[I]NTAKE
 	//[J]OYSTICKS
 	public static final int J_LEFT = 0;

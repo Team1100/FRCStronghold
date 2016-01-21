@@ -14,6 +14,7 @@ public class Shooter extends Subsystem {
 	private Jaguar belts;
 	private Jaguar fire1;
 	private Jaguar fire2;
+	private Jaguar height;
     
    private static Shooter Shooter;
    
@@ -27,16 +28,15 @@ public class Shooter extends Subsystem {
 	   fire1 = new Jaguar(RobotMap.S_FIRE_1);
 	   fire2 = new Jaguar(RobotMap.S_FIRE_2);
 	   belts = new Jaguar(RobotMap.S_BELT);
+	   height = new Jaguar(RobotMap.S_HEIGHT);
    }
 
-   public void Shoot(){
-	   fire1.set(1);//spin firing wheels
-	   fire2.set(1);
+   public void Shoot(double speed){
+	   fire1.set(speed);//spin firing wheels
+	   fire2.set(speed);
    }
-   public void StopShoot(){
-	   fire1.set(0);//stop spinning wheels
-	   fire2.set(0);
-	   SpinBelt(0);
+   public void ChangeAngle(double speed) {
+	   height.set(speed);
    }
    /**
     * @belt = belt

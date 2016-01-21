@@ -2,7 +2,6 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.shooter.ShootCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SpinBeltCommand;
-import org.usfirst.frc.team1100.robot.commands.shooter.StopShootCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 /**
@@ -28,7 +27,7 @@ public class OI{
 		Peasant = new XboxController(RobotMap.J_X, .2);//TODO:set deadband
 		
 		//Control button sets go here. Like, literally in this section of the constructor.
-		Peasant.getButtonX().whileHeld(new ShootCommand());
+		Peasant.getButtonX().whileHeld(new ShootCommand(1));
 		Peasant.getButtonA().whenPressed(new SpinBeltCommand(.5));
 		Peasant.getButtonB().whenPressed(new SpinBeltCommand(-.5));
 	}
