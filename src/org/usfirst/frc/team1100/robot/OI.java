@@ -28,8 +28,9 @@ public class OI{
 		
 		//Control button sets go here. Like, literally in this section of the constructor.
 		Peasant.getButtonX().whileHeld(new ShootCommand(1));
-		Peasant.getButtonA().whenPressed(new SpinBeltCommand(.5));
-		Peasant.getButtonB().whenPressed(new SpinBeltCommand(-.5));
+		Peasant.getButtonLeftBumper().whenPressed(new SpinBeltCommand(-.5));
+		Peasant.getButtonRightBumper().whenPressed(new SpinBeltCommand(.5));
+		
 	}
 
 	public AttackThree getLeftStick() {
