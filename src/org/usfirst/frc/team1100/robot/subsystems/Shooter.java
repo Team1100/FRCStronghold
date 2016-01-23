@@ -14,7 +14,7 @@ public class Shooter extends Subsystem {
 	
 	private Jaguar belts;
 	private Jaguar fire1;
-	private Jaguar fire2;
+	//private Jaguar fire2;
 	private Jaguar height;
     
    private static Shooter Shooter;
@@ -40,6 +40,7 @@ public class Shooter extends Subsystem {
 	   height.set(speed);
    }
    /**
+    * @yolo true
     * @belt = belt
     * beltsssss of belt
     * @param speed of belt
