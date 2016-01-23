@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.shooter.AimShooterCommand;
 
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,14 +27,14 @@ public class Shooter extends Subsystem {
    
    private Shooter(){
 	   fire1 = new Jaguar(RobotMap.S_FIRE_1);
-	   fire2 = new Jaguar(RobotMap.S_FIRE_2);
+	   //fire2 = new Jaguar(RobotMap.S_FIRE_2);
 	   belts = new Jaguar(RobotMap.S_BELT);
 	   height = new Jaguar(RobotMap.S_HEIGHT);
    }
 
-   public void Shoot(double speed){
-	   fire1.set(speed);//spin firing wheels
-	   fire2.set(speed);
+   public void shoot(double speed){
+	   fire1.set(-speed);//spin firing wheels
+	   //fire2.set(speed);
    }
    public void ChangeAngle(double speed) {
 	   height.set(speed);
@@ -51,6 +52,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new AimShooterCommand());
     }
 }
 
