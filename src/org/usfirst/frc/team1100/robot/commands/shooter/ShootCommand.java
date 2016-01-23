@@ -35,7 +35,6 @@ public class ShootCommand extends Command {
     protected void end() {
     	Shooter.getInstance().shoot(0);
     	
-    	speed = 0;
     }
 
     // Called when another command which requires one or more of the same
