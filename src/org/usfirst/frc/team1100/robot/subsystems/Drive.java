@@ -121,8 +121,7 @@ public class Drive extends Subsystem {
 
 		@Override
 		public boolean getInverted() {
-			// TODO Auto-generated method stub
-			return false;
+			return vics[0].getInverted();
 		}
 
 		@Override

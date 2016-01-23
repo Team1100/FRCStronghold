@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 		
         //TODO: set autonomousCommand
+		//autonmousCommand = .....
     }
 	
 	public void disabledPeriodic() {

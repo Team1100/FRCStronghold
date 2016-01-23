@@ -6,7 +6,7 @@ package org.usfirst.frc.team1100.robot;
  * floating around.
  */
 public class RobotMap {
-	//t indicates temporary value
+	//TODO: t indicates temporary value
 	
 	//[D]RIVE TRAIN
 	public static final int D_LEFT_FRONT = 1; //t
@@ -21,9 +21,9 @@ public class RobotMap {
 	//[S]HOOTER
 	//[I]NTAKE
 	//[J]OYSTICKS
-	public static final int J_LEFT = 0;//t
-	public static final int J_RIGHT = 1;//t
-	public static final int J_X = 2;//t
+	public static final int J_LEFT = 0;
+	public static final int J_RIGHT = 1;
+	public static final int J_X = 2;
 	//[E]NCODERS
 	public static final int E_POLAR_SHOOTER = 17;//t
 }
