@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.vision.FollowCookie;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 		
         //TODO: set autonomousCommand
+		autonomousCommand = new FollowCookie();
     }
 	
 	public void disabledPeriodic() {

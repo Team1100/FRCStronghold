@@ -2,7 +2,7 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.shooter.AimShooterCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.UserAimShooterCommand;
 
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -53,7 +53,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new AimShooterCommand());
+    	setDefaultCommand(new UserAimShooterCommand());
     }
 }
 

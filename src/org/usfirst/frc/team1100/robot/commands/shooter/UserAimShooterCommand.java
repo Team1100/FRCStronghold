@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AimShooterCommand extends Command {
+public class UserAimShooterCommand extends Command {
 
-	private double speed;
-    public AimShooterCommand(/*double speed*/) {
+	//private double speed;
+    public UserAimShooterCommand(/*double speed*/) {
         requires(Shooter.getInstance());
         //this.speed = speed;
     }

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.shooter.ShootCommand;
-import org.usfirst.frc.team1100.robot.commands.shooter.SpinBeltCommand;
+import org.usfirst.frc.team1100.robot.commands.vision.FollowCookie;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 /**
@@ -29,6 +29,7 @@ public class OI{
 		//Control button sets go here. Like, literally in this section of the constructor.
 		Peasant.getButtonX().whileHeld(new ShootCommand(1));
 		Peasant.getButtonY().whileHeld(new ShootCommand(-.8));
+		Peasant.getButtonA().whileHeld(new FollowCookie());
 		//Peasant.getButtonLeftBumper().whenPressed(new SpinBeltCommand(-.5));
 		//Peasant.getButtonRightBumper().whenPressed(new SpinBeltCommand(.5));
 		
