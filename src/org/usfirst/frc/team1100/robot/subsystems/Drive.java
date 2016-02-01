@@ -67,7 +67,9 @@ public class Drive extends Subsystem {
 	}
 	//method called to make robot move
 	public void driveTank(double left, double right){
-		drive.tankDrive(left, right);
+		//drive.tankDrive(left, right);
+		//TODO: Uncomment this out, this is temporary. Without removing the comment,
+		//the drive train WILL NOT WORK
 	}
 	//get the angle on the gyro
 	/*public double getAngle(){

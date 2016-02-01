@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class FollowCookie extends Command {
 	
-	private final double PIXELS_TO_MM = 32512;
-	private final double COOKIE_WIDTH_MM = 69;
-	private final double IMAGE_DISTANCE_MM = 5.29517356;
+	private final double PIXELS_TO_MM = 0.01125; //Our constant for conversion
+	private final double COOKIE_WIDTH_MM = 69; //Object width
+	private final double IMAGE_DISTANCE_MM = 2.7195; //Distance in the image field
 	
 	private final double ANGLE_SPEED = .4;
 	private final double DRIVE_SPEED = .5;
@@ -51,15 +51,20 @@ public class FollowCookie extends Command {
     	for(double x :centerX){
     		if(ix == index){
 	    		SmartDashboard.putNumber("X", x);
-	    		if(x<152.5){
+	    		
+	    		if(x<142.5){
 	    			Drive.getInstance().driveTank(-DRIVE_SPEED, DRIVE_SPEED);
-	    		}
-	    		else if(x>167.5){
+	    		} else if(x<152.5) {
+	    			Drive.getInstance().driveTank(-DRIVE_SPEED/2, DRIVE_SPEED/2);
+	    		} else if(x>177.5){
 	    			Drive.getInstance().driveTank(DRIVE_SPEED, -DRIVE_SPEED);
-	    		}
-	    		else{
+	    		} else if(x>167.5) {
+	    			Drive.getInstance().driveTank(DRIVE_SPEED/2, -DRIVE_SPEED/2);
+	    		} else{
 	    			Drive.getInstance().driveTank(0, 0);
 	    		}
+	    		
+	    		//Drive.getInstance().driveTank(PIDSpeed(160,x)/2, -PIDSpeed(160,x)/2);
     		}
     		ix++;
     	}
@@ -93,6 +98,18 @@ public class FollowCookie extends Command {
     	SmartDashboard.putNumber("Width_in_Pixels", width);
     }
 
+    private double PIDSpeed(double target, double current) {
+    	double error = 0;
+    	double pOut = 0;
+    	error = target - current;
+    	pOut = error * 5 / 10;
+    	if(pOut > 127)
+    		pOut = 127;
+    	if(pOut < -127)
+    		pOut = -127;
+    	return (pOut+127.0)/127.0;
+    }
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
@@ -112,9 +129,9 @@ public class FollowCookie extends Command {
     
     private double distance(double width){
     	if(width==0)return 0;
-    	double imageWidth = width/PIXELS_TO_MM;
-    	double ratio =  COOKIE_WIDTH_MM/imageWidth;
-    	double distance = IMAGE_DISTANCE_MM * ratio;
+    	double imageWidth = width*PIXELS_TO_MM; //Compute the width of the physical image in the image field
+    	double ratio =  COOKIE_WIDTH_MM/imageWidth; //Calculate ratio of image field to object field
+    	double distance = IMAGE_DISTANCE_MM * ratio; //Find object distance
     	return distance;
     }
 }
