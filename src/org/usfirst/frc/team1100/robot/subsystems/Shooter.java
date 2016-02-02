@@ -37,7 +37,7 @@ public class Shooter extends Subsystem {
 	   //fire2.set(speed);
    }
    public void ChangeAngle(double speed) {
-	   height.set(speed);
+	   height.set(speed); 
    }
    /**
     * @yolo true

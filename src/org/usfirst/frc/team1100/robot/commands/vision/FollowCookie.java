@@ -43,6 +43,7 @@ public class FollowCookie extends Command {
     		if(area[i]>max_area){
     			max_area = area[i];
     			index = i;
+    			SmartDashboard.putNumber("Area", max_area);
     		}
     	}
     	
@@ -51,24 +52,22 @@ public class FollowCookie extends Command {
     	for(double x :centerX){
     		if(ix == index){
 	    		SmartDashboard.putNumber("X", x);
-	    		
-	    		if(x<142.5){
+	    		if(x<152.5){
 	    			Drive.getInstance().driveTank(-DRIVE_SPEED, DRIVE_SPEED);
-	    		} else if(x<152.5) {
-	    			Drive.getInstance().driveTank(-DRIVE_SPEED/2, DRIVE_SPEED/2);
-	    		} else if(x>177.5){
+	    		}
+	    		else if(x>167.5){
 	    			Drive.getInstance().driveTank(DRIVE_SPEED, -DRIVE_SPEED);
-	    		} else if(x>167.5) {
-	    			Drive.getInstance().driveTank(DRIVE_SPEED/2, -DRIVE_SPEED/2);
-	    		} else{
+	    		}
+	    		else{
 	    			Drive.getInstance().driveTank(0, 0);
 	    		}
-	    		
-	    		//Drive.getInstance().driveTank(PIDSpeed(160,x)/2, -PIDSpeed(160,x)/2);
     		}
     		ix++;
     	}
-    	if(centerX.length==0)Drive.getInstance().driveTank(0, 0);
+    	if(centerX.length==0){
+    		Drive.getInstance().driveTank(0, 0);
+    		SmartDashboard.putNumber("X", 0);
+    	}
     	
     	double[] centerY = table.getNumberArray("centerY", defaultValue);
     	int iy = 0;
@@ -87,27 +86,20 @@ public class FollowCookie extends Command {
     		}
     		iy++;
     	}
-    	if(centerY.length==0)Shooter.getInstance().ChangeAngle(0);
+    	if(centerY.length==0){
+    		Shooter.getInstance().ChangeAngle(0);
+    		SmartDashboard.putNumber("Y", 0);
+    	}
     	
     	double[] widthList = table.getNumberArray("width", defaultValue);
     	double width = 0;
-    	for(int i = 0; i<widthList.length; i++){
-    		if(i==index)width = widthList[i];
+    	int iw = 0;
+    	for(double w : widthList){
+    		if(iw==index)width = widthList[iw];
+    		iw ++;
     	}
     	SmartDashboard.putNumber("Distance_Vector", distance(width));
     	SmartDashboard.putNumber("Width_in_Pixels", width);
-    }
-
-    private double PIDSpeed(double target, double current) {
-    	double error = 0;
-    	double pOut = 0;
-    	error = target - current;
-    	pOut = error * 5 / 10;
-    	if(pOut > 127)
-    		pOut = 127;
-    	if(pOut < -127)
-    		pOut = -127;
-    	return (pOut+127.0)/127.0;
     }
     
     // Make this return true when this Command no longer needs to run execute()
@@ -129,9 +121,10 @@ public class FollowCookie extends Command {
     
     private double distance(double width){
     	if(width==0)return 0;
-    	double imageWidth = width*PIXELS_TO_MM; //Compute the width of the physical image in the image field
+    	/*double imageWidth = width*PIXELS_TO_MM; //Compute the width of the physical image in the image field
     	double ratio =  COOKIE_WIDTH_MM/imageWidth; //Calculate ratio of image field to object field
-    	double distance = IMAGE_DISTANCE_MM * ratio; //Find object distance
+    	double distance = IMAGE_DISTANCE_MM * ratio; //Find object distance*/
+    	double distance  = 1199.9*Math.pow(width, -0.855);
     	return distance;
     }
 }
