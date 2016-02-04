@@ -63,8 +63,6 @@ public class FollowCookie extends Command {
 	    		} else{
 	    			Drive.getInstance().driveTank(0, 0);
 	    		}
-	    		
-	    		//Drive.getInstance().driveTank(PIDSpeed(160,x)/2, -PIDSpeed(160,x)/2);
     		}
     		ix++;
     	}
@@ -97,18 +95,6 @@ public class FollowCookie extends Command {
     	SmartDashboard.putNumber("Distance_Vector", distance(width));
     	SmartDashboard.putNumber("Width_in_Pixels", width);
     }
-
-    private double PIDSpeed(double target, double current) {
-    	double error = 0;
-    	double pOut = 0;
-    	error = target - current;
-    	pOut = error * 5 / 10;
-    	if(pOut > 127)
-    		pOut = 127;
-    	if(pOut < -127)
-    		pOut = -127;
-    	return (pOut+127.0)/127.0;
-    }
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -129,9 +115,7 @@ public class FollowCookie extends Command {
     
     private double distance(double width){
     	if(width==0)return 0;
-    	double imageWidth = width*PIXELS_TO_MM; //Compute the width of the physical image in the image field
-    	double ratio =  COOKIE_WIDTH_MM/imageWidth; //Calculate ratio of image field to object field
-    	double distance = IMAGE_DISTANCE_MM * ratio; //Find object distance
+    	double distance = 420;
     	return distance;
     }
 }
