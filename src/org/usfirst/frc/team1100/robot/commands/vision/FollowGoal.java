@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class FollowCookie extends Command {
+public class FollowGoal extends Command {
 	
 	private final double ANGLE_SPEED = .4;
 	private final double DRIVE_SPEED = .5;
 	private NetworkTable table;
 	double[] defaultValue;
 	
-    public FollowCookie() {
+    public FollowGoal() {
         requires(Drive.getInstance());
         requires(Shooter.getInstance());
         table = NetworkTable.getTable("GRIP/myContoursReport");
@@ -117,10 +117,7 @@ public class FollowCookie extends Command {
     
     private double distance(double width){
     	if(width==0)return 0;
-    	/*double imageWidth = width*PIXELS_TO_MM; //Compute the width of the physical image in the image field
-    	double ratio =  COOKIE_WIDTH_MM/imageWidth; //Calculate ratio of image field to object field
-    	double distance = IMAGE_DISTANCE_MM * ratio; //Find object distance*/
-    	double distance  = 1199.9*Math.pow(width, -0.855);
+    	double distance  =  286.269*Math.pow(Math.E, -0.018*width);
     	return distance;
     }
 }
