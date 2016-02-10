@@ -1,19 +1,25 @@
 
 package org.usfirst.frc.team1100.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Uses pneumatics to kick boulders into enemy towers
  */
 public class Shooter extends Subsystem {
     
-   private static Shooter Shooter;
+   private static Shooter shooter;
+   
+   private Solenoid kicker;
+   private DoubleSolenoid latch;
+   private DoubleSolenoid reset;
    
    public static Shooter getInstance(){
-	   if(Shooter==null)
-		   Shooter = new Shooter();
-	   return Shooter;
+	   if(shooter==null)
+		   shooter = new Shooter();
+	   return shooter;
    }
    
    

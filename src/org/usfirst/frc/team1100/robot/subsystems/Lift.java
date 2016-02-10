@@ -6,18 +6,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *This is a blank class for subsystem with a basic format.
  */
-public class Example extends Subsystem {
+public class Lift extends Subsystem {
     
-    private static Example Example;
+    private static Lift Example;
     
-    public static Example getInstance(){
+    public static Lift getInstance(){
     	if(Example==null)
-    		Example = new Example();
+    		Example = new Lift();
     	return Example;
     }
     
     //list declarations.
-    public Example(){
+    public Lift(){
     	//initialize components
     }
     

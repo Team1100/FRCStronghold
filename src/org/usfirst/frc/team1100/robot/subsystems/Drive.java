@@ -12,11 +12,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
- *
+ * Controls the Wheels. Obsolete class. Use DriveCAN Instead.
  */
 public class Drive extends Subsystem {
-
-	private static Drive DriveChain;// create drive train object
+	private static Drive drive;// create drive train object
 
 	// Declare Victors(motor controllers)
 	private Victor RightFrontVictor;
@@ -29,14 +28,14 @@ public class Drive extends Subsystem {
 	private VVV LeftVVV;
 	private VVV RightVVV;
 	// Declare Robot Drive
-	private RobotDrive drive;
+	private RobotDrive driveTrain;
 	//Declare Gyro
 	private Gyro gyro;
 
 	public static Drive getInstance() {// make drive accessible from anywhere
-		if (DriveChain == null)
-			DriveChain = new Drive();
-		return DriveChain;
+		if (drive == null)
+			drive = new Drive();
+		return drive;
 	}
 
 	public Drive() {
@@ -51,14 +50,14 @@ public class Drive extends Subsystem {
 		LeftVVV = new VVV(LeftFrontVictor, LeftMidVictor, LeftBackVictor);
 		RightVVV = new VVV(RightFrontVictor, RightMidVictor, RightBackVictor);
 		// Initialize Drive
-		drive = new RobotDrive(LeftVVV, RightVVV);
+		driveTrain = new RobotDrive(LeftVVV, RightVVV);
 		//Initialize Gyro
-		gyro = new AnalogGyro(RobotMap.D_GYRO);
+		//TODO gyro = new AnalogGyro(RobotMap.D_GYRO);
 		gyro.reset();
 	}
 	//method called to make robot move
 	public void driveTank(double left, double right){
-		drive.tankDrive(left, right);
+		driveTrain.tankDrive(left, right);
 	}
 	//get the angle on the gyro
 	public double getAngle(){
@@ -72,7 +71,7 @@ public class Drive extends Subsystem {
 		setDefaultCommand(new UserDrive());
 	}
 
-	public class VVV implements SpeedController {//class manages a side of speed controllers
+public class VVV implements SpeedController {//class manages a side of speed controllers
 		
 		//In this class "Sanic" indicates enhanced loop variable
 		

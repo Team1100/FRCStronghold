@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team1100.robot.commands.drive;
 
-import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,7 +18,7 @@ public class DriveCommand extends Command {
 	 * @param time - duration of movement in seconds
 	 */
     public DriveCommand(double left, double right, double time) {
-        requires(Drive.getInstance());
+        requires(DriveCAN.getInstance());
         this.left = left;
         this.right = right;
         this.time = time;
@@ -31,7 +31,7 @@ public class DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Drive.getInstance().driveTank(left, right);
+    	DriveCAN.getInstance().driveTank(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -3,10 +3,10 @@ package org.usfirst.frc.team1100.robot.commands.drive;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class UserDrive extends Command {
 
     public UserDrive() {
-        requires(Drive.getInstance());
+        requires(DriveCAN.getInstance());
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +22,10 @@ public class UserDrive extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    @SuppressWarnings("deprecation")
-	protected void execute() {
+    protected void execute() {
     	double left = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
     	double right = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kY);
-    	Drive.getInstance().driveTank(left, right);
-    	SmartDashboard.putDouble("Gyro Angle", Drive.getInstance().getAngle());
+    	DriveCAN.getInstance().driveTank(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
