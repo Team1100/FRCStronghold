@@ -37,6 +37,10 @@ public class RobotMap {
 	public static final int J_LEFT = 0;
 	public static final int J_RIGHT = 1;
 	public static final int J_X = 2;
+	//[U]LTRASONIC
+	public static final int U_EZ3 = 0;
+	public static final int U_EZ1 = 1;
+	public static final int U_UNKNOWN = 2;
 	//[E]NCODERS AND SENSORS
 	
 }
