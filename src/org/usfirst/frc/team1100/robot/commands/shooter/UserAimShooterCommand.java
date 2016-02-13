@@ -24,7 +24,7 @@ public class UserAimShooterCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Shooter.getInstance().ChangeAngle(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft));
+    	//Shooter.getInstance().ChangeAngle(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft));
     }
 
     // Make this return true when this Command no longer needs to run execute()

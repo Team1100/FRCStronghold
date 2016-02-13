@@ -24,7 +24,7 @@ public class OI{
 	private OI(){
 		LeftStick = new AttackThree(RobotMap.J_LEFT, .1);//TODO: set deadband
 		RightStick = new AttackThree(RobotMap.J_RIGHT, .1);//TODO: set deadband
-		Peasant = new XboxController(RobotMap.J_X, .2);//TODO:set deadband
+		/*Peasant = new XboxController(RobotMap.J_X, .2);//TODO:set deadband
 		
 		//Control button sets go here. Like, literally in this section of the constructor.
 		Peasant.getButtonX().whileHeld(new ShootCommand(1));
@@ -32,7 +32,7 @@ public class OI{
 		Peasant.getButtonA().whileHeld(new FollowCookie());
 		//Peasant.getButtonLeftBumper().whenPressed(new SpinBeltCommand(-.5));
 		//Peasant.getButtonRightBumper().whenPressed(new SpinBeltCommand(.5));
-		
+		*/
 	}
 
 	public AttackThree getLeftStick() {

@@ -28,7 +28,7 @@ public class UltrasoundTest extends Command{
 	protected void execute() {
 		
 		if(System.currentTimeMillis() - oldTime >= refreshRate) {
-			data.add((double) Drive.getInstance().getUltrasound());
+			data.add((double) Drive.getInstance().getEZ3());
 			oldTime = System.currentTimeMillis();
 			if(data.size()==sampleSize){
 				Collections.sort(data);

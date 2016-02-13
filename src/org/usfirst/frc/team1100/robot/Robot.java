@@ -1,9 +1,7 @@
 	
 package org.usfirst.frc.team1100.robot;
 
-import java.io.IOException;
-
-import org.usfirst.frc.team1100.robot.commands.vision.UltrasoundTest;
+import org.usfirst.frc.team1100.robot.commands.StayAlongSide;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
@@ -47,7 +45,7 @@ public class Robot extends IterativeRobot {
         }*/
 
 		// TODO: set autonomousCommand
-		autonomousCommand = new UltrasoundTest();
+		autonomousCommand = new StayAlongSide();
 	}
 
 	public void disabledPeriodic() {
