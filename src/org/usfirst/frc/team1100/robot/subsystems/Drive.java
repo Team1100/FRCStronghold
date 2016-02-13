@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -29,6 +30,7 @@ public class Drive extends Subsystem {
 	private SpeedController leftT;
 	//private SpeedController leftT2;
 	private SpeedController rightT;
+	private AnalogInput uSense; 
 	//private SpeedController rightT2;
 	// Declare VVVs
 	/*private VVV LeftVVV;
@@ -49,6 +51,7 @@ public class Drive extends Subsystem {
 		leftT = new Jaguar(RobotMap.D_LEFT_FRONT);
 		//leftT2 = new Jaguar(RobotMap.D_LEFT_BACK);
 		rightT = new Jaguar(RobotMap.D_RIGHT_FRONT);
+		uSense = new AnalogInput(RobotMap.V_ULTRASONIC_1);
 		//rightT2 = new Jaguar(RobotMap.D_RIGHT_BACK);
 		/*RightFrontVictor = new Victor(RobotMap.D_RIGHT_FRONT);
 		RightMidVictor = new Victor(RobotMap.D_RIGHT_MID);
@@ -82,6 +85,10 @@ public class Drive extends Subsystem {
 		setDefaultCommand(new UserDrive());
 	}
 
+	public double getUltrasound(){
+		return uSense.getValue();
+	}
+	
 	public class VVV implements SpeedController {//class manages a side of speed controllers
 		
 		//In this class "Sanic" indicates enhanced loop variable

@@ -12,19 +12,17 @@ public class TestGrip extends Command {
 	@Override
 	protected void initialize() {
 
-		table = NetworkTable.getTable("GRIP/myContoursReport");
+		table = NetworkTable.getTable("grip");
 		defaultValue = new double[0];
 	}
 
 	@Override
 	protected void execute() {
-		// while(!isFinished()){
-		int i = 0;
-		double[] area = table.getNumberArray("area", defaultValue);
-		double[] height = table.getNumberArray("height", defaultValue);
-		double[] width = table.getNumberArray("width", defaultValue);
-		double[] centerX = table.getNumberArray("centerX", defaultValue);
-		double[] centerY = table.getNumberArray("centerY", defaultValue);
+		double[] area = table.getNumberArray("myContoursReport/area", defaultValue);
+		double[] height = table.getNumberArray("myContoursReport/height", defaultValue);
+		double[] width = table.getNumberArray("myContoursReport/width", defaultValue);
+		double[] centerX = table.getNumberArray("myContoursReport/centerX", defaultValue);
+		double[] centerY = table.getNumberArray("myContoursReport/centerY", defaultValue);
 		for (double a : area) {
 			SmartDashboard.putNumber("AreaTest", a);
 		}
@@ -40,9 +38,6 @@ public class TestGrip extends Command {
 		for (double y : centerY) {
 			SmartDashboard.putNumber("CenterYTest", y);
 		}
-		SmartDashboard.putNumber("ExecutableLoop", i);
-		i++;
-		// }
 	}
 
 	@Override

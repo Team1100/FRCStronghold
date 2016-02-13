@@ -18,6 +18,9 @@ public class RobotMap {
 	//public static final int D_GYRO = 3;//t*/
 	//[V]ISION
 	public static final int V_CAMERA = 0;//t
+	public static final int V_ULTRASONIC_1 = 0;
+	public static final int V_ULTRASONIC_2 = 1;
+	public static final int V_ULTRASONIC_3 = 2;
 	//[S]HOOTER
 	public static final int S_BELT = 4 ;
 	public static final int S_FIRE_1 = 0;

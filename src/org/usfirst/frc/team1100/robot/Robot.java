@@ -1,8 +1,9 @@
-
+	
 package org.usfirst.frc.team1100.robot;
 
-import org.usfirst.frc.team1100.robot.commands.vision.FollowGoal;
-import org.usfirst.frc.team1100.robot.commands.vision.TestGrip;
+import java.io.IOException;
+
+import org.usfirst.frc.team1100.robot.commands.vision.UltrasoundTest;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
@@ -39,14 +40,14 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 
 		// Start GRIP
-		try {
-			new ProcessBuilder(GRIP_CMD).inheritIO().start();
-		} catch (java.io.IOException e) {
-			e.printStackTrace();
-		}
+		/*try {
+            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
 		// TODO: set autonomousCommand
-		autonomousCommand = new TestGrip();
+		autonomousCommand = new UltrasoundTest();
 	}
 
 	public void disabledPeriodic() {
