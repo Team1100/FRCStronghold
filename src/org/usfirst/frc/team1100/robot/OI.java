@@ -1,7 +1,13 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.shooter.SetKickerCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.SetLatchCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.SetResetCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.groups.ResetShooterCommandGroup;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 /**
 .*.This.class.is.the.glue.that.binds.the.controls.on.the.physical.operator
 .*.interface.to.the.commands.and.command.groups.that.allow.control.of.the.robot.
@@ -25,6 +31,13 @@ public class OI{
 		Peasant = new XboxController(RobotMap.J_X, .2);
 		
 		//Control button sets go here. Like, literally in this section of the constructor.
+		Peasant.getButtonA().whenPressed(new SetKickerCommand(Value.kReverse));
+		Peasant.getButtonB().whenPressed(new SetResetCommand(Value.kReverse));
+		Peasant.getButtonX().whenPressed(new SetLatchCommand(Value.kReverse));
+		Peasant.getButtonY().whenPressed(new SetResetCommand(Value.kForward));
+		Peasant.getButtonRightBumper().whenPressed(new SetKickerCommand(Value.kForward));
+		Peasant.getButtonLeftBumper().whenPressed(new SetLatchCommand(Value.kForward));
+		Peasant.getButtonStart().whenPressed(new ResetShooterCommandGroup());
 	}
 
 	public AttackThree getLeftStick() {

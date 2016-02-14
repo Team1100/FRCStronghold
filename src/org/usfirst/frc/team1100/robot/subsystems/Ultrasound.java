@@ -88,7 +88,7 @@ public class Ultrasound extends Subsystem{
 		return list.get(index);
 		
 	}*/
-}
+
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub

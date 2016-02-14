@@ -18,10 +18,14 @@ public class RobotMap {
 	//[V]ISION
 	public static final int V_CAMERA = 314;//t
 	//[S]HOOTER
-	public static final int S_KICKER_PNEUMATIC = 0;//t
-	public static final int S_RESET_PNEUMATIC = 1;//t
-	public static final int S_LATCH_PNEUMATIC = 2;//t
-	public static final int S_KICKER_SENSOR = 1;//t
+	public static final int S_PCM = 1;
+	public static final int S_KICKER_PNEUMATIC_A = 4;
+	public static final int S_RESET_PNEUMATIC_A = 2;
+	public static final int S_LATCH_PNEUMATIC_A = 0;
+	public static final int S_KICKER_PNEUMATIC_B = 5;
+	public static final int S_RESET_PNEUMATIC_B = 3;
+	public static final int S_LATCH_PNEUMATIC_B = 1;
+	public static final int S_KICKER_SENSOR = 1;
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = 3;//t
 	public static final int I_INTAKE_LIFT = 4;//t
