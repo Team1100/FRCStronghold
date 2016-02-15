@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot.commands.drive;
 
 import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -46,6 +47,6 @@ public class DriveCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	edu.wpi.first.wpilibj.DriverStation.reportError("Drive Interrupted", false);
+    	DriverStation.reportError("Drive Interrupted", false);
     }
 }
