@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetKickerCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetLatchCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetResetCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.groups.LowGoalFire;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.ResetShooterCommandGroup;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
@@ -38,6 +39,7 @@ public class OI{
 		Peasant.getButtonRightBumper().whenPressed(new SetKickerCommand(Value.kForward));
 		Peasant.getButtonLeftBumper().whenPressed(new SetLatchCommand(Value.kForward));
 		Peasant.getButtonStart().whenPressed(new ResetShooterCommandGroup());
+		Peasant.getButtonBack().whenPressed(new LowGoalFire());
 	}
 
 	public AttackThree getLeftStick() {

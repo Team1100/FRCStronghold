@@ -46,6 +46,10 @@ public class Shooter extends Subsystem {
 		latch.set(v);
 		System.out.println("Subystem called: setting latch to " + v.toString());
 	}
+	
+	public String getLatchValue() {
+		return latch.toString();
+	}
 
 	public void setReset(Value v) {
 		reset.set(v);

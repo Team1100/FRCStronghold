@@ -27,6 +27,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	System.out.println("Testing!!!!");
     	//Initialize Subsystems and OI
 		OI.getInstance();
 		DriveCAN.getInstance();

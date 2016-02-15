@@ -12,6 +12,7 @@ public class SetLatchCommand extends Command{
 	Value value;
 	
 	public SetLatchCommand(Value value){
+		System.out.println("Test");
 		requires(Shooter.getInstance());
 		this.value = value;
 	}
@@ -24,8 +25,9 @@ public class SetLatchCommand extends Command{
 
 	@Override
 	protected void execute() {
+		System.out.println("Executing");
 		Shooter.getInstance().setLatch(value);
-		System.out.println("Command called: setting latch to " + value.toString());
+		System.out.println("Command called: setting latch to " + value.toString() + " actual " + Shooter.getInstance().getLatchValue());
 		isFinished = true;
 	}
 
