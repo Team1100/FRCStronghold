@@ -19,22 +19,22 @@ public class RobotMap {
 	public static final int V_CAMERA = 314;//t
 	//[S]HOOTER
 	public static final int S_PCM = 1;
-	public static final int S_KICKER_PNEUMATIC_A = 4;
+	public static final int S_FILL_PNEUMATIC_A = 4;
 	public static final int S_RESET_PNEUMATIC_A = 2;
 	public static final int S_LATCH_PNEUMATIC_A = 0;
-	public static final int S_KICKER_PNEUMATIC_B = 5;
+	public static final int S_FILL_PNEUMATIC_B = 5;
 	public static final int S_RESET_PNEUMATIC_B = 3;
 	public static final int S_LATCH_PNEUMATIC_B = 1;
 	public static final int S_KICKER_SENSOR = 1;
-	//[I]NTAKE
-	public static final int I_INTAKE_ROLLER = 3;//t
-	public static final int I_INTAKE_LIFT = 4;//t
-	public static final int I_INTAKE_LIFT_ENCODER = 5;//t
-	//[L]IFT
+	
 	public static final int L_CLUTCH_PNEUMATIC = 3;//t
 	public static final int L_ARM_LIFT_MOTOR_1 = 0;//t
 	public static final int L_ARM_LIFT_MOTOR_2 = 1;//t
 	public static final int L_ARM_LIFT_ENCODER = 0;//t
+	//[I]NTAKE
+	public static final int I_INTAKE_ROLLER = 0;//It was 3 until Justin came along and plugged it in
+	public static final int I_INTAKE_LIFT = 1;
+	public static final int I_INTAKE_LIFT_ENCODER = 5;//t
 	//[C]LLIMB
 	public static final int C_HOOK_EXTEND_MOTOR = 2;//t
 	//[J]OYSTICKS

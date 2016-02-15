@@ -31,7 +31,7 @@ public class Climb extends Subsystem{
 	
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		// TODO : User Climb? (if this is a joystick, otherwise delete this msg)
 		
 	}
 

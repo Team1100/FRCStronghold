@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1100.robot.commands.shooter.groups;
 
-import org.usfirst.frc.team1100.robot.commands.shooter.SetKickerCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.SetFillCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetLatchCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetResetCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
@@ -16,15 +16,15 @@ public class ResetShooterCommandGroup extends CommandGroup {
 
 	public  ResetShooterCommandGroup() {
     	if(!Shooter.getInstance().isReset()){
-	    	addSequential(new SetKickerCommand(Value.kReverse));
+	    	addSequential(new SetFillCommand(Value.kReverse));//vent the fill
 	    	addSequential(new WaitCommand(.5));
-	    	addSequential(new SetResetCommand(Value.kForward));
+	    	addSequential(new SetResetCommand(Value.kForward));//reset
 	    	addSequential(new WaitCommand(.5));
-	    	addSequential(new SetLatchCommand(Value.kForward));
+	    	addSequential(new SetLatchCommand(Value.kForward));//pull down latch
 	    	addSequential(new WaitCommand(.5));
-	    	addSequential(new SetResetCommand(Value.kReverse));
+	    	addSequential(new SetResetCommand(Value.kReverse));//retract reset piston
 	    	addSequential(new WaitCommand(.5));
-	    	addSequential(new SetKickerCommand(Value.kForward));
+	    	addSequential(new SetFillCommand(Value.kForward));//extend fill
     	}
     }
 }

@@ -9,18 +9,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Uses pneumatics to kick boulders into enemy towers
+ * (or our own towers. or empty space(its air damnit). or the ceiling, idk)
  */
 public class Shooter extends Subsystem {
 
 	private static Shooter shooter;
 
-	private DoubleSolenoid kicker;
-	private DoubleSolenoid latch;
-	private DoubleSolenoid reset;
-
+	private DoubleSolenoid fill;//this one creates the work buildup for firing
+	private DoubleSolenoid latch;//controls/releases the fill
+	private DoubleSolenoid reset;//pulls back kicker to reset
 
 	public boolean isReset() {
-		if(kicker.get()==Value.kForward
+		if(fill.get()==Value.kForward
 				&&reset.get()==Value.kReverse
 				&&latch.get()==Value.kForward){
 			return true;
@@ -28,7 +28,9 @@ public class Shooter extends Subsystem {
 		else return false;
 	}
 
-	
+	public void burn(){
+		System.out.println("ARGHGHHERARGHARTHELPMEIMDYINGARGHH");
+	}
 
 	public static Shooter getInstance() {
 		if (shooter == null)
@@ -37,7 +39,7 @@ public class Shooter extends Subsystem {
 	}
 
 	public Shooter() {
-		kicker = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_KICKER_PNEUMATIC_A, RobotMap.S_KICKER_PNEUMATIC_B);
+		fill = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_FILL_PNEUMATIC_A, RobotMap.S_FILL_PNEUMATIC_B);
 		latch = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_LATCH_PNEUMATIC_A, RobotMap.S_LATCH_PNEUMATIC_B);
 		reset = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_RESET_PNEUMATIC_A, RobotMap.S_RESET_PNEUMATIC_B);
 	}
@@ -55,8 +57,8 @@ public class Shooter extends Subsystem {
 		reset.set(v);
 	}
 
-	public void setKicker(Value v) {
-		kicker.set(v);
+	public void setFill(Value v) {
+		fill.set(v);
 	}
 
 	public void initDefaultCommand() {

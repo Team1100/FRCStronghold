@@ -34,6 +34,8 @@ public class Robot extends IterativeRobot {
 		Intake.getInstance();
 		Shooter.getInstance();
 		
+		Shooter.getInstance().burn();
+		
         //TODO: set autonomousCommand
 		//autonmousCommand = .....
     }
