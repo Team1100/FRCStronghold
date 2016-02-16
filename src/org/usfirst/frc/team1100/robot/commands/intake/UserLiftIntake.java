@@ -16,30 +16,33 @@ public class UserLiftIntake extends Command{
 	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void execute() {
 		value = OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft);
-		Intake.getInstance().moveLift(value);		
+		Intake.getInstance().moveLift(value);
+		if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
+			Intake.getInstance().toggleRollers();
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

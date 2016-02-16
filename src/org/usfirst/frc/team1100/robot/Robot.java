@@ -1,8 +1,7 @@
 
 package org.usfirst.frc.team1100.robot;
 
-import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
+import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
@@ -27,17 +26,16 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	System.out.println("Testing!!!!");
     	//Initialize Subsystems and OI
 		OI.getInstance();
-		DriveCAN.getInstance();
+		//DriveCAN.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
 		
 		Shooter.getInstance().burn();
 		
         //TODO: set autonomousCommand
-		//autonmousCommand = .....
+		autonomousCommand = new SetIntakeSetpoint(1);
     }
 	
 	public void disabledPeriodic() {

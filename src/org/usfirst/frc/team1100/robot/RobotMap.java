@@ -9,8 +9,8 @@ public class RobotMap {
 	//TODO: t indicates temporary value
 	
 	//[D]RIVE TRAIN
-	public static final int D_LEFT_FRONT = 0; //t
-	public static final int D_LEFT_MID = 1;//t
+	public static final int D_LEFT_FRONT = 9; //t
+	public static final int D_LEFT_MID = 7;//t
 	public static final int D_LEFT_BACK = 2;//t
 	public static final int D_RIGHT_FRONT = 3;//t
 	public static final int D_RIGHT_MID = 4;//t
@@ -28,13 +28,14 @@ public class RobotMap {
 	public static final int S_KICKER_SENSOR = 1;
 	
 	public static final int L_CLUTCH_PNEUMATIC = 3;//t
-	public static final int L_ARM_LIFT_MOTOR_1 = 0;//t
-	public static final int L_ARM_LIFT_MOTOR_2 = 1;//t
+	public static final int L_ARM_LIFT_MOTOR_1 = 8;//t
+	public static final int L_ARM_LIFT_MOTOR_2 = 6;//t
 	public static final int L_ARM_LIFT_ENCODER = 0;//t
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = 0;//It was 3 until Justin came along and plugged it in
 	public static final int I_INTAKE_LIFT = 1;
-	public static final int I_INTAKE_LIFT_ENCODER = 5;//t
+	public static final int I_INTAKE_LIFT_POTENTIOMETER = 0;
+	public static final int I_BALL_IN = 1;
 	//[C]LLIMB
 	public static final int C_HOOK_EXTEND_MOTOR = 2;//t
 	//[J]OYSTICKS

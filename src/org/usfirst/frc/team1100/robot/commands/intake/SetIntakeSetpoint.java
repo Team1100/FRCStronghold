@@ -3,42 +3,45 @@ package org.usfirst.frc.team1100.robot.commands.intake;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TurnRollers extends Command{
+public class SetIntakeSetpoint extends Command{
 
-	double value;
+	private double pos;
+	private boolean isFinished;
 	
-	public TurnRollers(double value){
+	public SetIntakeSetpoint(double pos){
 		requires(Intake.getInstance());
-		this.value = value;
+		this.pos = pos;
 	}
 	
 	@Override
 	protected void initialize() {
-				
+		isFinished = false;
+		
 	}
 
 	@Override
 	protected void execute() {
-		Intake.getInstance().moveRoller(value);
-		
+		//Intake.getInstance().moveLift(.2);
+		SmartDashboard.putNumber("Analog", Intake.getInstance().getAnalog());
+		Intake.getInstance().setPosition(pos);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		
-		return false;
+		return isFinished;
 	}
 
 	@Override
 	protected void end() {
-		Intake.getInstance().moveRoller(0);
 		
 	}
 
 	@Override
 	protected void interrupted() {
 		end();
+		
 	}
 
 }

@@ -1,34 +1,32 @@
-package org.usfirst.frc.team1100.robot.commands.shooter;
+package org.usfirst.frc.team1100.robot.commands.shooter.arm;
 
+import org.usfirst.frc.team1100.robot.OI;
+import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetResetCommand extends Command{
-	
-	private Value value;
-	private boolean isFinished = false;
-	
-	public SetResetCommand(Value value){
-		requires(Shooter.getInstance());
-		this.value = value;
-	}
+public class UserMoveArm extends Command{
 
+	public UserMoveArm(){
+		requires(Shooter.getInstance());
+	}
+	
 	@Override
 	protected void initialize() {
+		
 		
 	}
 
 	@Override
 	protected void execute() {
-		Shooter.getInstance().setReset(value);
-		isFinished = true;
+		Shooter.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight));		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return isFinished;
+		
+		return false;
 	}
 
 	@Override
@@ -42,5 +40,5 @@ public class SetResetCommand extends Command{
 		
 		
 	}
-
+	
 }

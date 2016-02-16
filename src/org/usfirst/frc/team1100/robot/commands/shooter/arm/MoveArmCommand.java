@@ -1,46 +1,43 @@
-package org.usfirst.frc.team1100.robot.commands.shooter;
+package org.usfirst.frc.team1100.robot.commands.shooter.arm;
 
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
+//#include <apstring.h>
+public class MoveArmCommand extends Command{
 
-public class SetResetCommand extends Command{
+	double value;
+	double timeout;
 	
-	private Value value;
-	private boolean isFinished = false;
-	
-	public SetResetCommand(Value value){
+	public MoveArmCommand(double value, double timeout){
 		requires(Shooter.getInstance());
 		this.value = value;
+		this.timeout = timeout;
 	}
-
+	
 	@Override
 	protected void initialize() {
-		
+		setTimeout(timeout);
 	}
 
 	@Override
 	protected void execute() {
-		Shooter.getInstance().setReset(value);
-		isFinished = true;
+		Shooter.getInstance().moveArm(value);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return isFinished;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		
-		
+		Shooter.getInstance().moveArm(0);
 	}
 
 	@Override
 	protected void interrupted() {
-		
-		
+		end();
 	}
 
 }

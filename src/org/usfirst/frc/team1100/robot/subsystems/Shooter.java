@@ -2,9 +2,12 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.shooter.arm.UserMoveArm;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,6 +21,8 @@ public class Shooter extends Subsystem {
 	private DoubleSolenoid fill;//this one creates the work buildup for firing
 	private DoubleSolenoid latch;//controls/releases the fill
 	private DoubleSolenoid reset;//pulls back kicker to reset
+	private SpeedController lift1;
+	private SpeedController lift2;//these two move the arm up and down
 
 	public boolean isReset() {
 		if(fill.get()==Value.kForward
@@ -28,7 +33,7 @@ public class Shooter extends Subsystem {
 		else return false;
 	}
 
-	public void burn(){
+	public void burn(){// The Heretics
 		System.out.println("ARGHGHHERARGHARTHELPMEIMDYINGARGHH");
 	}
 
@@ -42,11 +47,19 @@ public class Shooter extends Subsystem {
 		fill = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_FILL_PNEUMATIC_A, RobotMap.S_FILL_PNEUMATIC_B);
 		latch = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_LATCH_PNEUMATIC_A, RobotMap.S_LATCH_PNEUMATIC_B);
 		reset = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_RESET_PNEUMATIC_A, RobotMap.S_RESET_PNEUMATIC_B);
+		
+		lift1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
+		lift2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
 	}
 
+	public void moveArm(double value){
+		burn();
+		lift1.set(value);
+		lift2.set(value);
+	}
+	
 	public void setLatch(Value v) {
 		latch.set(v);
-		System.out.println("Subystem called: setting latch to " + v.toString());
 	}
 	
 	public String getLatchValue() {
@@ -62,7 +75,6 @@ public class Shooter extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new UserMoveArm());
 	}
 }
