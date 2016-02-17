@@ -18,30 +18,33 @@ public class SetIntakeSetpoint extends Command{
 	@Override
 	protected void initialize() {
 		isFinished = false;
-		
+		setTimeout(1);		
 	}
 
 	@Override
 	protected void execute() {
-		//Intake.getInstance().moveLift(.2);
-		SmartDashboard.putNumber("Analog", Intake.getInstance().getAnalog());
+		SmartDashboard.putString("Command", "yeas");
 		Intake.getInstance().setPosition(pos);
+		Intake.getInstance().enable();
+				
+		SmartDashboard.putBoolean("On target", Intake.getInstance().target());
+		SmartDashboard.putNumber("Motor speed", Intake.getInstance().getLiftSpeed());
+		SmartDashboard.putNumber("Potentiometer", Intake.getInstance().getAnalog());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return isFinished;
+		return Intake.getInstance().target();
 	}
 
 	@Override
 	protected void end() {
-		
+		Intake.getInstance().disable();
 	}
 
 	@Override
 	protected void interrupted() {
 		end();
-		
 	}
 
 }

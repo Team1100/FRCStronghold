@@ -30,7 +30,7 @@ public class RobotMap {
 	public static final int L_CLUTCH_PNEUMATIC = 3;//t
 	public static final int L_ARM_LIFT_MOTOR_1 = 8;//t
 	public static final int L_ARM_LIFT_MOTOR_2 = 6;//t
-	public static final int L_ARM_LIFT_ENCODER = 0;//t
+	public static final int L_ARM_LIFT_POTENTIOMETER = 2;//t
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = 0;//It was 3 until Justin came along and plugged it in
 	public static final int I_INTAKE_LIFT = 1;

@@ -2,21 +2,29 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.ultrasound.PollSensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Ultrasound extends Subsystem {
-
+	
 	private AnalogInput EZ1;
 	private AnalogInput EZ3;
 	private final int SAMPLE_SIZE = 100;
-	private Ultrasound ultrasound;
+	private static Ultrasound ultrasound;
 
-	public Ultrasound getInstance() {
+	private Queue<Double> dataEZ1;
+	private Queue<Double> dataEZ3; 
+	
+	private double EZ3Distance;
+	private double EZ1Distance;
+	
+	public static Ultrasound getInstance() {
 		if (ultrasound == null)
 			ultrasound = new Ultrasound();
 		return ultrasound;
@@ -25,30 +33,41 @@ public class Ultrasound extends Subsystem {
 	public Ultrasound() {
 		EZ1 = new AnalogInput(RobotMap.U_EZ1);
 		EZ3 = new AnalogInput(RobotMap.U_EZ3);
+
+		dataEZ1 = new LinkedList<Double>();
+		dataEZ3 = new LinkedList<Double>();; 
 	}
 
-	public double getDistanceEZ3() {
-		ArrayList<Double> data = new ArrayList<Double>();
-		
-		for(int i = 0; i < SAMPLE_SIZE; i++){
-			data.add((double) (EZ3.getValue()));
-		}
-		Collections.sort(data);
-		double value = getMode(data);
-		data.clear();
-		return distanceEZ3(value);
+	public void setDistanceEZ3() {
+		double value = getMode(dataEZ3);
+		dataEZ3.clear();
+		EZ3Distance =  distanceEZ3(value);
 	}
 	
-	public double getDistanceEZ1() {
-		ArrayList<Double> data = new ArrayList<Double>();
-		
-		for(int i = 0; i < SAMPLE_SIZE; i++){
-			data.add((double) (EZ1.getValue()));
-		}
-		Collections.sort(data);
-		double value = getMode(data);
-		data.clear();
-		return distanceEZ1(value);
+	public void setDistanceEZ1() {
+		double value = getMode(dataEZ1);
+		dataEZ1.clear();
+		EZ1Distance = distanceEZ1(value);
+	}
+	
+	public double getEZ3Distance(){
+		return EZ3Distance;
+	}
+	
+	public double getEZ1Distance(){
+		return EZ1Distance;
+	}
+	
+	public void addEZ3Data(){
+		dataEZ3.add((double) EZ3.getValue());
+		if(dataEZ3.size()>SAMPLE_SIZE)
+			dataEZ3.poll();
+	}
+	
+	public void addEZ1Data(){
+		dataEZ1.add((double) EZ1.getValue());
+		if(dataEZ1.size()>SAMPLE_SIZE)
+			dataEZ1.poll();
 	}
 
 	private double distanceEZ3(double value) {
@@ -59,14 +78,16 @@ public class Ultrasound extends Subsystem {
 		return .129 * value + 2.077;
 	}
 
-	public double getMode(ArrayList<Double> list) {
+	public double getMode(Queue<Double> data) {
 		double x = 0;
 		double y = 0;
 		double count = 0;
 		double maxCount = 0;
 		int index = 0;
-		for (int i = 0; i < list.size(); i++) {
-			x = list.get(i);
+		ArrayList<Double> d = new ArrayList<Double>(data);
+		Collections.sort(d);
+		for (int i = 0; i < data.size(); i++) {
+			x = d.get(i);
 			if (x == y) {
 				count++;
 			} else {
@@ -78,14 +99,13 @@ public class Ultrasound extends Subsystem {
 				y = x;
 			}
 		}
-		return list.get(index);
+		return d.get(index);
 
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		
-
+		setDefaultCommand(new PollSensors());
 	}
 
 }

@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
+import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
@@ -28,14 +29,14 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	//Initialize Subsystems and OI
 		OI.getInstance();
-		//DriveCAN.getInstance();
+		DriveCAN.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
 		
 		Shooter.getInstance().burn();
 		
         //TODO: set autonomousCommand
-		autonomousCommand = new SetIntakeSetpoint(1);
+		//autonomousCommand = new SetIntakeSetpoint(1);
     }
 	
 	public void disabledPeriodic() {

@@ -26,14 +26,14 @@ public class Intake extends PIDSubsystem {
 	private DigitalInput ballIn;
 	private AnalogInput liftRead;
 
-	public static final int POS_SUCK = 0;
-	public static final int POS_UP = 0;
-	public static final int POS_DOWN = 0;
-
-	private static double P = .8;
-	private static double I = 0;
+	public static final double POS_SUCK = 2.3;
+	public static final double POS_UP = 3.7;
+	public static final double POS_DOWN = 2.2;
+	
+	private static double P = 1;
+	private static double I = .2;
 	private static double D = 0;
-	private static int ABSOLUTE_TOLERANCE = 0;
+	private static double TOLERANCE = 100000;
 
 	public static Intake getInstance() {
 		if (intake == null)
@@ -44,16 +44,28 @@ public class Intake extends PIDSubsystem {
 	private Intake() {
 		super(P, I, D);
 		setInputRange(POS_DOWN, POS_UP);
-		setAbsoluteTolerance(ABSOLUTE_TOLERANCE);
 
+		setOutputRange(-.4, .4);
+		
+		setAbsoluteTolerance(TOLERANCE);
+		
 		roller = new Talon(RobotMap.I_INTAKE_ROLLER);
 		lift = new Talon(RobotMap.I_INTAKE_LIFT);
+		
 		liftRead = new AnalogInput(RobotMap.I_INTAKE_LIFT_POTENTIOMETER);
 		ballIn = new DigitalInput(RobotMap.I_BALL_IN);
 
 		LiveWindow.addSensor("Intake", "PID Controller", getPIDController());
 	}
-
+	
+	public boolean target(){
+		boolean x = onTarget();
+		/*if(Math.abs(getLiftSpeed())<.1){
+			x = true;
+		}*/
+		return x;
+	}
+	
 	public double getEncoder() {
 		return liftRead.getValue();
 	}
@@ -75,6 +87,7 @@ public class Intake extends PIDSubsystem {
 	public void setPosition(double pos) {
 		super.setSetpoint(pos);
 		super.enable();
+		
 	}
 
 	public void initDefaultCommand() {
@@ -82,10 +95,10 @@ public class Intake extends PIDSubsystem {
 	}
 
 	public void toggleRollers() {
-		if (ballIn()) {
+		/*if (ballIn()) {
 			roller.set(0);
 			return;
-		}
+		}*/
 		if (!rollersOn)
 			roller.set(-.5);
 		else
@@ -100,7 +113,18 @@ public class Intake extends PIDSubsystem {
 	public double getAnalog() {
 		return liftRead.getVoltage();
 	}
+	
+	public double getLiftSpeed(){
+		return lift.get();
+	}
 
+	private void setLift(double value){
+		if(Math.abs(value)>.1)
+			lift.set(value);
+		else
+			lift.set(0);
+	}
+	
 	@Override
 	protected double returnPIDInput() {
 		return liftRead.pidGet();
@@ -108,6 +132,6 @@ public class Intake extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		lift.set(output);
+		setLift(-output);
 	}
 }

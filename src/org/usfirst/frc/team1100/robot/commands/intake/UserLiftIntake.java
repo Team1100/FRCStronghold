@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UserLiftIntake extends Command{
 
@@ -23,9 +24,9 @@ public class UserLiftIntake extends Command{
 	protected void execute() {
 		value = OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft);
 		Intake.getInstance().moveLift(value);
-		if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
+		/*if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
 			Intake.getInstance().toggleRollers();
-		}
+		}*/	
 	}
 
 	@Override
