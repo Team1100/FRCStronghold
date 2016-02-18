@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
 		DriveCAN.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
+		//TODO: ass Ultrasound, Climb
 		
 		Shooter.getInstance().burn();
 		

@@ -16,12 +16,13 @@ public class ResetShooterCommandGroup extends CommandGroup {
 
 	public  ResetShooterCommandGroup() {
     	if(!Shooter.getInstance().isReset()){
+    		addSequential(new WaitCommand(.75));
 	    	addSequential(new SetFillCommand(Value.kReverse));//vent the fill
 	    	addSequential(new WaitCommand(.5));
 	    	addSequential(new SetResetCommand(Value.kForward));//reset
-	    	addSequential(new WaitCommand(.5));
+	    	addSequential(new WaitCommand(.75));
 	    	addSequential(new SetLatchCommand(Value.kForward));//pull down latch
-	    	addSequential(new WaitCommand(.5));
+	    	addSequential(new WaitCommand(.75));
 	    	addSequential(new SetResetCommand(Value.kReverse));//retract reset piston
 	    	addSequential(new WaitCommand(.5));
 	    	addSequential(new SetFillCommand(Value.kForward));//extend fill

@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UserMoveArm extends Command{
 
@@ -14,31 +15,27 @@ public class UserMoveArm extends Command{
 	
 	@Override
 	protected void initialize() {
-		
-		
+				
 	}
 
 	@Override
 	protected void execute() {
 		Shooter.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight));		
+		SmartDashboard.putNumber("Arm Encoder", Shooter.getInstance().getEncValue());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		
 		return false;
 	}
 
 	@Override
 	protected void end() {
 		
-		
 	}
 
 	@Override
 	protected void interrupted() {
 		
-		
 	}
-	
 }

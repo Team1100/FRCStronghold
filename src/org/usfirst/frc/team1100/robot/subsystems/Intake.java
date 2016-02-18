@@ -28,12 +28,14 @@ public class Intake extends PIDSubsystem {
 
 	public static final double POS_SUCK = 2.3;
 	public static final double POS_UP = 3.7;
-	public static final double POS_DOWN = 2.2;
+	public static final double POS_DOWN = 2.1;
+	
+	private static final double MAX_SPEED = .4;
 	
 	private static double P = 1;
 	private static double I = .2;
 	private static double D = 0;
-	private static double TOLERANCE = 100000;
+	private static double TOLERANCE = 100000;//shhhhh
 
 	public static Intake getInstance() {
 		if (intake == null)
@@ -41,11 +43,11 @@ public class Intake extends PIDSubsystem {
 		return intake;
 	}
 
-	private Intake() {
+	private Intake() { /*"We need some sort of ball-sucking mechanism..." - L Tambascio, 2015*/
 		super(P, I, D);
 		setInputRange(POS_DOWN, POS_UP);
 
-		setOutputRange(-.4, .4);
+		setOutputRange(-MAX_SPEED, MAX_SPEED);
 		
 		setAbsoluteTolerance(TOLERANCE);
 		
@@ -60,9 +62,6 @@ public class Intake extends PIDSubsystem {
 	
 	public boolean target(){
 		boolean x = onTarget();
-		/*if(Math.abs(getLiftSpeed())<.1){
-			x = true;
-		}*/
 		return x;
 	}
 	
@@ -71,11 +70,7 @@ public class Intake extends PIDSubsystem {
 	}
 
 	public boolean ballIn() {
-		return ballIn.get();
-	}
-
-	public void moveLift(double value) {
-		lift.set(value);
+		return !ballIn.get();
 	}
 
 	public void moveRoller(double value) {
@@ -95,10 +90,6 @@ public class Intake extends PIDSubsystem {
 	}
 
 	public void toggleRollers() {
-		/*if (ballIn()) {
-			roller.set(0);
-			return;
-		}*/
 		if (!rollersOn)
 			roller.set(-.5);
 		else
@@ -118,7 +109,11 @@ public class Intake extends PIDSubsystem {
 		return lift.get();
 	}
 
-	private void setLift(double value){
+	public void setLift(double value){
+		if(Math.abs(value)>MAX_SPEED){
+			if(value>0)value = MAX_SPEED;
+			else if(value<0)value = -MAX_SPEED;
+		}
 		if(Math.abs(value)>.1)
 			lift.set(value);
 		else

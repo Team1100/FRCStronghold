@@ -25,19 +25,18 @@ public class LiftIntake extends Command{
 
 	@Override
 	protected void execute() {
-		Intake.getInstance().moveLift(value);
+		Intake.getInstance().setLift(value);
 		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		
 		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		Intake.getInstance().moveLift(0);
+		Intake.getInstance().setLift(0);
 		
 	}
 

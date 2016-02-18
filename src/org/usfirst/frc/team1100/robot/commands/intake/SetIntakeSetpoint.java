@@ -34,7 +34,9 @@ public class SetIntakeSetpoint extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		return Intake.getInstance().target();
+		if(isTimedOut())isFinished = true;
+		if(Intake.getInstance().target())isFinished = true;
+		return isFinished;
 	}
 
 	@Override

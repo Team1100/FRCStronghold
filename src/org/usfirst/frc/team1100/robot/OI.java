@@ -40,6 +40,8 @@ public class OI{
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
 		Peasant.getButtonLeftBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_UP));
 		Peasant.getButtonLeftStick().whenPressed(new SetIntakeSetpoint(Intake.POS_SUCK));
+	
+		org.usfirst.frc.team1100.robot.subsystems.Shooter.getInstance().burn();
 	}
 
 	public AttackThree getLeftStick() {

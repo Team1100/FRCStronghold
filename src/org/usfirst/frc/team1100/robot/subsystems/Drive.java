@@ -52,7 +52,7 @@ public class Drive extends Subsystem {
 		// Initialize Drive
 		driveTrain = new RobotDrive(LeftVVV, RightVVV);
 		//Initialize Gyro
-		//TODO gyro = new AnalogGyro(RobotMap.D_GYRO);
+		// gyro = new AnalogGyro(RobotMap.D_GYRO);
 		gyro.reset();
 	}
 	//method called to make robot move
