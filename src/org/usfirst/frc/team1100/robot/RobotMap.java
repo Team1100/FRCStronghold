@@ -8,6 +8,8 @@ package org.usfirst.frc.team1100.robot;
 public class RobotMap {
 	//TODO: t indicates temporary value
 	
+	//These numbers are for ease of reading.
+	
 	private static final int MOTOR_0 = 0;
 	private static final int MOTOR_1 = 1;
 	private static final int MOTOR_2 = 2;
@@ -45,6 +47,8 @@ public class RobotMap {
 	private static final int DIGITAL_3 = 3;
 	private static final int DIGITAL_4 = 4;
 	
+	//Below are actual assignments.
+	
 	//[D]RIVE TRAIN
 	public static final int D_LEFT_FRONT = MOTOR_4; //t
 	public static final int D_LEFT_BACK = MOTOR_5;//t
@@ -52,18 +56,18 @@ public class RobotMap {
 	public static final int D_RIGHT_BACK = MOTOR_7;//t
 	//[S]HOOTER
 	public static final int S_PCM = CAN_1;
-	
 	public static final int S_FILL_PNEUMATIC_A = PNEUM_4;
 	public static final int S_RESET_PNEUMATIC_A = PNEUM_2;
 	public static final int S_LATCH_PNEUMATIC_A = PNEUM_0;
 	public static final int S_FILL_PNEUMATIC_B = PNEUM_5;
 	public static final int S_RESET_PNEUMATIC_B = PNEUM_3;
 	public static final int S_LATCH_PNEUMATIC_B = PNEUM_1;
-	
+	//[L]IFT
 	public static final int L_ARM_LIFT_MOTOR_1 = MOTOR_2;
 	public static final int L_ARM_LIFT_MOTOR_2 = MOTOR_3;
-	public static final int L_ARM_ENC_A = DIGITAL_1;
-	public static final int L_ARM_ENC_B = DIGITAL_2;
+	public static final int L_ARM_ENC_A = DIGITAL_1;//t
+	public static final int L_ARM_ENC_B = DIGITAL_2;//t
+	public static final int L_ARM_POTENTIOMETER = ANALOG_1;//t
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = MOTOR_0;
 	public static final int I_INTAKE_LIFT = MOTOR_1;
@@ -77,7 +81,6 @@ public class RobotMap {
 	public static final int J_RIGHT = USB_1;
 	public static final int J_X = USB_2;
 	//[U]LTRASONIC
-	public static final int U_EZ3 = ANALOG_1;//t
+	public static final int U_EZ3 = ANALOG_3;//t
 	public static final int U_EZ1 = ANALOG_2;//t
-	
 }

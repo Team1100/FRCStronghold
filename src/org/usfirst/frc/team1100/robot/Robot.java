@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.subsystems.Climb;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Lift;
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 		Lift.getInstance();
 		Ultrasound.getInstance();
-		//TODO: add Climb
+		Climb.getInstance();
 		
 		/*autoChuse= new SendableChooser();
 		autoChuse.addObject("Low Bar", new LowBarAuto());

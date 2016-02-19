@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1100.robot.commands.vision;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
 import org.usfirst.frc.team1100.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,7 +18,7 @@ public class TrackToGoal extends Command {
 	private boolean isFinishedX;
 	private boolean isFinished;
 
-	private double centerYtarget = 120;
+	private double centerYtarget = 120; //TODO: find real values
 	private double centerXtarget = 160;
 	
 	@Override
@@ -54,9 +52,9 @@ public class TrackToGoal extends Command {
 			for (double x : centerX) {
 				if (ix == index) {
 					SmartDashboard.putNumber("X", x);
-					if (x < 152.5) {
+					if (x < centerXtarget) {
 						Drive.getInstance().driveTank(-DRIVE_SPEED, DRIVE_SPEED);
-					} else if (x > 167.5) {
+					} else if (x > centerXtarget) {
 						Drive.getInstance().driveTank(DRIVE_SPEED, -DRIVE_SPEED);
 					} else {
 						Drive.getInstance().driveTank(0, 0);
@@ -78,9 +76,9 @@ public class TrackToGoal extends Command {
 			for (double y : centerY) {
 				if (iy == index) {
 					SmartDashboard.putNumber("Y", y);
-					if (y > 112.5) {
+					if (y > centerYtarget) {
 						Lift.getInstance().moveArm(ANGLE_SPEED);
-					} else if (y < 127.5) {
+					} else if (y < centerYtarget) {
 						Lift.getInstance().moveArm(-ANGLE_SPEED);
 					} else {
 						Lift.getInstance().moveArm(0);

@@ -25,37 +25,44 @@ public class OI{
 	private AttackThree RightStick;
 	private XboxController Peasant;
 	
+	/**
+	 * Called by Robot Initialization. 
+	 * Creates joysticks and button asssignments.
+	 */
 	private OI(){
 		//Joystick Init
 		LeftStick = new AttackThree(RobotMap.J_LEFT, .1);
 		RightStick = new AttackThree(RobotMap.J_RIGHT, .1);
 		Peasant = new XboxController(RobotMap.J_X, .2);
 		
-		//Button Assignments
-		//Don't have these on while testing things unless you are testing them
+		//Button Assignments TODO: Finalize
 		Peasant.getButtonX().whenPressed(new FireThenReset());
 		Peasant.getButtonA().whenPressed(new LowGoalThenReset());
 		Peasant.getButtonStart().whenPressed(new ResetShooterCommandGroup());
 		Peasant.getButtonY().whenPressed(new ToggleRollerCommand());
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
 		Peasant.getButtonLeftBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_UP));
-		Peasant.getButtonLeftStick().whenPressed(new SetIntakeSetpoint(Intake.POS_SUCK));
-	
-		org.usfirst.frc.team1100.robot.subsystems.Shooter.getInstance().burn();
 	}
-
+	/**
+	 * Returns the Left Joystick.
+	 * @return the Left AttackThree
+	 */
 	public AttackThree getLeftStick() {
 		return LeftStick;
 	}
 
+	/**
+	 * Returns the Right Joystick
+	 * @return the Right AttackThree
+	 */
 	public AttackThree getRightStick() {
 		return RightStick;
 	}
-
+	/**
+	 * Returns the Xbox
+	 * @return the xbox ya silly what else
+	 */
 	public XboxController getPeasant() {
 		return Peasant;
 	}
-	
-	
 }
-

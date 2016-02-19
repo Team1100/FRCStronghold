@@ -28,7 +28,7 @@ public class Lift extends PIDSubsystem {
 	private SpeedController lift2;// these two move the arm up and down
 
 	private TT armLift;
-
+	
 	private Encoder armRead;
 
 	private DigitalInput encA;

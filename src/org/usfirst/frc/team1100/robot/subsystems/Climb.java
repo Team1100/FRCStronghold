@@ -24,10 +24,12 @@ public class Climb extends Subsystem{
 
 	public Climb(){
 		hookExtend1 = new Talon(RobotMap.C_HOOK_EXTEND_MOTOR_1);
+		hookExtend2 = new Talon(RobotMap.C_HOOK_EXTEND_MOTOR_2);
 	}
 	
 	public void extendHook(double speed){
 		hookExtend1.set(speed);
+		hookExtend2.set(speed);
 	}
 	
 	@Override

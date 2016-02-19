@@ -6,27 +6,31 @@ import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  * Controls the Wheels. Obsolete class. Use DriveCAN Instead.
  */
-public class Drive extends Subsystem {
-	private static Drive drive;// create drive train object
+public class Drive extends PIDSubsystem{
+	private static Drive drive;
 
-	// Declare Victors(motor controllers)
 	private Victor RightFrontVictor;
 	private Victor RightBackVictor;
 	private Victor LeftFrontVictor;
 	private Victor LeftBackVictor;
-	// Declare Robot Drive
+	
 	private RobotDrive driveTrain;
-	// Declare Gyro
-	private Gyro gyro;
-
+	
+	private AnalogGyro gyro;
+	
+	private static final double P = 1;
+	private static final double I = 0;
+	private static final double D = 0;
+	
+	private static final double TOLERANCE = 1;
+	private static final double MAX_SPEED = .5;
+	
 	public static Drive getInstance() {// make drive accessible from anywhere
 		if (drive == null)
 			drive = new Drive();
@@ -34,6 +38,10 @@ public class Drive extends Subsystem {
 	}
 
 	public Drive() {
+		super (P,I,D);
+		setAbsoluteTolerance(TOLERANCE);
+		setOutputRange(-MAX_SPEED, MAX_SPEED);
+		
 		RightFrontVictor = new Victor(RobotMap.D_RIGHT_FRONT);
 		RightBackVictor = new Victor(RobotMap.D_RIGHT_BACK);
 		LeftFrontVictor = new Victor(RobotMap.D_LEFT_FRONT);
@@ -58,5 +66,16 @@ public class Drive extends Subsystem {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new UserDrive());
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		return gyro.pidGet();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		driveTank(output, -output);
+		
 	}
 }
