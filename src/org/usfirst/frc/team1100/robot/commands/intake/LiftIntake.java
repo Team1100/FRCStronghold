@@ -4,11 +4,14 @@ import org.usfirst.frc.team1100.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Used to move the intake manualy in auto. Don't use this.
+ * Use "SetIntakeSetpoint" for PID support
+ */
 public class LiftIntake extends Command{
 
-	double timeout;
-	double value;
-
+	private double timeout;
+	private double value;
 
 	public LiftIntake(double timeout, double value){
 		this.timeout = timeout;

@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UserMoveArm extends Command{
 
+	/**
+	 * Called by Lift as default. Joystick controls.
+	 */
 	public UserMoveArm(){
 		requires(Lift.getInstance());
 	}

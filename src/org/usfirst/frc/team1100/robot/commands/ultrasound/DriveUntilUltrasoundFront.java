@@ -13,6 +13,12 @@ public class DriveUntilUltrasoundFront extends Command{
 	
 	private boolean isFinished;
 	
+	/**
+	 * Drives until the ultrasonic returns a value within distance
+	 * @param distance the distance in inches we should be going until
+	 * @param left Speed of left motor
+	 * @param right Speed of right motor
+	 */
 	public DriveUntilUltrasoundFront(double distance, double left, double right){
 		requires(Drive.getInstance());
 		

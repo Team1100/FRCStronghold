@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class LowGoalFire extends CommandGroup{
+	/**
+	 * Undoes necessary pistons then does a soft kick
+	 */
 	public LowGoalFire(){
 		addSequential(new SetFillCommand(Value.kReverse));
 		addSequential(new WaitCommand(1));

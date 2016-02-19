@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *Used for autonomous driving command groups
  */
 public class DriveCommand extends Command {
 
 	private double left, right, time;
 	/**
-	 * Moves the robot with its wheels
+	 * Moves the robot for a period of time
 	 * @param left - speed of left motor
 	 * @param right - speed of right motor
 	 * @param time - duration of movement in seconds

@@ -10,7 +10,10 @@ public class SetLatchCommand extends Command{
 	private boolean isFinished = false;
 	
 	Value value;
-	
+	/**
+	 * Sets the piston to a position
+	 * @param value use Value.position
+	 */
 	public SetLatchCommand(Value value){
 		System.out.println("Test");
 		requires(Shooter.getInstance());

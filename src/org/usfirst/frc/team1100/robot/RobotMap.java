@@ -56,6 +56,7 @@ public class RobotMap {
 	public static final int D_RIGHT_BACK = MOTOR_7;//t
 	//[S]HOOTER
 	public static final int S_PCM = CAN_1;
+	
 	public static final int S_FILL_PNEUMATIC_A = PNEUM_4;
 	public static final int S_RESET_PNEUMATIC_A = PNEUM_2;
 	public static final int S_LATCH_PNEUMATIC_A = PNEUM_0;

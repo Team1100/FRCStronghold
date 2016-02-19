@@ -4,9 +4,8 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.shooter.arm.UserMoveArm;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -20,14 +19,12 @@ public class Lift extends PIDSubsystem {
 
 	private static Lift lift;
 
-	private DoubleSolenoid fill;// this one creates the work buildup for firing
-	private DoubleSolenoid latch;// controls/releases the fill
-	private DoubleSolenoid reset;// pulls back kicker to reset
-
 	private SpeedController lift1;
 	private SpeedController lift2;// these two move the arm up and down
 
 	private TT armLift;
+	
+	private AnalogInput armRead2;
 	
 	private Encoder armRead;
 
@@ -58,10 +55,15 @@ public class Lift extends PIDSubsystem {
 		encB = new DigitalInput(RobotMap.L_ARM_ENC_B);
 		
 		armRead = new Encoder(encA, encB);
+		armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
 	}
 
 	public double getEncValue(){
 		return armRead.pidGet();
+	}
+	
+	public double getPotentiometer(){
+		return armRead2.getValue();
 	}
 	
 	public void moveArm(double value) {
@@ -87,7 +89,7 @@ public class Lift extends PIDSubsystem {
 	public class TT implements SpeedController {// class manages a set of
 												// speed controllers
 
-		// In this class "Sanic" indicates enhanced loop variable
+		// In this class "sanic" indicates enhanced loop variable
 
 		private SpeedController[] tals;
 		private double speed;
@@ -100,8 +102,8 @@ public class Lift extends PIDSubsystem {
 		@Override
 		public void pidWrite(double output) {
 			this.set(output);
-			for (SpeedController Sanic : tals) {
-				Sanic.disable();
+			for (SpeedController sanic : tals) {
+				sanic.disable();
 			}
 		}
 
@@ -118,16 +120,16 @@ public class Lift extends PIDSubsystem {
 		@Override
 		public void set(double speed) {
 			this.speed = speed;
-			for (SpeedController Sanic : this.tals) {
-				Sanic.set(speed);
+			for (SpeedController sanic : this.tals) {
+				sanic.set(speed);
 			}
 
 		}
 
 		@Override
 		public void setInverted(boolean isInverted) {
-			for (SpeedController Sanic : this.tals) {
-				Sanic.setInverted(isInverted);
+			for (SpeedController sanic : this.tals) {
+				sanic.setInverted(isInverted);
 			}
 
 		}
@@ -139,8 +141,8 @@ public class Lift extends PIDSubsystem {
 
 		@Override
 		public void disable() {
-			for (SpeedController Sanic : this.tals) {
-				Sanic.disable();
+			for (SpeedController sanic : this.tals) {
+				sanic.disable();
 			}
 		}
 	}

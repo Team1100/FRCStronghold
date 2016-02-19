@@ -7,10 +7,16 @@ import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Lifts the intake with joystick.
+ */
 public class UserLiftIntake extends Command{
 
 	double value;
 	
+	/**
+	 * Moves the intake with the joystick. Also listens to the ballIn sensor
+	 */
 	public UserLiftIntake(){
 		requires(Intake.getInstance());
 	}

@@ -3,12 +3,17 @@ package org.usfirst.frc.team1100.robot.commands.shooter.arm;
 import org.usfirst.frc.team1100.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
-//#include <apstring.h>
+
 public class MoveArmCommand extends Command{
 
 	double value;
 	double timeout;
 	
+	/**
+	 * Move arm without PID, and a timeout
+	 * @param value - speed from -1 to 1(negative is backwards)
+	 * @param timeout - time in seconds
+	 */
 	public MoveArmCommand(double value, double timeout){
 		requires(Lift.getInstance());
 		this.value = value;

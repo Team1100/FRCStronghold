@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class PollSensors extends Command{
 
+	/**
+	 * Default command for Ultrasound that updates the sensors
+	 */
 	public PollSensors(){
 		requires(Ultrasound.getInstance());
 	}

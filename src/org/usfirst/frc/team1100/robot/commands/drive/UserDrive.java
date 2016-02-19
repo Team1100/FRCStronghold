@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *Drive called continuously by the Drive subsystem, for joysticks
  */
 public class UserDrive extends Command {
 
@@ -39,5 +39,6 @@ public class UserDrive extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

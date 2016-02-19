@@ -21,6 +21,15 @@ public class TrackToGoal extends Command {
 	private double centerYtarget = 120; //TODO: find real values
 	private double centerXtarget = 160;
 	
+	/**
+	 * Moves the drive and intake to face the goal based
+	 * off of what the camera sees.
+	 */
+	public TrackToGoal(){
+		requires(Lift.getInstance());
+		requires(Drive.getInstance());
+	}
+	
 	@Override
 	protected void initialize() {
 		requires(Drive.getInstance());

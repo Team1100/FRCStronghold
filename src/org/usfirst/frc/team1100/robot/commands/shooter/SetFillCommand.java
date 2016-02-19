@@ -9,7 +9,10 @@ public class SetFillCommand extends Command{
 
 	private Value value;
 	private boolean isFinished = false;
-	
+	/**
+	 * Sets the piston to a position
+	 * @param value use Value.position
+	 */
 	public SetFillCommand(Value value){
 		requires(Shooter.getInstance());
 		this.value = value;

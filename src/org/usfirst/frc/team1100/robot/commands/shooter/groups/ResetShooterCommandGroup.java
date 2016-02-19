@@ -13,7 +13,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  */
 public class ResetShooterCommandGroup extends CommandGroup {
-
+	/**
+	 * Does a sequence of pneumatics to reset the shooter
+	 * after being fired.
+	 */
 	public  ResetShooterCommandGroup() {
     	if(!Shooter.getInstance().isReset()){
     		addSequential(new WaitCommand(.75));
