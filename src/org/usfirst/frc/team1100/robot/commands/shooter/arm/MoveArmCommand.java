@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1100.robot.commands.shooter.arm;
 
-import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 //#include <apstring.h>
@@ -10,7 +10,7 @@ public class MoveArmCommand extends Command{
 	double timeout;
 	
 	public MoveArmCommand(double value, double timeout){
-		requires(Shooter.getInstance());
+		requires(Lift.getInstance());
 		this.value = value;
 		this.timeout = timeout;
 	}
@@ -22,7 +22,7 @@ public class MoveArmCommand extends Command{
 
 	@Override
 	protected void execute() {
-		Shooter.getInstance().moveArm(value);
+		Lift.getInstance().moveArm(value);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class MoveArmCommand extends Command{
 
 	@Override
 	protected void end() {
-		Shooter.getInstance().moveArm(0);
+		Lift.getInstance().moveArm(0);
 	}
 
 	@Override

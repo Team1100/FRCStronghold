@@ -13,7 +13,8 @@ public class Climb extends Subsystem{
 	
 	private static Climb climb;
 	
-	private SpeedController hookExtender;
+	private SpeedController hookExtend1;
+	private SpeedController hookExtend2;
 	
 	public static Climb getInstance(){
 		if(climb==null)
@@ -22,11 +23,11 @@ public class Climb extends Subsystem{
 	}
 
 	public Climb(){
-		hookExtender = new Talon(RobotMap.C_HOOK_EXTEND_MOTOR);//TODO: find out actual controller
+		hookExtend1 = new Talon(RobotMap.C_HOOK_EXTEND_MOTOR_1);
 	}
 	
 	public void extendHook(double speed){
-		hookExtender.set(speed);
+		hookExtend1.set(speed);
 	}
 	
 	@Override

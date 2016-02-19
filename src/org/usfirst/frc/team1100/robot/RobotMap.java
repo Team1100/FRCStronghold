@@ -8,42 +8,76 @@ package org.usfirst.frc.team1100.robot;
 public class RobotMap {
 	//TODO: t indicates temporary value
 	
-	//[D]RIVE TRAIN
-	public static final int D_LEFT_FRONT = 9; //t
-	public static final int D_LEFT_MID = 7;//t
-	public static final int D_LEFT_BACK = 2;//t
-	public static final int D_RIGHT_FRONT = 3;//t
-	public static final int D_RIGHT_MID = 4;//t
-	public static final int D_RIGHT_BACK = 5;//t
-	//[S]HOOTER
-	public static final int S_PCM = 1;
-	public static final int S_FILL_PNEUMATIC_A = 4;
-	public static final int S_RESET_PNEUMATIC_A = 2;
-	public static final int S_LATCH_PNEUMATIC_A = 0;
-	public static final int S_FILL_PNEUMATIC_B = 5;
-	public static final int S_RESET_PNEUMATIC_B = 3;
-	public static final int S_LATCH_PNEUMATIC_B = 1;
-	public static final int S_KICKER_SENSOR = 1;
+	private static final int MOTOR_0 = 0;
+	private static final int MOTOR_1 = 1;
+	private static final int MOTOR_2 = 2;
+	private static final int MOTOR_3 = 3;
+	private static final int MOTOR_4 = 4;
+	private static final int MOTOR_5 = 5;
+	private static final int MOTOR_6 = 6;
+	private static final int MOTOR_7 = 7;
+	private static final int MOTOR_8 = 8;
+	private static final int MOTOR_9 = 9;
 	
-	public static final int L_ARM_LIFT_MOTOR_1 = 2;
-	public static final int L_ARM_LIFT_MOTOR_2 = 3;
-	public static final int L_ARM_ENC_A = 1;
-	public static final int L_ARM_ENC_B = 2;
+	private static final int PNEUM_0 = 0;
+	private static final int PNEUM_1 = 1;
+	private static final int PNEUM_2 = 2;
+	private static final int PNEUM_3 = 3;
+	private static final int PNEUM_4 = 4;
+	private static final int PNEUM_5 = 5;
+	
+	private static final int CAN_0 = 0;
+	private static final int CAN_1 = 1;
+	
+	private static final int USB_0 = 0;
+	private static final int USB_1 = 1;
+	private static final int USB_2 = 2;
+	
+	private static final int ANALOG_0 = 0;
+	private static final int ANALOG_1 = 1;
+	private static final int ANALOG_2 = 2;
+	private static final int ANALOG_3 = 3;
+	private static final int ANALOG_4 = 4;
+	
+	private static final int DIGITAL_0 = 0;
+	private static final int DIGITAL_1 = 1;
+	private static final int DIGITAL_2 = 2;
+	private static final int DIGITAL_3 = 3;
+	private static final int DIGITAL_4 = 4;
+	
+	//[D]RIVE TRAIN
+	public static final int D_LEFT_FRONT = MOTOR_4; //t
+	public static final int D_LEFT_BACK = MOTOR_5;//t
+	public static final int D_RIGHT_FRONT = MOTOR_6;//t
+	public static final int D_RIGHT_BACK = MOTOR_7;//t
+	//[S]HOOTER
+	public static final int S_PCM = CAN_1;
+	
+	public static final int S_FILL_PNEUMATIC_A = PNEUM_4;
+	public static final int S_RESET_PNEUMATIC_A = PNEUM_2;
+	public static final int S_LATCH_PNEUMATIC_A = PNEUM_0;
+	public static final int S_FILL_PNEUMATIC_B = PNEUM_5;
+	public static final int S_RESET_PNEUMATIC_B = PNEUM_3;
+	public static final int S_LATCH_PNEUMATIC_B = PNEUM_1;
+	
+	public static final int L_ARM_LIFT_MOTOR_1 = MOTOR_2;
+	public static final int L_ARM_LIFT_MOTOR_2 = MOTOR_3;
+	public static final int L_ARM_ENC_A = DIGITAL_1;
+	public static final int L_ARM_ENC_B = DIGITAL_2;
 	//[I]NTAKE
-	public static final int I_INTAKE_ROLLER = 0;//It was 3 until Justin came along and plugged it in
-	public static final int I_INTAKE_LIFT = 1;
-	public static final int I_INTAKE_LIFT_POTENTIOMETER = 0;
-	public static final int I_BALL_IN = 0;
+	public static final int I_INTAKE_ROLLER = MOTOR_0;
+	public static final int I_INTAKE_LIFT = MOTOR_1;
+	public static final int I_INTAKE_LIFT_POTENTIOMETER = ANALOG_0;
+	public static final int I_BALL_IN = DIGITAL_0;
 	//[C]LLIMB
-	public static final int C_HOOK_EXTEND_MOTOR = 2;//t
+	public static final int C_HOOK_EXTEND_MOTOR_1 = MOTOR_8;//t
+	public static final int C_HOOK_EXTEND_MOTOR_2 = MOTOR_9;//t
 	//[J]OYSTICKS
-	public static final int J_LEFT = 0;
-	public static final int J_RIGHT = 1;
-	public static final int J_X = 2;
+	public static final int J_LEFT = USB_0;
+	public static final int J_RIGHT = USB_1;
+	public static final int J_X = USB_2;
 	//[U]LTRASONIC
-	public static final int U_EZ3 = 0;//t
-	public static final int U_EZ1 = 1;//t
-	public static final int U_UNKNOWN = 2;//t
-	//[E]NCODERS AND SENSORS
+	public static final int U_EZ3 = ANALOG_1;//t
+	public static final int U_EZ1 = ANALOG_2;//t
 	
 }

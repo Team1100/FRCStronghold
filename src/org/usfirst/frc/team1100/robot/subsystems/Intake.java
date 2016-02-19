@@ -26,16 +26,16 @@ public class Intake extends PIDSubsystem {
 	private DigitalInput ballIn;
 	private AnalogInput liftRead;
 
-	public static final double POS_SUCK = 2.3;
-	public static final double POS_UP = 3.7;
-	public static final double POS_DOWN = 2.1;
+	public static final double POS_SUCK = 2;
+	public static final double POS_UP = 3.34;
+	public static final double POS_DOWN = 1.48;
 	
 	private static final double MAX_SPEED = .4;
 	
-	private static double P = 1;
-	private static double I = .2;
-	private static double D = 0;
-	private static double TOLERANCE = 100000;//shhhhh
+	private static final double P = 1;
+	private static final double I = .2;
+	private static final double D = 0;
+	private static final double TOLERANCE = 100000;//shhhhh
 
 	public static Intake getInstance() {
 		if (intake == null)

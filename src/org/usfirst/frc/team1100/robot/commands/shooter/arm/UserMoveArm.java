@@ -2,7 +2,7 @@ package org.usfirst.frc.team1100.robot.commands.shooter.arm;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.input.XboxController;
-import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class UserMoveArm extends Command{
 
 	public UserMoveArm(){
-		requires(Shooter.getInstance());
+		requires(Lift.getInstance());
 	}
 	
 	@Override
@@ -20,8 +20,8 @@ public class UserMoveArm extends Command{
 
 	@Override
 	protected void execute() {
-		Shooter.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight));		
-		SmartDashboard.putNumber("Arm Encoder", Shooter.getInstance().getEncValue());
+		Lift.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight));		
+		SmartDashboard.putNumber("Arm Encoder", Lift.getInstance().getEncValue());
 	}
 
 	@Override

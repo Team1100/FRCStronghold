@@ -1,8 +1,9 @@
 package org.usfirst.frc.team1100.robot.commands.vision;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
-import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Lift;
+import org.usfirst.frc.team1100.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -19,10 +20,13 @@ public class TrackToGoal extends Command {
 	private boolean isFinishedX;
 	private boolean isFinished;
 
+	private double centerYtarget = 120;
+	private double centerXtarget = 160;
+	
 	@Override
 	protected void initialize() {
-		requires(DriveCAN.getInstance());
-		requires(Shooter.getInstance());
+		requires(Drive.getInstance());
+		requires(Lift.getInstance());
 		table = NetworkTable.getTable("GRIP/myContoursReport");
 		defaultValue = new double[0];
 
@@ -51,11 +55,11 @@ public class TrackToGoal extends Command {
 				if (ix == index) {
 					SmartDashboard.putNumber("X", x);
 					if (x < 152.5) {
-						DriveCAN.getInstance().driveTank(-DRIVE_SPEED, DRIVE_SPEED);
+						Drive.getInstance().driveTank(-DRIVE_SPEED, DRIVE_SPEED);
 					} else if (x > 167.5) {
-						DriveCAN.getInstance().driveTank(DRIVE_SPEED, -DRIVE_SPEED);
+						Drive.getInstance().driveTank(DRIVE_SPEED, -DRIVE_SPEED);
 					} else {
-						DriveCAN.getInstance().driveTank(0, 0);
+						Drive.getInstance().driveTank(0, 0);
 						isFinishedX = true;
 					}
 				}
@@ -75,11 +79,11 @@ public class TrackToGoal extends Command {
 				if (iy == index) {
 					SmartDashboard.putNumber("Y", y);
 					if (y > 112.5) {
-						Shooter.getInstance().moveArm(ANGLE_SPEED);
+						Lift.getInstance().moveArm(ANGLE_SPEED);
 					} else if (y < 127.5) {
-						Shooter.getInstance().moveArm(-ANGLE_SPEED);
+						Lift.getInstance().moveArm(-ANGLE_SPEED);
 					} else {
-						Shooter.getInstance().moveArm(0);
+						Lift.getInstance().moveArm(0);
 						isFinishedY = true;
 					}
 				}
@@ -87,7 +91,7 @@ public class TrackToGoal extends Command {
 			}
 		}
 		if (centerY.length == 0) {
-			Shooter.getInstance().moveArm(0);
+			Lift.getInstance().moveArm(0);
 			SmartDashboard.putNumber("Y", 0);
 			isFinishedY = true;	
 		}
@@ -104,8 +108,8 @@ public class TrackToGoal extends Command {
 
 	@Override
 	protected void end() {
-		Shooter.getInstance().moveArm(0);
-		DriveCAN.getInstance().driveTank(0, 0);
+		Lift.getInstance().moveArm(0);
+		Drive.getInstance().driveTank(0, 0);
 	}
 
 	@Override

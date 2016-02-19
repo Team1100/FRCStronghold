@@ -3,7 +3,6 @@ package org.usfirst.frc.team1100.robot.commands.drive;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class UserDrive extends Command {
 
     public UserDrive() {
-        requires(DriveCAN.getInstance());
+        requires(Drive.getInstance());
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +24,7 @@ public class UserDrive extends Command {
     protected void execute() {
     	double left = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
     	double right = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kY);
-    	DriveCAN.getInstance().driveTank(left, right);
+    	Drive.getInstance().driveTank(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

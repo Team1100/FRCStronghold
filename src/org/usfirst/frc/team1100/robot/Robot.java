@@ -1,15 +1,17 @@
 
 package org.usfirst.frc.team1100.robot;
 
-import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
-import org.usfirst.frc.team1100.robot.subsystems.DriveCAN;
+import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
+import org.usfirst.frc.team1100.robot.subsystems.Lift;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.Ultrasound;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,18 +28,23 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    private SendableChooser autoChuse;
+    
     public void robotInit() {
     	//Initialize Subsystems and OI
 		OI.getInstance();
-		DriveCAN.getInstance();
+		Drive.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
-		//TODO: ass Ultrasound, Climb
+		Lift.getInstance();
+		Ultrasound.getInstance();
+		//TODO: add Climb
 		
-		Shooter.getInstance().burn();
+		/*autoChuse= new SendableChooser();
+		autoChuse.addObject("Low Bar", new LowBarAuto());
+		//TODO: add rest. make it work
 		
-        //TODO: set autonomousCommand
-		//autonomousCommand = new SetIntakeSetpoint(1);
+		SmartDashboard.putData("AutoThomas", autoChuse);*/
     }
 	
 	public void disabledPeriodic() {
@@ -45,7 +52,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
+        //autonomousCommand = (Command)autoChuse.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
