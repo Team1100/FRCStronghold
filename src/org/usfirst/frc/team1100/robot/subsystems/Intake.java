@@ -8,7 +8,7 @@ import org.usfirst.frc.team1100.robot.commands.intake.UserLiftIntake;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -51,8 +51,8 @@ public class Intake extends PIDSubsystem {
 		
 		setAbsoluteTolerance(TOLERANCE);
 		
-		roller = new Talon(RobotMap.I_INTAKE_ROLLER);
-		lift = new Talon(RobotMap.I_INTAKE_LIFT);
+		roller = new Victor(RobotMap.I_INTAKE_ROLLER);
+		lift = new Victor(RobotMap.I_INTAKE_LIFT);
 		
 		liftRead = new AnalogInput(RobotMap.I_INTAKE_LIFT_POTENTIOMETER);
 		ballIn = new DigitalInput(RobotMap.I_BALL_IN);

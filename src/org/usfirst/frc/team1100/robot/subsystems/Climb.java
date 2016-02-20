@@ -3,7 +3,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -23,8 +23,8 @@ public class Climb extends Subsystem{
 	}
 
 	public Climb(){
-		hookExtend1 = new Talon(RobotMap.C_HOOK_EXTEND_MOTOR_1);
-		hookExtend2 = new Talon(RobotMap.C_HOOK_EXTEND_MOTOR_2);
+		hookExtend1 = new Victor(RobotMap.C_HOOK_EXTEND_MOTOR_1);
+		hookExtend2 = new Victor(RobotMap.C_HOOK_EXTEND_MOTOR_2);
 	}
 	
 	public void extendHook(double speed){
@@ -32,10 +32,13 @@ public class Climb extends Subsystem{
 		hookExtend2.set(speed);
 	}
 	
+	public void pullUp(double speed){
+		hookExtend1.set(-speed);
+		hookExtend2.set(-speed);
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO : User Climb? (if this is a joystick, otherwise delete this msg)
-		
 	}
-
 }

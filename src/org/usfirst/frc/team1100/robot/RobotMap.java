@@ -30,6 +30,7 @@ public class RobotMap {
 	
 	private static final int CAN_0 = 0;
 	private static final int CAN_1 = 1;
+	private static final int CAN_2 = 2;
 	
 	private static final int USB_0 = 0;
 	private static final int USB_1 = 1;
@@ -50,13 +51,12 @@ public class RobotMap {
 	//Below are actual assignments.
 	
 	//[D]RIVE TRAIN
-	public static final int D_LEFT_FRONT = MOTOR_4; //t
-	public static final int D_LEFT_BACK = MOTOR_5;//t
-	public static final int D_RIGHT_FRONT = MOTOR_6;//t
-	public static final int D_RIGHT_BACK = MOTOR_7;//t
+	public static final int D_LEFT_FRONT = MOTOR_7; 
+	public static final int D_LEFT_BACK = MOTOR_6;
+	public static final int D_RIGHT_FRONT = MOTOR_2;
+	public static final int D_RIGHT_BACK = MOTOR_3;
 	//[S]HOOTER
 	public static final int S_PCM = CAN_1;
-	
 	public static final int S_FILL_PNEUMATIC_A = PNEUM_4;
 	public static final int S_RESET_PNEUMATIC_A = PNEUM_2;
 	public static final int S_LATCH_PNEUMATIC_A = PNEUM_0;
@@ -64,19 +64,19 @@ public class RobotMap {
 	public static final int S_RESET_PNEUMATIC_B = PNEUM_3;
 	public static final int S_LATCH_PNEUMATIC_B = PNEUM_1;
 	//[L]IFT
-	public static final int L_ARM_LIFT_MOTOR_1 = MOTOR_2;
-	public static final int L_ARM_LIFT_MOTOR_2 = MOTOR_3;
+	public static final int L_ARM_LIFT_MOTOR_1 =MOTOR_0;
+	public static final int L_ARM_LIFT_MOTOR_2 = MOTOR_4;
 	public static final int L_ARM_ENC_A = DIGITAL_1;//t
 	public static final int L_ARM_ENC_B = DIGITAL_2;//t
 	public static final int L_ARM_POTENTIOMETER = ANALOG_1;//t
 	//[I]NTAKE
-	public static final int I_INTAKE_ROLLER = MOTOR_0;
-	public static final int I_INTAKE_LIFT = MOTOR_1;
+	public static final int I_INTAKE_ROLLER = MOTOR_5;//t
+	public static final int I_INTAKE_LIFT = MOTOR_1;//t
 	public static final int I_INTAKE_LIFT_POTENTIOMETER = ANALOG_0;
 	public static final int I_BALL_IN = DIGITAL_0;
 	//[C]LLIMB
-	public static final int C_HOOK_EXTEND_MOTOR_1 = MOTOR_8;//t
-	public static final int C_HOOK_EXTEND_MOTOR_2 = MOTOR_9;//t
+	public static final int C_HOOK_EXTEND_MOTOR_1 = MOTOR_8;
+	public static final int C_HOOK_EXTEND_MOTOR_2 = MOTOR_9;
 	//[J]OYSTICKS
 	public static final int J_LEFT = USB_0;
 	public static final int J_RIGHT = USB_1;

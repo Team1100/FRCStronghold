@@ -2,9 +2,10 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleRollerCommand;
+import org.usfirst.frc.team1100.robot.commands.intake.TurnRollers;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenReset;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.LowGoalThenReset;
-import org.usfirst.frc.team1100.robot.commands.shooter.groups.ResetShooterCommandGroup;
+import org.usfirst.frc.team1100.robot.commands.vision.TrackToGoal;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -38,8 +39,9 @@ public class OI{
 		//Button Assignments TODO: Finalize
 		Peasant.getButtonX().whenPressed(new FireThenReset());
 		Peasant.getButtonA().whenPressed(new LowGoalThenReset());
-		Peasant.getButtonStart().whenPressed(new ResetShooterCommandGroup());
+		Peasant.getButtonB().whenPressed(new TrackToGoal());
 		Peasant.getButtonY().whenPressed(new ToggleRollerCommand());
+		Peasant.getButtonBack().whileHeld(new TurnRollers(.5));
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
 		Peasant.getButtonLeftBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_UP));
 	}

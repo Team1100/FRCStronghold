@@ -12,11 +12,20 @@ public class TrackToGoal extends Command {
 	private NetworkTable table;
 	double[] defaultValue;
 
-	private final double DRIVE_SPEED = .5;
-	private final double ANGLE_SPEED = .4;// TODO: utilize PID instead
-	private boolean isFinishedY;
-	private boolean isFinishedX;
+	private double initialY;
+	private double finalY;
+	private double deltaY;
+	private double yToEncoderRatio;
+	private double encoderTarget;
+	private double encoderStart;
+	private double encoderStart2;
+	
+	private final double ENCODER_DELTA = 0;
+	
 	private boolean isFinished;
+	
+	private boolean firstStageFinishedY;
+	private boolean targetYCalculated;
 
 	private double centerYtarget = 120; //TODO: find real values
 	private double centerXtarget = 160;
@@ -37,86 +46,77 @@ public class TrackToGoal extends Command {
 		table = NetworkTable.getTable("GRIP/myContoursReport");
 		defaultValue = new double[0];
 
-		isFinishedY = false;
-		isFinishedX = false;
 		isFinished = false;
-	}
-
-	@Override
-	protected void execute() {
+		firstStageFinishedY = false;
+		targetYCalculated = false;
+		
 		double[] area = table.getNumberArray("area", defaultValue);
+		double[] centerX = table.getNumberArray("centerX", defaultValue);
+		double[] centerY = table.getNumberArray("centerY", defaultValue);
 		int index = 0;
 		double max_area = 0;
 		for (int i = 0; i < area.length; i++) {
 			if (area[i] > max_area) {
 				max_area = area[i];
 				index = i;
-				SmartDashboard.putNumber("Area", max_area);
 			}
 		}
+		double x = centerX[index];
+		double y = centerY[index];
+		initialY = y;
+		encoderStart = Lift.getInstance().getPosition();
+		}
 
-		double[] centerX = table.getNumberArray("centerX", defaultValue);
-		int ix = 0;
-		if (!isFinishedX) {
-			for (double x : centerX) {
-				if (ix == index) {
-					SmartDashboard.putNumber("X", x);
-					if (x < centerXtarget) {
-						Drive.getInstance().driveTank(-DRIVE_SPEED, DRIVE_SPEED);
-					} else if (x > centerXtarget) {
-						Drive.getInstance().driveTank(DRIVE_SPEED, -DRIVE_SPEED);
-					} else {
-						Drive.getInstance().driveTank(0, 0);
-						isFinishedX = true;
-					}
+	@Override
+	protected void execute() {
+		if(!firstStageFinishedY){
+			Lift.getInstance().setSetpoint(encoderStart+ENCODER_DELTA);
+			Lift.getInstance().enable();
+			if(Lift.getInstance().onTarget())
+				firstStageFinishedY = true;
+			Lift.getInstance().disable();
+		}
+		else if(firstStageFinishedY && !targetYCalculated){
+			double[] area = table.getNumberArray("area", defaultValue);
+			double[] centerY = table.getNumberArray("centerY", defaultValue);
+			int index = 0;
+			double max_area = 0;
+			for (int i = 0; i < area.length; i++) {
+				if (area[i] > max_area) {
+					max_area = area[i];
+					index = i;
 				}
-				ix++;
 			}
+			double y = centerY[index];
+			finalY = y;
+			deltaY = finalY-initialY;
+			yToEncoderRatio = deltaY/ENCODER_DELTA;
+			double yToMove = centerYtarget-finalY;
+			encoderTarget = yToMove/yToEncoderRatio;
+			encoderStart2 = Lift.getInstance().getPosition();
+			targetYCalculated = true;
 		}
-		if (centerX.length == 0) {
-			Drive.getInstance().driveTank(0, 0);
-			SmartDashboard.putNumber("X", 0);
-			isFinishedX = true;
+		else if(targetYCalculated){
+			Lift.getInstance().setSetpoint(encoderStart2+encoderTarget);
+			Lift.getInstance().enable();
 		}
-
-		double[] centerY = table.getNumberArray("centerY", defaultValue);
-		int iy = 0;
-		if (!isFinishedY) {
-			for (double y : centerY) {
-				if (iy == index) {
-					SmartDashboard.putNumber("Y", y);
-					if (y > centerYtarget) {
-						Lift.getInstance().moveArm(ANGLE_SPEED);
-					} else if (y < centerYtarget) {
-						Lift.getInstance().moveArm(-ANGLE_SPEED);
-					} else {
-						Lift.getInstance().moveArm(0);
-						isFinishedY = true;
-					}
-				}
-				iy++;
-			}
+		if(targetYCalculated&&Lift.getInstance().onTarget()){
+			Lift.getInstance().disable();
+			isFinished = true;
 		}
-		if (centerY.length == 0) {
-			Lift.getInstance().moveArm(0);
-			SmartDashboard.putNumber("Y", 0);
-			isFinishedY = true;	
-		}
-
 	}
 
 	@Override
 	protected boolean isFinished() {
-		if(isFinishedY&&isFinishedX){
-			isFinished = true;
-		}
 		return isFinished;
 	}
 
 	@Override
 	protected void end() {
 		Lift.getInstance().moveArm(0);
+		Lift.getInstance().disable();
 		Drive.getInstance().driveTank(0, 0);
+		Drive.getInstance().disable();
 	}
 
 	@Override
