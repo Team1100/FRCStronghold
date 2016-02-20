@@ -30,6 +30,8 @@ public class Lift extends PIDSubsystem {
 
 	private DigitalInput encA;
 	private DigitalInput encB;
+	
+	private DigitalInput lSwitch;
 
 	private static final double P = .1;
 	private static final double I = 0;
@@ -56,8 +58,13 @@ public class Lift extends PIDSubsystem {
 		
 		armRead = new Encoder(encA, encB);
 		armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
+		lSwitch = new DigitalInput(RobotMap.L_LIMIT_SWITCH);
 	}
 
+	public boolean tooFar(){
+		return lSwitch.get();
+	}
+	
 	public double getEncValue(){
 		return armRead.pidGet();
 	}
@@ -67,7 +74,9 @@ public class Lift extends PIDSubsystem {
 	}
 	
 	public void moveArm(double value) {
-		armLift.set(value);
+		if(tooFar())
+			armLift.set(0);
+		else armLift.set(value);
 	}
 
 

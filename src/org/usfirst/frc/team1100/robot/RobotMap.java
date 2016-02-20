@@ -69,12 +69,13 @@ public class RobotMap {
 	public static final int L_ARM_ENC_A = DIGITAL_3;//t
 	public static final int L_ARM_ENC_B = DIGITAL_2;//t
 	public static final int L_ARM_POTENTIOMETER = ANALOG_1;//t
+	public static final int L_LIMIT_SWITCH = DIGITAL_4;//t
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = MOTOR_5;//t
 	public static final int I_INTAKE_LIFT = MOTOR_1;//t
 	public static final int I_INTAKE_LIFT_POTENTIOMETER = ANALOG_0;
-	public static final int I_BALL_IN = DIGITAL_0;
-	public static final int I_BALL_IN_2 = DIGITAL_1;
+	public static final int I_BALL_IN = DIGITAL_0; //t
+	public static final int I_BALL_IN_2 = DIGITAL_1; //t
 	//[C]LLIMB
 	public static final int C_HOOK_EXTEND_MOTOR_1 = MOTOR_8;
 	public static final int C_HOOK_EXTEND_MOTOR_2 = MOTOR_9;
