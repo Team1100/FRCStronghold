@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * Controls the roller that pulls the boulders into the kicker
@@ -24,6 +23,7 @@ public class Intake extends PIDSubsystem {
 	private SpeedController roller;
 	private SpeedController lift;
 	private DigitalInput ballIn;
+	private DigitalInput ballIn2;
 	private AnalogInput liftRead;
 
 	public static final double POS_SUCK = 2;
@@ -56,8 +56,7 @@ public class Intake extends PIDSubsystem {
 		
 		liftRead = new AnalogInput(RobotMap.I_INTAKE_LIFT_POTENTIOMETER);
 		ballIn = new DigitalInput(RobotMap.I_BALL_IN);
-
-		LiveWindow.addSensor("Intake", "PID Controller", getPIDController());
+		ballIn2 = new DigitalInput(RobotMap.I_BALL_IN_2);
 	}
 	
 	public boolean target(){
@@ -70,7 +69,11 @@ public class Intake extends PIDSubsystem {
 	}
 
 	public boolean ballIn() {
-		return !ballIn.get();
+		boolean in;
+		if(!ballIn.get()&&!ballIn2.get())
+			in = true;
+		else in = false;
+		return in;
 	}
 
 	public void moveRoller(double value) {
