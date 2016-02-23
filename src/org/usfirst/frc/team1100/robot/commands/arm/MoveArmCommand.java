@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.shooter.arm;
+package org.usfirst.frc.team1100.robot.commands.arm;
 
 import org.usfirst.frc.team1100.robot.subsystems.Lift;
 

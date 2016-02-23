@@ -1,17 +1,19 @@
 //#include <apstring.h>
 package org.usfirst.frc.team1100.robot;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team1100.robot.subsystems.Climb;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Lift;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.Ultrasound;
+import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
@@ -32,6 +34,11 @@ public class Robot extends IterativeRobot {
     private SendableChooser autoChuse;
     
     public void robotInit() {
+    	/*try {
+            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     	//Initialize Subsystems and OI
 		OI.getInstance();
 		Drive.getInstance();
@@ -40,6 +47,7 @@ public class Robot extends IterativeRobot {
 		Lift.getInstance();
 		Ultrasound.getInstance();
 		Climb.getInstance();
+		Vision.getInstance();
 		
 		/*autoChuse= new SendableChooser();
 		autoChuse.addObject("Low Bar", new LowBarAuto());
@@ -55,6 +63,11 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         //autonomousCommand = (Command)autoChuse.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
+        try {
+			new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -69,6 +82,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+    	
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
@@ -77,7 +91,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	Lift.getInstance().disable();
     }
 
     /**
@@ -91,6 +105,5 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-        LiveWindow.run();
     }
 }

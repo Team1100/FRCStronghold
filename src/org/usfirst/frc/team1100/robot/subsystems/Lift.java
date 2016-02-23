@@ -2,7 +2,7 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.shooter.arm.UserMoveArm;
+import org.usfirst.frc.team1100.robot.commands.arm.UserMoveArm;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -27,16 +27,20 @@ public class Lift extends PIDSubsystem {
 	private AnalogInput armRead2;
 	
 	private Encoder armRead;
-
-	private DigitalInput encA;
-	private DigitalInput encB;
 	
 	private DigitalInput lSwitch;
 
+	public static final double POS_DEFENSES = 240;//TODO add real value
+	public static final double POS_MIDDLE = 230;
+	public static final double CLOSE = 250;
+	public static final double RAMP = 290;
+	
+	
 	private static final double P = .1;
 	private static final double I = 0;
 	private static final double D = 0;
-	private static final double TOLERANCE = 1;
+	private static final double TOLERANCE = 7;
+	private static final double MAX_SPEED = .6;
 
 	public static Lift getInstance() {
 		if (lift == null)
@@ -47,18 +51,17 @@ public class Lift extends PIDSubsystem {
 	public Lift() {
 		super(P, I, D);
 		setAbsoluteTolerance(TOLERANCE);
-
+		setOutputRange(-MAX_SPEED, MAX_SPEED);
+		
 		lift1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
 		lift2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
 		
 		armLift = new TT(lift1, lift2);
 		
-		encA = new DigitalInput(RobotMap.L_ARM_ENC_A);
-		encB = new DigitalInput(RobotMap.L_ARM_ENC_B);
-		
-		armRead = new Encoder(encA, encB);
+		armRead = new Encoder(RobotMap.L_ARM_ENC_A, RobotMap.L_ARM_ENC_B);
 		armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
-		lSwitch = new DigitalInput(RobotMap.L_LIMIT_SWITCH);
+		
+		armRead.reset();
 	}
 
 	public boolean tooFar(){
@@ -66,7 +69,11 @@ public class Lift extends PIDSubsystem {
 	}
 	
 	public double getEncValue(){
-		return armRead.pidGet();
+		return armRead.get();
+	}
+	
+	public void resetEncoder(){
+		armRead.reset();
 	}
 	
 	public double getPotentiometer(){
@@ -74,12 +81,18 @@ public class Lift extends PIDSubsystem {
 	}
 	
 	public void moveArm(double value) {
-		if(tooFar())
+		if(getEncValue()>500&&value<0){
 			armLift.set(0);
-		else armLift.set(value);
+			return;
+		}
+		armLift.set(value);
 	}
 
 
+	public double getSpeed(){
+		return armLift.get();
+	}
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new UserMoveArm());
 	}
@@ -87,12 +100,12 @@ public class Lift extends PIDSubsystem {
 	
 	@Override
 	protected double returnPIDInput() {
-		return armRead.pidGet();
+		return -armRead.pidGet();
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-		moveArm(output);
+		moveArm(-output);
 	}
 
 	public class TT implements SpeedController {// class manages a set of

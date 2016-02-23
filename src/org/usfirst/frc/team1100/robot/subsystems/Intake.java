@@ -23,14 +23,15 @@ public class Intake extends PIDSubsystem {
 	private SpeedController roller;
 	private SpeedController lift;
 	private DigitalInput ballIn;
-	private DigitalInput ballIn2;
 	private AnalogInput liftRead;
-
-	public static final double POS_SUCK = 2;
-	public static final double POS_UP = 3.34;
-	public static final double POS_DOWN = 1.48;
 	
-	private static final double MAX_SPEED = .4;
+	private DigitalInput limitTop, limitBot;
+
+	public static final double POS_UP_ISH = 2.13;
+	public static final double POS_UP = 2.76;
+	public static final double POS_DOWN = 1.46;
+	
+	private static final double MAX_SPEED = .5;
 	
 	private static final double P = 1;
 	private static final double I = .2;
@@ -47,16 +48,18 @@ public class Intake extends PIDSubsystem {
 		super(P, I, D);
 		setInputRange(POS_DOWN, POS_UP);
 
-		setOutputRange(-MAX_SPEED, MAX_SPEED);
+		setOutputRange(-MAX_SPEED/3, MAX_SPEED);
 		
 		setAbsoluteTolerance(TOLERANCE);
 		
 		roller = new Victor(RobotMap.I_INTAKE_ROLLER);
 		lift = new Victor(RobotMap.I_INTAKE_LIFT);
 		
+		limitTop = new DigitalInput(RobotMap.I_LIMIT_SWITCH_TOP);
+		limitBot = new DigitalInput(RobotMap.I_LIMIT_SWITCH_BOT);
+		
 		liftRead = new AnalogInput(RobotMap.I_INTAKE_LIFT_POTENTIOMETER);
 		ballIn = new DigitalInput(RobotMap.I_BALL_IN);
-		ballIn2 = new DigitalInput(RobotMap.I_BALL_IN_2);
 	}
 	
 	public boolean target(){
@@ -70,7 +73,7 @@ public class Intake extends PIDSubsystem {
 
 	public boolean ballIn() {
 		boolean in;
-		if(!ballIn.get()&&!ballIn2.get())
+		if(!ballIn.get())
 			in = true;
 		else in = false;
 		return in;
@@ -113,10 +116,26 @@ public class Intake extends PIDSubsystem {
 	}
 
 	public void setLift(double value){
+		if(getAnalog()<POS_DOWN&&value>0){
+			lift.set(0);
+			return;
+		}
+		if(getAnalog()>POS_UP&&value<0){
+			lift.set(0);
+			return;
+		}
 		if(Math.abs(value)>MAX_SPEED){
 			if(value>0)value = MAX_SPEED;
 			else if(value<0)value = -MAX_SPEED;
 		}
+		/*if(limitTop.get()&&lift.get()>0){
+			lift.set(0);
+			return;
+		}
+		if(limitBot.get()&&lift.get()<0){
+			lift.set(0);
+			return;
+		}*/
 		if(Math.abs(value)>.1)
 			lift.set(value);
 		else

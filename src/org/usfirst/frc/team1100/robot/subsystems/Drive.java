@@ -24,6 +24,8 @@ public class Drive extends PIDSubsystem{
 	
 	private AnalogGyro gyro;
 	
+	private boolean reversed;
+	
 	private static final double P = 1;
 	private static final double I = 0;
 	private static final double D = 0;
@@ -42,6 +44,8 @@ public class Drive extends PIDSubsystem{
 		setAbsoluteTolerance(TOLERANCE);
 		setOutputRange(-MAX_SPEED, MAX_SPEED);
 		
+		reversed = false;
+		
 		RightFrontVictor = new Victor(RobotMap.D_RIGHT_FRONT);
 		RightBackVictor = new Victor(RobotMap.D_RIGHT_BACK);
 		LeftFrontVictor = new Victor(RobotMap.D_LEFT_FRONT);
@@ -49,25 +53,39 @@ public class Drive extends PIDSubsystem{
 
 		driveTrain = new RobotDrive(LeftFrontVictor, LeftBackVictor, RightFrontVictor, RightBackVictor);
 
-		// TODO: gyro = new AnalogGyro(RobotMap.D_GYRO);
-		// gyro.reset();
+		/* gyro = new AnalogGyro(RobotMap.D_GYRO, 0 , 1);
+		 gyro.reset();*/
 	}
 
 	public void driveTank(double left, double right) {
-		driveTrain.tankDrive(left, right);
+		if(!reversed)driveTrain.tankDrive(left, right);
 	}
 
+	public void toggleDriveReverse(){
+		reversed = !reversed;
+	}
+	
+	public boolean isReversed(){
+		return reversed;
+	}
+	
 	public double getAngle() {
 		return gyro.getAngle();
 
 	}
 
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new UserDrive());
 	}
+	
+	public void driveAngle(double speed, double angle){
+		if(!reversed)driveTrain.drive(speed, angle);
+	}
 
+	public void stop(){
+		driveTrain.stopMotor();
+	}
+	
 	@Override
 	protected double returnPIDInput() {
 		return gyro.pidGet();
