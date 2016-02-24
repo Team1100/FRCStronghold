@@ -12,6 +12,20 @@ public class JerkGrouper extends CommandGroup {
 	private final double target = 106;
 
 	public JerkGrouper() {
+		for(int i = 0; i<5; i++){
+			x = X();
+			if (x > 106) {
+				addSequential(new JerkSingleCommand(1));
+				addSequential(new WaitCommand(.5));
+				SmartDashboard.putNumber("x",1);
+			} else if (x < 106) {
+				addSequential(new JerkSingleCommand(-1));
+				addSequential(new WaitCommand(.5));
+				SmartDashboard.putNumber("x",-1);
+			}
+		}
+	}
+	public double X(){
 		NetworkTable table = NetworkTable.getTable("GRIP/myContoursReport");
 		double[] defaultValue = {1, 1, 1};
     	double[] area = table.getNumberArray("area", defaultValue);
@@ -28,17 +42,6 @@ public class JerkGrouper extends CommandGroup {
 			}
 		}
 		double x=centerX[index];
-		addSequential(new JerkSingleCommand(1));
-		if (x > 106) {
-			SmartDashboard.putNumber("tempx", Vision.getInstance().getX());
-			addSequential(new JerkSingleCommand(1));
-			addSequential(new WaitCommand(.5));
-			SmartDashboard.putNumber("x",1);
-		} else if (x < 106) {
-			SmartDashboard.putNumber("tempx", Vision.getInstance().getX());
-			addSequential(new JerkSingleCommand(-1));
-			addSequential(new WaitCommand(.5));
-			SmartDashboard.putNumber("x",-1);
-		}
+		return x;
 	}
 }
