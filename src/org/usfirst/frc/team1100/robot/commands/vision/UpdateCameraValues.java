@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class UpdateCameraValues extends Command{
+public class UpdateCameraValues extends Command {
 
-NetworkTable table;
-	
-	public UpdateCameraValues(){
+	NetworkTable table;
+
+	public UpdateCameraValues() {
 		requires(Vision.getInstance());
 	}
 
@@ -23,9 +23,9 @@ NetworkTable table;
 
 	@Override
 	protected void execute() {
-		
-		double[] defaultValue = {1, 1, 1};
-    	double[] area = table.getNumberArray("area", defaultValue);
+
+		double[] defaultValue = {};
+		double[] area = table.getNumberArray("area", defaultValue);
 		double[] centerY = table.getNumberArray("centerY", defaultValue);
 		double[] centerX = table.getNumberArray("centerX", defaultValue);
 		double[] height = table.getNumberArray("height", defaultValue);
@@ -38,15 +38,16 @@ NetworkTable table;
 				index = i;
 			}
 		}
-		try{
+		try {
 			SmartDashboard.putNumber("X", centerX[index]);
-			if(centerX[index]!=0){
-			Vision.getInstance().updateVal(centerX[index], centerY[index], height[index], width[index], area[index]);
+			if (centerX[index] != 0) {
+				Vision.getInstance().updateVal(centerX[index], centerY[index], height[index], width[index],
+						area[index]);
 			}
-			}catch(Exception e){
-			
+		} catch (Exception e) {
+			Vision.getInstance().updateVal(0, 0, 0, 0, 0);
 		}
-		
+
 		SmartDashboard.putNumber("Center Y", Vision.getInstance().getY());
 		SmartDashboard.putNumber("CenterX", Vision.getInstance().getX());
 		SmartDashboard.putNumber("Area", Vision.getInstance().getA());
@@ -63,14 +64,12 @@ NetworkTable table;
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

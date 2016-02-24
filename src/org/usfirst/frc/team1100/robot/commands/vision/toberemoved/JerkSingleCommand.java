@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.vision;
+package org.usfirst.frc.team1100.robot.commands.vision.toberemoved;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;

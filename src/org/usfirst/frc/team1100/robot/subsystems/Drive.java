@@ -53,8 +53,9 @@ public class Drive extends PIDSubsystem{
 
 		driveTrain = new RobotDrive(LeftFrontVictor, LeftBackVictor, RightFrontVictor, RightBackVictor);
 
-		/* gyro = new AnalogGyro(RobotMap.D_GYRO, 0 , 1);
-		 gyro.reset();*/
+		//TODO:gyro
+		/*gyro = new AnalogGyro(RobotMap.D_GYRO);
+		gyro.reset();*/
 	}
 
 	public void driveTank(double left, double right) {

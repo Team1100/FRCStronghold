@@ -35,7 +35,7 @@ public class WidthToEncoderMovement extends Command{
 		}
 		if(x>52&&x<54){
 			pos = 246;
-		}
+		}//Sergei Lavrov was here
 		if(x>=54&&x<58){
 			pos = 255;
 		}

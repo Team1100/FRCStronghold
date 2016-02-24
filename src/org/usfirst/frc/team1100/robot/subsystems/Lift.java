@@ -22,20 +22,17 @@ public class Lift extends PIDSubsystem {
 	private SpeedController lift1;
 	private SpeedController lift2;// these two move the arm up and down
 
-	private TT armLift;
-	
 	private AnalogInput armRead2;
-	
+
 	private Encoder armRead;
-	
+
 	private DigitalInput lSwitch;
 
-	public static final double POS_DEFENSES = 240;//TODO add real value
+	public static final double POS_DEFENSES = 240;
 	public static final double POS_MIDDLE = 230;
-	public static final double CLOSE = 250;
-	public static final double RAMP = 290;
-	
-	
+	public static final double POS_CLOSE = 250;
+	public static final double POS_RAMP = 290;
+
 	private static final double P = .1;
 	private static final double I = 0;
 	private static final double D = 0;
@@ -52,52 +49,46 @@ public class Lift extends PIDSubsystem {
 		super(P, I, D);
 		setAbsoluteTolerance(TOLERANCE);
 		setOutputRange(-MAX_SPEED, MAX_SPEED);
-		
+
 		lift1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
 		lift2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
-		
-		armLift = new TT(lift1, lift2);
-		
+
 		armRead = new Encoder(RobotMap.L_ARM_ENC_A, RobotMap.L_ARM_ENC_B);
 		armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
-		
+
 		armRead.reset();
 	}
 
-	public boolean tooFar(){
+	public boolean tooFar() {
 		return lSwitch.get();
 	}
-	
-	public double getEncValue(){
+
+	public double getEncValue() {
 		return armRead.get();
 	}
-	
-	public void resetEncoder(){
+
+	public void resetEncoder() {
 		armRead.reset();
 	}
-	
-	public double getPotentiometer(){
+
+	public double getPotentiometer() {
 		return armRead2.getValue();
 	}
-	
+
 	public void moveArm(double value) {
-		if(getEncValue()>500&&value<0){
-			armLift.set(0);
+		if (getEncValue() > 500 && value < 0) {
+			lift1.set(0);
+			lift2.set(0);
 			return;
 		}
-		armLift.set(value);
+		lift1.set(value);
+		lift2.set(value);
 	}
 
-
-	public double getSpeed(){
-		return armLift.get();
-	}
-	
 	public void initDefaultCommand() {
 		setDefaultCommand(new UserMoveArm());
 	}
-	
-	
+
 	@Override
 	protected double returnPIDInput() {
 		return -armRead.pidGet();
@@ -106,66 +97,5 @@ public class Lift extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		moveArm(-output);
-	}
-
-	public class TT implements SpeedController {// class manages a set of
-												// speed controllers
-
-		// In this class "sanic" indicates enhanced loop variable
-
-		private SpeedController[] tals;
-		private double speed;
-
-		public TT(SpeedController... tals) {
-			this.tals = tals;
-			this.set(0.0);
-		}
-
-		@Override
-		public void pidWrite(double output) {
-			this.set(output);
-			for (SpeedController sanic : tals) {
-				sanic.disable();
-			}
-		}
-
-		@Override
-		public double get() {
-			return this.speed;
-		}
-
-		@Override
-		public void set(double speed, byte syncGroup) {
-			this.speed = speed;
-		}
-
-		@Override
-		public void set(double speed) {
-			this.speed = speed;
-			for (SpeedController sanic : this.tals) {
-				sanic.set(speed);
-			}
-
-		}
-
-		@Override
-		public void setInverted(boolean isInverted) {
-			for (SpeedController sanic : this.tals) {
-				sanic.setInverted(isInverted);
-			}
-
-		}
-
-		@Override
-		public boolean getInverted() {
-			return tals[0].getInverted();
-		}
-
-		@Override
-		public void disable() {
-			for (SpeedController sanic : this.tals) {
-				sanic.disable();
-			}
-		}
 	}
 }

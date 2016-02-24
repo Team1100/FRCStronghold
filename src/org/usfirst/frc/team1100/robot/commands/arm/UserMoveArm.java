@@ -24,7 +24,7 @@ public class UserMoveArm extends Command{
 
 	@Override
 	protected void execute() {
-		Lift.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight));		
+		Lift.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft));		
 	}
 
 	@Override

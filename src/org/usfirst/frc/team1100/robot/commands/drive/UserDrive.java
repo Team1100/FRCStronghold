@@ -6,8 +6,6 @@ import org.usfirst.frc.team1100.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *Drive called continuously by the Drive subsystem, for joysticks

@@ -3,30 +3,30 @@ package org.usfirst.frc.team1100.robot.commands.arm;
 import org.usfirst.frc.team1100.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SetArmFromDashboard extends Command{
+public class SetArmSetpoint extends Command{
+
+	private double pos;
 	
-	public SetArmFromDashboard(){
+	public SetArmSetpoint(double pos){
 		requires(Lift.getInstance());
+		this.pos = pos;
 	}
 	
 	@Override
 	protected void initialize() {
-		SmartDashboard.putNumber("Set Arm Location", Lift.getInstance().getPosition());
+		
 	}
 
 	@Override
 	protected void execute() {
-		
-		Lift.getInstance().setSetpoint(SmartDashboard.getNumber("Set Arm Location", Lift.getInstance().getPosition()));
+		Lift.getInstance().setSetpoint(pos);
 		Lift.getInstance().enable();
-		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Lift.getInstance().onTarget();
 	}
 
 	@Override

@@ -25,7 +25,6 @@ public class ArmToSetpoint extends Command{
 		Lift.getInstance().enable();
 		SmartDashboard.putNumber("Arm Encoder", -Lift.getInstance().getEncValue());
 		SmartDashboard.putNumber("Arm Pot.", Lift.getInstance().getPotentiometer());
-		SmartDashboard.putNumber("Arm Speed", Lift.getInstance().getSpeed());
 		SmartDashboard.putBoolean("Arm OnTarget", isFinished());
 	}
 

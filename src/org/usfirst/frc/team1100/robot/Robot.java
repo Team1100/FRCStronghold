@@ -1,8 +1,17 @@
 //#include <apstring.h>
+//TODO:xtrack testing(prayer)
+//TODO:test auto
 package org.usfirst.frc.team1100.robot;
 
 import java.io.IOException;
 
+import org.usfirst.frc.team1100.robot.commands.auto.DriveBackLeft;
+import org.usfirst.frc.team1100.robot.commands.auto.DriveBackRight;
+import org.usfirst.frc.team1100.robot.commands.auto.DriveForwardLeft;
+import org.usfirst.frc.team1100.robot.commands.auto.DriveForwardRight;
+import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightBackward;
+import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightForward;
+import org.usfirst.frc.team1100.robot.commands.auto.LowBarAuto;
 import org.usfirst.frc.team1100.robot.subsystems.Climb;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -15,6 +24,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -49,10 +59,15 @@ public class Robot extends IterativeRobot {
 		Climb.getInstance();
 		Vision.getInstance();
 		
+		//TODO:enable auto chooser
 		/*autoChuse= new SendableChooser();
 		autoChuse.addObject("Low Bar", new LowBarAuto());
-		//TODO: add rest. make it work
-		
+		autoChuse.addObject("Backwards Defense, Left of Goal", new DriveBackLeft());
+		autoChuse.addObject("Backwards Defense, Right of Goal", new DriveBackRight());
+		autoChuse.addObject("Forwards Defense, Left of Goal", new DriveForwardLeft());
+		autoChuse.addObject("Forwards Defense, Right of Goal", new DriveForwardRight());
+		autoChuse.addObject("Forwards Defense, Straight Ahead", new DriveStraightForward());
+		autoChuse.addObject("Backwards Defense, Straight Ahead", new DriveStraightBackward());
 		SmartDashboard.putData("AutoThomas", autoChuse);*/
     }
 	

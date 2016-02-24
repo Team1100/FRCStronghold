@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.vision;
+package org.usfirst.frc.team1100.robot.commands.vision.toberemoved;
 
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
@@ -13,7 +13,8 @@ public class JerkGrouper extends CommandGroup {
 
 	public JerkGrouper() {
 		for(int i = 0; i<5; i++){
-			x = X();
+			double x = X();
+			SmartDashboard.putNumber("TEMP", x);
 			if (x > 106) {
 				addSequential(new JerkSingleCommand(1));
 				addSequential(new WaitCommand(.5));

@@ -5,41 +5,28 @@ import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CenterXAdjust extends Command {
+public class TurnLeftUntilCamera extends Command{
 
-	private double turns;
-	private double target;
-
-	public CenterXAdjust() {
+	private boolean isFinished;
+	
+	public TurnLeftUntilCamera(){
 		requires(Drive.getInstance());
 	}
-
+	
 	@Override
 	protected void initialize() {
-		turns = 0;
-		target = 160;
-		setTimeout(0);
+		isFinished = false;
 	}
 
 	@Override
 	protected void execute() {
-		if (isTimedOut()) {
-			if (Vision.getInstance().getX() > target) {
-				Drive.getInstance().driveTank(-.6, .4);
-			}
-			if (Vision.getInstance().getX() < target) {
-				Drive.getInstance().driveTank(.4, -.6);
-			}
-			setTimeout(.5);
-			Drive.getInstance().stop();
-			setTimeout(.2);
-		}
-		turns++;
+		Drive.getInstance().driveTank(-.6, .6);
+		if(Vision.getInstance().getA()!=0) isFinished = true;
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return turns > 5;
+		return isFinished;
 	}
 
 	@Override

@@ -39,6 +39,6 @@ public class Climb extends Subsystem{
 	
 	@Override
 	protected void initDefaultCommand() {
-		// TODO : User Climb? (if this is a joystick, otherwise delete this msg)
+		// TODO Climb controls
 	}
 }
