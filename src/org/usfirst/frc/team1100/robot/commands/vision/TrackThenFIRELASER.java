@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.commands.vision;
 
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeFAST;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenReset;
+import org.usfirst.frc.team1100.robot.commands.vision.toberemoved.WidthToEncoderMovement;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

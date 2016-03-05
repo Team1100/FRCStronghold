@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.vision;
 
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
+import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -53,8 +54,10 @@ public class UpdateCameraValues extends Command {
 		SmartDashboard.putNumber("Area", Vision.getInstance().getA());
 		SmartDashboard.putNumber("Height", Vision.getInstance().getH());
 		SmartDashboard.putNumber("Width", Vision.getInstance().getW());
-		SmartDashboard.putNumber("Arm Pot", Lift.getInstance().getPotentiometer());
-		SmartDashboard.putNumber("Arm Encoder", -Lift.getInstance().getEncValue());
+		//SmartDashboard.putNumber("Gyro", Drive.getInstance().getAngle());
+		SmartDashboard.putNumber("Arm Encoder", -Arm.getInstance().getEncValue());
+		SmartDashboard.putNumber("Left Drive", Drive.getInstance().leftSpeed());
+		SmartDashboard.putNumber("Right Drive", Drive.getInstance().rightSpeed());
 	}
 
 	@Override

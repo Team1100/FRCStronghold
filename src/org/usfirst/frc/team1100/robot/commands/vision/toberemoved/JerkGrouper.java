@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1100.robot.commands.vision.toberemoved;
 
-import org.usfirst.frc.team1100.robot.subsystems.Vision;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1100.robot.commands.arm;
 
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -15,7 +15,7 @@ public class MoveArmCommand extends Command{
 	 * @param timeout - time in seconds
 	 */
 	public MoveArmCommand(double value, double timeout){
-		requires(Lift.getInstance());
+		requires(Arm.getInstance());
 		this.value = value;
 		this.timeout = timeout;
 	}
@@ -27,7 +27,7 @@ public class MoveArmCommand extends Command{
 
 	@Override
 	protected void execute() {
-		Lift.getInstance().moveArm(value);
+		Arm.getInstance().moveArm(value);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class MoveArmCommand extends Command{
 
 	@Override
 	protected void end() {
-		Lift.getInstance().moveArm(0);
+		Arm.getInstance().moveArm(0);
 	}
 
 	@Override

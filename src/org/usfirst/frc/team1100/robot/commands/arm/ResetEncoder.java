@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1100.robot.commands.arm;
 
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,7 +9,7 @@ public class ResetEncoder extends Command{
 	private boolean isFinished;
 	
 	public ResetEncoder(){
-		requires(Lift.getInstance());
+		requires(Arm.getInstance());
 	}
 	
 	@Override
@@ -19,7 +19,7 @@ public class ResetEncoder extends Command{
 
 	@Override
 	protected void execute() {
-		Lift.getInstance().resetEncoder();
+		Arm.getInstance().resetEncoder();
 		isFinished = true;
 	}
 

@@ -12,10 +12,10 @@ import org.usfirst.frc.team1100.robot.commands.auto.DriveForwardRight;
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightBackward;
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightForward;
 import org.usfirst.frc.team1100.robot.commands.auto.LowBarAuto;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 import org.usfirst.frc.team1100.robot.subsystems.Climb;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.Ultrasound;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
@@ -54,13 +54,12 @@ public class Robot extends IterativeRobot {
 		Drive.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
-		Lift.getInstance();
+		Arm.getInstance();
 		Ultrasound.getInstance();
 		Climb.getInstance();
 		Vision.getInstance();
 		
-		//TODO:enable auto chooser
-		/*autoChuse= new SendableChooser();
+		autoChuse= new SendableChooser();
 		autoChuse.addObject("Low Bar", new LowBarAuto());
 		autoChuse.addObject("Backwards Defense, Left of Goal", new DriveBackLeft());
 		autoChuse.addObject("Backwards Defense, Right of Goal", new DriveBackRight());
@@ -68,7 +67,7 @@ public class Robot extends IterativeRobot {
 		autoChuse.addObject("Forwards Defense, Right of Goal", new DriveForwardRight());
 		autoChuse.addObject("Forwards Defense, Straight Ahead", new DriveStraightForward());
 		autoChuse.addObject("Backwards Defense, Straight Ahead", new DriveStraightBackward());
-		SmartDashboard.putData("AutoThomas", autoChuse);*/
+		SmartDashboard.putData("AutoThomas", autoChuse);
     }
 	
 	public void disabledPeriodic() {
@@ -76,7 +75,8 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        //autonomousCommand = (Command)autoChuse.getSelected();
+        autonomousCommand = (Command)autoChuse.getSelected();
+        SmartDashboard.putString("AUTO", autonomousCommand.toString());
         if (autonomousCommand != null) autonomousCommand.start();
         try {
 			new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	Lift.getInstance().disable();
+    	Arm.getInstance().disable();
     }
 
     /**

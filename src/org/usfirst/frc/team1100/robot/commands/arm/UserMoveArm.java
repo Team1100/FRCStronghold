@@ -2,11 +2,9 @@ package org.usfirst.frc.team1100.robot.commands.arm;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.input.XboxController;
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
-import org.usfirst.frc.team1100.robot.subsystems.Vision;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UserMoveArm extends Command{
 
@@ -14,7 +12,7 @@ public class UserMoveArm extends Command{
 	 * Called by Lift as default. Joystick controls.
 	 */
 	public UserMoveArm(){
-		requires(Lift.getInstance());
+		requires(Arm.getInstance());
 	}
 	
 	@Override
@@ -24,7 +22,7 @@ public class UserMoveArm extends Command{
 
 	@Override
 	protected void execute() {
-		Lift.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft));		
+		Arm.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft));		
 	}
 
 	@Override

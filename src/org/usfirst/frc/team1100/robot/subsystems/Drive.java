@@ -20,6 +20,8 @@ public class Drive extends PIDSubsystem{
 	private Victor LeftFrontVictor;
 	private Victor LeftBackVictor;
 	
+	public static final double AUTOSPEED = .77;
+	
 	private RobotDrive driveTrain;
 	
 	private AnalogGyro gyro;
@@ -52,16 +54,23 @@ public class Drive extends PIDSubsystem{
 		LeftBackVictor = new Victor(RobotMap.D_LEFT_BACK);
 
 		driveTrain = new RobotDrive(LeftFrontVictor, LeftBackVictor, RightFrontVictor, RightBackVictor);
-
-		//TODO:gyro
-		/*gyro = new AnalogGyro(RobotMap.D_GYRO);
-		gyro.reset();*/
+		
+		//TODO: put gyro on port 0 or 1
+		gyro = new AnalogGyro(1);
+		gyro.reset();
 	}
 
 	public void driveTank(double left, double right) {
 		if(!reversed)driveTrain.tankDrive(left, right);
 	}
 
+	public double leftSpeed(){
+		return LeftFrontVictor.get();
+	}
+	public double rightSpeed(){
+		return RightFrontVictor.get();
+	}
+	
 	public void toggleDriveReverse(){
 		reversed = !reversed;
 	}

@@ -1,16 +1,15 @@
 package org.usfirst.frc.team1100.robot.commands.arm;
 
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmToSetpoint extends Command{
 
 	double pos;
 	
 	public ArmToSetpoint(double pos){
-		requires(Lift.getInstance());
+		requires(Arm.getInstance());
 		this.pos = pos;
 	}
 	
@@ -21,21 +20,18 @@ public class ArmToSetpoint extends Command{
 
 	@Override
 	protected void execute() {
-		Lift.getInstance().setSetpoint(pos);
-		Lift.getInstance().enable();
-		SmartDashboard.putNumber("Arm Encoder", -Lift.getInstance().getEncValue());
-		SmartDashboard.putNumber("Arm Pot.", Lift.getInstance().getPotentiometer());
-		SmartDashboard.putBoolean("Arm OnTarget", isFinished());
+		Arm.getInstance().setSetpoint(pos);
+		Arm.getInstance().enable();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Lift.getInstance().onTarget()||isTimedOut();
+		return Arm.getInstance().onTarget()||isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		Lift.getInstance().disable();
+		Arm.getInstance().disable();
 	}
 
 	@Override

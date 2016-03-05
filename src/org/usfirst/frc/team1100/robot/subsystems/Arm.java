@@ -15,12 +15,12 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  * Uses pneumatics to kick boulders into enemy towers (or our own towers. or
  * empty space(its air damnit). or the ceiling, idk)
  */
-public class Lift extends PIDSubsystem {
+public class Arm extends PIDSubsystem {
 
-	private static Lift lift;
+	private static Arm arm;
 
-	private SpeedController lift1;
-	private SpeedController lift2;// these two move the arm up and down
+	private SpeedController arm1;
+	private SpeedController arm2;// these two move the arm up and down
 
 	private AnalogInput armRead2;
 
@@ -39,22 +39,22 @@ public class Lift extends PIDSubsystem {
 	private static final double TOLERANCE = 7;
 	private static final double MAX_SPEED = .6;
 
-	public static Lift getInstance() {
-		if (lift == null)
-			lift = new Lift();
-		return lift;
+	public static Arm getInstance() {
+		if (arm == null)
+			arm = new Arm();
+		return arm;
 	}
 
-	public Lift() {
+	public Arm() {
 		super(P, I, D);
 		setAbsoluteTolerance(TOLERANCE);
 		setOutputRange(-MAX_SPEED, MAX_SPEED);
 
-		lift1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
-		lift2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
+		arm1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
+		arm2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
 
 		armRead = new Encoder(RobotMap.L_ARM_ENC_A, RobotMap.L_ARM_ENC_B);
-		armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
+		//armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
 
 		armRead.reset();
 	}
@@ -77,12 +77,12 @@ public class Lift extends PIDSubsystem {
 
 	public void moveArm(double value) {
 		if (getEncValue() > 500 && value < 0) {
-			lift1.set(0);
-			lift2.set(0);
+			arm1.set(0);
+			arm2.set(0);
 			return;
 		}
-		lift1.set(value);
-		lift2.set(value);
+		arm1.set(value);
+		arm2.set(value);
 	}
 
 	public void initDefaultCommand() {

@@ -1,6 +1,6 @@
-package org.usfirst.frc.team1100.robot.commands.vision;
+package org.usfirst.frc.team1100.robot.commands.vision.toberemoved;
 
-import org.usfirst.frc.team1100.robot.subsystems.Lift;
+import org.usfirst.frc.team1100.robot.subsystems.Arm;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,7 +10,7 @@ public class WidthToEncoderMovement extends Command{
 	double pos;
 	
 	public WidthToEncoderMovement(){
-		requires(Lift.getInstance());
+		requires(Arm.getInstance());
 	}
 	
 	@Override
@@ -55,8 +55,8 @@ public class WidthToEncoderMovement extends Command{
 
 	@Override
 	protected void execute() {
-		Lift.getInstance().setSetpoint(pos);
-		Lift.getInstance().enable();
+		Arm.getInstance().setSetpoint(pos);
+		Arm.getInstance().enable();
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class WidthToEncoderMovement extends Command{
 
 	@Override
 	protected void end() {
-		Lift.getInstance().disable();
+		Arm.getInstance().disable();
 	}
 
 	@Override

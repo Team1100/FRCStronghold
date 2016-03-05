@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Climb extends Subsystem{
 	
-	private static Climb climb;
+	private static Climb climb;/* CLIIIIIIMB */
 	
 	private SpeedController hookExtend1;
 	private SpeedController hookExtend2;
