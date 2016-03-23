@@ -2,11 +2,13 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.arm.MoveArmCommand;
 import org.usfirst.frc.team1100.robot.commands.arm.UserMoveArm;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -27,6 +29,8 @@ public class Arm extends PIDSubsystem {
 	private Encoder armRead;
 
 	private DigitalInput lSwitch;
+	private DigitalInput downLimitSwitch;
+	private Solenoid brake;
 
 	public static final double POS_DEFENSES = 240;
 	public static final double POS_MIDDLE = 230;
@@ -53,12 +57,22 @@ public class Arm extends PIDSubsystem {
 		arm1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
 		arm2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
 
+		brake = new Solenoid(RobotMap.S_PCM, RobotMap.L_BRAKE);
+		
+		downLimitSwitch = new DigitalInput(RobotMap.L_DOWN_SWITCH);
+		
 		armRead = new Encoder(RobotMap.L_ARM_ENC_A, RobotMap.L_ARM_ENC_B);
-		//armRead2 = new AnalogInput(RobotMap.L_ARM_POTENTIOMETER);
-
 		armRead.reset();
 	}
 
+	public void brake(){
+		brake.set(true);
+	}
+	
+	public boolean isTooFarDown() {
+		return !downLimitSwitch.get();
+	}
+	
 	public boolean tooFar() {
 		return lSwitch.get();
 	}
@@ -79,6 +93,16 @@ public class Arm extends PIDSubsystem {
 		if (getEncValue() > 500 && value < 0) {
 			arm1.set(0);
 			arm2.set(0);
+			return;
+		}
+		if(value==0)
+			brake.set(true);
+		if(value > 0 && isTooFarDown()) {
+			//Check for the limit switch being hit, and if it is then we sto
+			//the arm and only allow it to go back up
+			arm1.set(0);
+			arm2.set(0);
+			//new MoveArmCommand(.3, .5).start();
 			return;
 		}
 		arm1.set(value);

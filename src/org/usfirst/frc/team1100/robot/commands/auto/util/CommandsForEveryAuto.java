@@ -11,8 +11,8 @@ public class CommandsForEveryAuto extends CommandGroup{
 	 * Use this class for command sequences that should be called
 	 * at the start of every match.
 	 */
-	public CommandsForEveryAuto(){
-		addSequential(new MoveToResetEncoder());
-		addSequential(new ArmToSetpoint(Arm.POS_RAMP));
+	public CommandsForEveryAuto() {
+		//addSequential(new MoveToResetEncoder());
+		//addSequential(new ArmToSetpoint(Arm.POS_RAMP));
 	}
 }

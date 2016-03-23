@@ -23,7 +23,7 @@ public class SetIntakeFAST extends Command{
 	@Override
 	protected void initialize() {
 		isFinished = false;
-		setTimeout(.25);		
+		setTimeout(.5);		
 	}
 
 	//Use PID to move to desired position

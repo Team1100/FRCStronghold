@@ -1,25 +1,24 @@
 //#include <apstring.h>
-//TODO:xtrack testing(prayer)
-//TODO:test auto
+//TODO: test auto	
+//TODO: Test Arm Brake
+//TODO: Raspberry Pi
+//TODO: xtrack testing(prayer)
+//TODO: (sigh) leds...
 package org.usfirst.frc.team1100.robot;
 
-import java.io.IOException;
-
-import org.usfirst.frc.team1100.robot.commands.auto.DriveBackLeft;
-import org.usfirst.frc.team1100.robot.commands.auto.DriveBackRight;
-import org.usfirst.frc.team1100.robot.commands.auto.DriveForwardLeft;
-import org.usfirst.frc.team1100.robot.commands.auto.DriveForwardRight;
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightBackward;
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightForward;
 import org.usfirst.frc.team1100.robot.commands.auto.LowBarAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.PortcullisAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.SetFireAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.SpyBotFire;
 import org.usfirst.frc.team1100.robot.subsystems.Arm;
-import org.usfirst.frc.team1100.robot.subsystems.Climb;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.Ultrasound;
-import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -42,13 +41,9 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     private SendableChooser autoChuse;
+    private SendableChooser fireInAutoChoose;
     
     public void robotInit() {
-    	/*try {
-            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     	//Initialize Subsystems and OI
 		OI.getInstance();
 		Drive.getInstance();
@@ -56,18 +51,25 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 		Arm.getInstance();
 		Ultrasound.getInstance();
-		Climb.getInstance();
-		Vision.getInstance();
+		//Climb.getInstance();
+		//Vision.getInstance();
+		
+		//USB Camera Initialization
+		CameraServer server = CameraServer.getInstance();
+		server.setQuality(30);
+		server.startAutomaticCapture("cam2");
 		
 		autoChuse= new SendableChooser();
 		autoChuse.addObject("Low Bar", new LowBarAuto());
-		autoChuse.addObject("Backwards Defense, Left of Goal", new DriveBackLeft());
-		autoChuse.addObject("Backwards Defense, Right of Goal", new DriveBackRight());
-		autoChuse.addObject("Forwards Defense, Left of Goal", new DriveForwardLeft());
-		autoChuse.addObject("Forwards Defense, Right of Goal", new DriveForwardRight());
-		autoChuse.addObject("Forwards Defense, Straight Ahead", new DriveStraightForward());
-		autoChuse.addObject("Backwards Defense, Straight Ahead", new DriveStraightBackward());
+		autoChuse.addObject("Forwards Defense", new DriveStraightForward());
+		autoChuse.addObject("Backwards Defense", new DriveStraightBackward());
+		autoChuse.addObject("SpyBot-Fires boulder", new SpyBotFire());
+		autoChuse.addObject("Portcullis Auto -- Experimental", new PortcullisAuto());
 		SmartDashboard.putData("AutoThomas", autoChuse);
+		fireInAutoChoose = new SendableChooser();
+		fireInAutoChoose.addObject("Fire at end of auto", new SetFireAuto(true));
+		fireInAutoChoose.addObject("Do not fire at end of auto", new SetFireAuto(false));
+		SmartDashboard.putData("Fire in Auto", fireInAutoChoose);
     }
 	
 	public void disabledPeriodic() {
@@ -75,14 +77,11 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	Shooter.getInstance().setInAuto(true);
         autonomousCommand = (Command)autoChuse.getSelected();
         SmartDashboard.putString("AUTO", autonomousCommand.toString());
+        ((Command)fireInAutoChoose.getSelected()).start();
         if (autonomousCommand != null) autonomousCommand.start();
-        try {
-			new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
     }
 
     /**
@@ -97,7 +96,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-    	
+    	Shooter.getInstance().setInAuto(false);
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
@@ -106,7 +105,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	Arm.getInstance().disable();
+    	
     }
 
     /**

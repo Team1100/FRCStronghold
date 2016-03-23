@@ -30,6 +30,8 @@ public class UserDrive extends Command {
     		left = -left;
     		right = -right;
     	}
+    	//left = OI.getInstance().getPeasant2().getAxis(org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis.kYLeft);
+    	//right = OI.getInstance().getPeasant2().getAxis(org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis.kYRight);
     	Drive.getInstance().driveTank(left, right);
     	//SmartDashboard.putNumber("Gyro", Drive.getInstance().getAngle());
     }

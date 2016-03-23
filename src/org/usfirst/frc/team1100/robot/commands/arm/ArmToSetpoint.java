@@ -32,11 +32,12 @@ public class ArmToSetpoint extends Command{
 	@Override
 	protected void end() {
 		Arm.getInstance().disable();
+		Arm.getInstance().brake();
 	}
 
 	@Override
 	protected void interrupted() {
+		Arm.getInstance().brake();
 		end();
 	}
-
 }

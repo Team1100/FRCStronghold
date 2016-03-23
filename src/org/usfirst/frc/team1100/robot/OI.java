@@ -2,16 +2,15 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.arm.ArmToSetpoint;
 import org.usfirst.frc.team1100.robot.commands.arm.MoveToResetEncoder;
-import org.usfirst.frc.team1100.robot.commands.drive.DriveCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleRollerCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.TurnRollers;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenReset;
-import org.usfirst.frc.team1100.robot.commands.vision.TrackThenFIRELASER;
+import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenResetSimultIntake;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
-import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Arm;
+import org.usfirst.frc.team1100.robot.subsystems.Intake;
 /**
 .*.This.class.is.the.glue.that.binds.the.controls.on.the.physical.operator
 .*.interface.to.the.commands.and.command.groups.that.allow.control.of.the.robot.
@@ -27,7 +26,7 @@ public class OI{
 	
 	private AttackThree LeftStick;
 	private AttackThree RightStick;
-	private XboxController Peasant;
+	private XboxController Peasant/*, Peasant2*/;
 	
 	/**
 	 * Called by Robot Initialization. 
@@ -38,10 +37,12 @@ public class OI{
 		LeftStick = new AttackThree(RobotMap.J_LEFT, .1);
 		RightStick = new AttackThree(RobotMap.J_RIGHT, .1);
 		Peasant = new XboxController(RobotMap.J_X, .2); //Help! Help! I'm being repressed!
+		//Peasant2 = new XboxController(0, .2); //Help! Help! I'm being repressed!
 		
 		//Button Assignments
+		
 		Peasant.getButtonX().whenPressed(new FireThenReset());
-		Peasant.getButtonB().whenPressed(new TrackThenFIRELASER());
+		Peasant.getButtonB().whenPressed(new FireThenResetSimultIntake());
 		Peasant.getButtonY().whenPressed(new ToggleRollerCommand());
 		Peasant.getButtonA().whileHeld(new TurnRollers(.5));
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
@@ -53,20 +54,18 @@ public class OI{
 		Peasant.getButtonStart().whenPressed(new ArmToSetpoint(Arm.POS_RAMP));
 		Peasant.getButtonBack().whenPressed(new ArmToSetpoint(Arm.POS_MIDDLE));
 		
-		
-		RightStick.getButton(5).whenPressed(new DriveCommand(.7, .7, 2));
-		LeftStick.getButton(4).whenReleased(new DriveCommand(-.7, -.7, 2));
-		
 		//RightStick.getButton(6).whenPressed(new StartGrip());
 		//RightStick.getButton(5).whenPressed(new ToggleDirection());
 		
 		//Piston testing:
-		/*Peasant.getButtonA().whenPressed(new SetFillCommand(Value.kReverse));
+		/*
+		Peasant.getButtonA().whenPressed(new SetFillCommand(Value.kReverse));
 		Peasant.getButtonY().whenPressed(new SetResetCommand(Value.kForward));
 		Peasant.getButtonLeftBumper().whenPressed(new SetLatchCommand(Value.kForward));
 		Peasant.getButtonB().whenPressed(new SetResetCommand(Value.kReverse));
 		Peasant.getButtonRightBumper().whenPressed(new SetFillCommand(Value.kForward));
 		Peasant.getButtonX().whenPressed(new SetLatchCommand(Value.kReverse));
+		Peasant.getButtonStart().whenPressed(new FireThenReset());
 		*/
 	}
 	/**
@@ -91,4 +90,8 @@ public class OI{
 	public XboxController getPeasant() {
 		return Peasant;
 	}
+	
+	/*public XboxController getPeasant2() {
+		return Peasant2;
+	}*/
 }

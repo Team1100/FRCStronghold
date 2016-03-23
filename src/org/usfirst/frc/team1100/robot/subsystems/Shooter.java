@@ -19,6 +19,17 @@ public class Shooter extends Subsystem {
 	private DoubleSolenoid latch;// controls/releases the fill
 	private DoubleSolenoid reset;// pulls back kicker to reset
 
+	private boolean autoFire;
+	private boolean isInAuto;
+	
+	public boolean isInAuto() {
+		return isInAuto;
+	}
+
+	public void setInAuto(boolean isInAuto) {
+		this.isInAuto = isInAuto;
+	}
+
 	public static Shooter getInstance() {
 		if (shooter == null)
 			shooter = new Shooter();
@@ -29,6 +40,16 @@ public class Shooter extends Subsystem {
 		fill = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_FILL_PNEUMATIC_A, RobotMap.S_FILL_PNEUMATIC_B);
 		latch = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_LATCH_PNEUMATIC_A, RobotMap.S_LATCH_PNEUMATIC_B);
 		reset = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_RESET_PNEUMATIC_A, RobotMap.S_RESET_PNEUMATIC_B);
+		autoFire = false;
+		isInAuto = false;
+	}
+	
+	public boolean shootInAuto(){
+		return autoFire;
+	}
+	
+	public void setFireinAuto(boolean fire){
+		this.autoFire = fire;
 	}
 
 	public void setLatch(Value v) {

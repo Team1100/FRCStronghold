@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team1100.robot.subsystems;
 
-import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.intake.UserLiftIntake;
 
@@ -25,11 +24,11 @@ public class Intake extends PIDSubsystem {
 	private DigitalInput ballIn;
 	private AnalogInput liftRead;
 	
-	private DigitalInput limitTop, limitBot;
+	private DigitalInput /*limitTop,*/ limitBot;
 
 	public static final double POS_UP_ISH = 2.13;
-	public static final double POS_UP = 2.76;
-	public static final double POS_DOWN = 1.46;
+	public static final double POS_UP = 2.5;
+	public static final double POS_DOWN = 1.7;
 	
 	private static final double MAX_SPEED = .5;
 	
@@ -55,7 +54,7 @@ public class Intake extends PIDSubsystem {
 		roller = new Victor(RobotMap.I_INTAKE_ROLLER);
 		lift = new Victor(RobotMap.I_INTAKE_LIFT);
 		
-		limitTop = new DigitalInput(RobotMap.I_LIMIT_SWITCH_TOP);
+		/*limitTop = new DigitalInput(RobotMap.I_LIMIT_SWITCH_TOP);*/
 		limitBot = new DigitalInput(RobotMap.I_LIMIT_SWITCH_BOT);
 		
 		liftRead = new AnalogInput(RobotMap.I_INTAKE_LIFT_POTENTIOMETER);
@@ -71,17 +70,19 @@ public class Intake extends PIDSubsystem {
 		return liftRead.getValue();
 	}
 
+	public boolean tooFarDown(){
+		return !limitBot.get();
+	}
+	
 	public boolean ballIn() {
 		boolean in;
-		if(!ballIn.get())
+		if(ballIn.get())
 			in = true;
 		else in = false;
-		return in;
+		return false;//TODO
 	}
 
 	public void moveRoller(double value) {
-		if (OI.getInstance().getPeasant().getButtonLeftBumper().get())
-			value = -value;
 		roller.set(value);
 	}
 
@@ -131,11 +132,11 @@ public class Intake extends PIDSubsystem {
 		/*if(limitTop.get()&&lift.get()>0){
 			lift.set(0);
 			return;
-		}
-		if(limitBot.get()&&lift.get()<0){
+		}*/
+		if(tooFarDown()&&lift.get()<0){
 			lift.set(0);
 			return;
-		}*/
+		}
 		if(Math.abs(value)>.1)
 			lift.set(value);
 		else

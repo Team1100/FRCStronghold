@@ -5,11 +5,11 @@ import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class WidthToEncoderMovement extends Command{
+public class CenterYAdjust extends Command{
 
 	double pos;
 	
-	public WidthToEncoderMovement(){
+	public CenterYAdjust(){
 		requires(Arm.getInstance());
 	}
 	
@@ -67,6 +67,7 @@ public class WidthToEncoderMovement extends Command{
 	@Override
 	protected void end() {
 		Arm.getInstance().disable();
+		Arm.getInstance().brake();
 	}
 
 	@Override

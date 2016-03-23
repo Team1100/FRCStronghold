@@ -27,6 +27,7 @@ public class RobotMap {
 	private static final int PNEUM_3 = 3;
 	private static final int PNEUM_4 = 4;
 	private static final int PNEUM_5 = 5;
+	private static final int PNEUM_6 = 6;
 	
 	private static final int CAN_0 = 0;
 	private static final int CAN_1 = 1;
@@ -49,6 +50,8 @@ public class RobotMap {
 	private static final int DIGITAL_4 = 4;
 	private static final int DIGITAL_5 = 5;
 	private static final int DIGITAL_6 = 6;
+	private static final int DIGITAL_7 = 7;
+	private static final int DIGITAL_8 = 8;
 	
 	//Below are actual assignments.
 	
@@ -57,7 +60,7 @@ public class RobotMap {
 	public static final int D_LEFT_BACK = MOTOR_6;
 	public static final int D_RIGHT_FRONT = MOTOR_2;
 	public static final int D_RIGHT_BACK = MOTOR_3;
-	public static final int D_GYRO = ANALOG_2;
+	public static final int D_GYRO = ANALOG_0;
 	//[S]HOOTER
 	public static final int S_PCM = CAN_1;
 	public static final int S_FILL_PNEUMATIC_A = PNEUM_2;
@@ -71,11 +74,13 @@ public class RobotMap {
 	public static final int L_ARM_LIFT_MOTOR_2 = MOTOR_5;
 	public static final int L_ARM_ENC_A = DIGITAL_0;
 	public static final int L_ARM_ENC_B = DIGITAL_1;
-	public static final int L_ARM_POTENTIOMETER = ANALOG_1;
+	public static final int L_ARM_POTENTIOMETER = ANALOG_2;
+	public static final int L_BRAKE = PNEUM_6;
+	public static final int L_DOWN_SWITCH = DIGITAL_2;
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = MOTOR_4;
 	public static final int I_INTAKE_LIFT = MOTOR_1;
-	public static final int I_INTAKE_LIFT_POTENTIOMETER = ANALOG_0;
+	public static final int I_INTAKE_LIFT_POTENTIOMETER = ANALOG_1;
 	public static final int I_BALL_IN = DIGITAL_4; 
 	public static final int I_LIMIT_SWITCH_TOP = DIGITAL_5;
 	public static final int I_LIMIT_SWITCH_BOT = DIGITAL_6;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.vision;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,6 +16,8 @@ public class TurnLeftUntilCamera extends Command{
 	
 	@Override
 	protected void initialize() {
+		if(Shooter.getInstance().isInAuto()&&!Shooter.getInstance().shootInAuto())
+			this.cancel();
 		isFinished = false;
 	}
 

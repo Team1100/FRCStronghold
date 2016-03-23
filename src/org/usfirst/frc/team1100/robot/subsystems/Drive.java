@@ -20,7 +20,8 @@ public class Drive extends PIDSubsystem{
 	private Victor LeftFrontVictor;
 	private Victor LeftBackVictor;
 	
-	public static final double AUTOSPEED = .77;
+	public static final double AUTOSPEED = .85;
+	public static final double PORTCULLIS_SPEED = 0.67;
 	
 	private RobotDrive driveTrain;
 	
@@ -55,8 +56,8 @@ public class Drive extends PIDSubsystem{
 
 		driveTrain = new RobotDrive(LeftFrontVictor, LeftBackVictor, RightFrontVictor, RightBackVictor);
 		
-		//TODO: put gyro on port 0 or 1
-		gyro = new AnalogGyro(1);
+		
+		gyro = new AnalogGyro(RobotMap.D_GYRO);
 		gyro.reset();
 	}
 

@@ -31,9 +31,9 @@ public class UserLiftIntake extends Command{
 		SmartDashboard.putNumber("Intake Analog", Intake.getInstance().getAnalog());
 		value = OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight);
 		Intake.getInstance().setLift(value);
-		if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
+		/*if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
 			Intake.getInstance().toggleRollers();
-		}	
+		}*///TODO
 	}
 
 	@Override
