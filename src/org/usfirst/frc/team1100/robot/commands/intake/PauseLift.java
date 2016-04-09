@@ -4,32 +4,20 @@ import org.usfirst.frc.team1100.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * Used to move the intake manualy in auto. Don't use this.
- * Use "SetIntakeSetpoint" for PID support
- */
-public class LiftIntake extends Command{
+public class PauseLift extends Command{
 
-	private double timeout;
-	private double value;
-
-	public LiftIntake(double timeout, double value){
-		this.timeout = timeout;
-		this.value = value;
-		
+	public PauseLift(){
 		requires(Intake.getInstance());
 	}
 	
 	@Override
 	protected void initialize() {
-		setTimeout(timeout);
-		
+		setTimeout(.5);
 	}
 
 	@Override
 	protected void execute() {
-		Intake.getInstance().moveIntake(value);
-		
+		Intake.getInstance().blindDrive(0);
 	}
 
 	@Override
@@ -39,14 +27,13 @@ public class LiftIntake extends Command{
 
 	@Override
 	protected void end() {
-		Intake.getInstance().moveIntake(0);
 		
 	}
 
 	@Override
 	protected void interrupted() {
-		end();
+		
 		
 	}
-
+	
 }

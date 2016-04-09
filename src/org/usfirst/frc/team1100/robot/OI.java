@@ -2,7 +2,9 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.arm.ArmToSetpoint;
 import org.usfirst.frc.team1100.robot.commands.arm.MoveToResetEncoder;
+import org.usfirst.frc.team1100.robot.commands.arm.ToggleBrakeCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
+import org.usfirst.frc.team1100.robot.commands.intake.ToggleLEDCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleRollerCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.TurnRollers;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenReset;
@@ -44,7 +46,7 @@ public class OI{
 		Peasant.getButtonX().whenPressed(new FireThenReset());
 		Peasant.getButtonB().whenPressed(new FireThenResetSimultIntake());
 		Peasant.getButtonY().whenPressed(new ToggleRollerCommand());
-		Peasant.getButtonA().whileHeld(new TurnRollers(.5));
+		Peasant.getButtonA().whileHeld(new TurnRollers(Intake.ROLL_SPEED));
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
 		Peasant.getButtonLeftBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_UP));
 		
@@ -54,6 +56,10 @@ public class OI{
 		Peasant.getButtonStart().whenPressed(new ArmToSetpoint(Arm.POS_RAMP));
 		Peasant.getButtonBack().whenPressed(new ArmToSetpoint(Arm.POS_MIDDLE));
 		
+		LeftStick.getButton(5).whenPressed(new ToggleBrakeCommand());
+		RightStick.getButton(8).whenPressed(new ToggleLEDCommand(0));
+		RightStick.getButton(9).whenPressed(new ToggleLEDCommand(1));
+		RightStick.getButton(10).whenPressed(new ToggleLEDCommand(2));
 		//RightStick.getButton(6).whenPressed(new StartGrip());
 		//RightStick.getButton(5).whenPressed(new ToggleDirection());
 		

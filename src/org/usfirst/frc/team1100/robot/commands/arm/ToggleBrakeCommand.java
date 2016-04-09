@@ -4,39 +4,41 @@ import org.usfirst.frc.team1100.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ArmToSetpoint extends Command{
+public class ToggleBrakeCommand extends Command{
 
-	double pos;
+	private boolean isFinished;
 	
-	public ArmToSetpoint(double pos){
+	public ToggleBrakeCommand(){
 		requires(Arm.getInstance());
-		this.pos = pos;
 	}
 	
 	@Override
 	protected void initialize() {
-		setTimeout(2.5);
+		isFinished = false;
 	}
 
 	@Override
 	protected void execute() {
-		Arm.getInstance().setSetpoint(pos);
-		Arm.getInstance().enable();
+		Arm.getInstance().brakeToggle();
+		isFinished = true;
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Arm.getInstance().onTarget()||isTimedOut();
+		// TODO Auto-generated method stub
+		return isFinished;
 	}
 
 	@Override
 	protected void end() {
-		Arm.getInstance().disable();
-		Arm.getInstance().setBrake(Arm.ON);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void interrupted() {
-		end();
+		// TODO Auto-generated method stub
+		
 	}
+
 }

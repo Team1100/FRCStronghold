@@ -1,12 +1,15 @@
 
 package org.usfirst.frc.team1100.robot.subsystems;
 
+import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.arm.MoveArmCommand;
+import org.usfirst.frc.team1100.robot.commands.arm.ToggleBrakeCommand;
 import org.usfirst.frc.team1100.robot.commands.arm.UserMoveArm;
+import org.usfirst.frc.team1100.robot.input.XboxController;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -43,6 +46,9 @@ public class Arm extends PIDSubsystem {
 	private static final double TOLERANCE = 7;
 	private static final double MAX_SPEED = .6;
 
+	public static final boolean ON = false;
+	public static final boolean OFF = true;
+	
 	public static Arm getInstance() {
 		if (arm == null)
 			arm = new Arm();
@@ -54,19 +60,24 @@ public class Arm extends PIDSubsystem {
 		setAbsoluteTolerance(TOLERANCE);
 		setOutputRange(-MAX_SPEED, MAX_SPEED);
 
-		arm1 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_1);
-		arm2 = new Talon(RobotMap.L_ARM_LIFT_MOTOR_2);
+		arm1 = new Talon(RobotMap.A_ARM_LIFT_MOTOR_1);
+		arm2 = new Talon(RobotMap.A_ARM_LIFT_MOTOR_2);
 
-		brake = new Solenoid(RobotMap.S_PCM, RobotMap.L_BRAKE);
+		brake = new Solenoid(RobotMap.S_PCM, RobotMap.A_BRAKE);
 		
-		downLimitSwitch = new DigitalInput(RobotMap.L_DOWN_SWITCH);
+		downLimitSwitch = new DigitalInput(RobotMap.A_DOWN_SWITCH);
 		
-		armRead = new Encoder(RobotMap.L_ARM_ENC_A, RobotMap.L_ARM_ENC_B);
+		armRead = new Encoder(RobotMap.A_ARM_ENC_A, RobotMap.A_ARM_ENC_B);
 		armRead.reset();
 	}
-
+	
+	
 	public void brake(){
 		brake.set(true);
+	}
+	
+	public void setBrake(boolean b) {
+		brake.set(b);
 	}
 	
 	public boolean isTooFarDown() {
@@ -90,25 +101,34 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void moveArm(double value) {
-		if (getEncValue() > 500 && value < 0) {
+		/*if (getEncValue() > 500 && value < 0) {
 			arm1.set(0);
 			arm2.set(0);
 			return;
-		}
-		if(value==0)
-			brake.set(true);
-		if(value > 0 && isTooFarDown()) {
+		}*/
+		
+		/*if(value > 0 && isTooFarDown()) {
 			//Check for the limit switch being hit, and if it is then we sto
 			//the arm and only allow it to go back up
 			arm1.set(0);
 			arm2.set(0);
-			//new MoveArmCommand(.3, .5).start();
 			return;
+		}*/
+		if(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft)!=0) {
+			setBrake(OFF); 
 		}
 		arm1.set(value);
 		arm2.set(value);
 	}
 
+	public boolean getBrake(){
+		return brake.get();
+	}
+	
+	public void brakeToggle(){
+		brake.set(!brake.get());
+	}
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new UserMoveArm());
 	}

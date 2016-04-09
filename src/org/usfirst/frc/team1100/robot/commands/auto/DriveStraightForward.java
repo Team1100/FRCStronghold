@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DriveStraightForward extends CommandGroup{
 	public DriveStraightForward(){
-		addSequential(new DriveCommand(Drive.AUTOSPEED, Drive.AUTOSPEED, 3.5));
+		addSequential(new DriveCommand(Drive.AUTOSPEED, Drive.AUTOSPEED, 3));
 		addSequential(new CommandsForEveryAuto());
 		//addSequential(new FireThenReset());
 	}

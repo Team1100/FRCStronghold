@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UserMoveArm extends Command{
 
@@ -23,8 +24,10 @@ public class UserMoveArm extends Command{
 	@Override
 	protected void execute() {
 		Arm.getInstance().moveArm(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft));		
+		if(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kRightTrigger)!=0)
+			Arm.getInstance().setBrake(Arm.ON);
+		SmartDashboard.putBoolean("Arm Brake", !Arm.getInstance().getBrake());
 	}
-
 	@Override
 	protected boolean isFinished() {
 		return false;

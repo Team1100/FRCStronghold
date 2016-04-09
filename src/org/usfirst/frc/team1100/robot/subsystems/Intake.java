@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.intake.PauseLift;
 import org.usfirst.frc.team1100.robot.commands.intake.UserLiftIntake;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -26,17 +27,24 @@ public class Intake extends PIDSubsystem {
 	
 	private DigitalInput /*limitTop,*/ limitBot;
 
-	public static final double POS_UP_ISH = 2.13;
-	public static final double POS_UP = 2.5;
-	public static final double POS_DOWN = 1.7;
+	public static final double POS_UP = 3.33;
+	public static final double POS_DOWN = 1.825;
 	
-	private static final double MAX_SPEED = .5;
+	
 	
 	private static final double P = 1;
 	private static final double I = .2;
 	private static final double D = 0;
-	private static final double TOLERANCE = 100000;//shhhhh
+	private static final double TOLERANCE = 100;//shhhhh
 
+	public static final double ROLL_SPEED = .75;
+	private static final double MAX_SPEED = ROLL_SPEED*.5;
+	
+	private boolean magUsed;	
+	
+	private DigitalInput magSwitch;
+	private DigitalInput ballSwitch;
+	
 	public static Intake getInstance() {
 		if (intake == null)
 			intake = new Intake();
@@ -47,7 +55,7 @@ public class Intake extends PIDSubsystem {
 		super(P, I, D);
 		setInputRange(POS_DOWN, POS_UP);
 
-		setOutputRange(-MAX_SPEED/3, MAX_SPEED);
+		setOutputRange(-MAX_SPEED*.5, MAX_SPEED);
 		
 		setAbsoluteTolerance(TOLERANCE);
 		
@@ -58,7 +66,11 @@ public class Intake extends PIDSubsystem {
 		limitBot = new DigitalInput(RobotMap.I_LIMIT_SWITCH_BOT);
 		
 		liftRead = new AnalogInput(RobotMap.I_INTAKE_LIFT_POTENTIOMETER);
-		ballIn = new DigitalInput(RobotMap.I_BALL_IN);
+		
+		magSwitch = new DigitalInput(RobotMap.I_MAG_SWITCH);
+		ballSwitch = new DigitalInput(RobotMap.I_BALL_IN);
+		
+		magUsed = false;
 	}
 	
 	public boolean target(){
@@ -79,7 +91,7 @@ public class Intake extends PIDSubsystem {
 		if(ballIn.get())
 			in = true;
 		else in = false;
-		return false;//TODO
+		return false;//TODO ball in tomfoolery
 	}
 
 	public void moveRoller(double value) {
@@ -98,7 +110,7 @@ public class Intake extends PIDSubsystem {
 
 	public void toggleRollers() {
 		if (!rollersOn)
-			roller.set(-.5);
+			roller.set(-ROLL_SPEED);
 		else
 			roller.set(0);
 		rollersOn = !rollersOn;
@@ -116,14 +128,14 @@ public class Intake extends PIDSubsystem {
 		return lift.get();
 	}
 
-	public void setLift(double value){
-		if(getAnalog()<POS_DOWN&&value>0){
-			lift.set(0);
-			return;
+	public void moveIntake(double value){
+		if(getAnalog()<POS_DOWN&&value>0){ 
+			//lift.set(0);
+			//return;
 		}
 		if(getAnalog()>POS_UP&&value<0){
-			lift.set(0);
-			return;
+			//lift.set(0);
+			//return;
 		}
 		if(Math.abs(value)>MAX_SPEED){
 			if(value>0)value = MAX_SPEED;
@@ -133,6 +145,14 @@ public class Intake extends PIDSubsystem {
 			lift.set(0);
 			return;
 		}*/
+		if(this.isMagSwitchOn()&&!magUsed){
+			//(new SetLEDCommand(false, true, false)).start();
+			magUsed = true;
+			new PauseLift().start();
+		} else if(!this.isMagSwitchOn()&&magUsed){
+			//(new SetLEDCommand(false, false, false)).start();
+			magUsed = false;
+		}
 		if(tooFarDown()&&lift.get()<0){
 			lift.set(0);
 			return;
@@ -150,6 +170,18 @@ public class Intake extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		setLift(-output);
+		moveIntake(-output);
+	}
+	
+	public boolean isMagSwitchOn() {
+		return !magSwitch.get();
+	}
+	
+	public void blindDrive(double speed){
+		lift.set(speed);
+	}
+	
+	public boolean isBallIn() {
+		return !ballSwitch.get();
 	}
 }

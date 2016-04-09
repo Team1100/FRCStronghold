@@ -6,6 +6,7 @@ import org.usfirst.frc.team1100.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *Drive called continuously by the Drive subsystem, for joysticks
@@ -33,7 +34,16 @@ public class UserDrive extends Command {
     	//left = OI.getInstance().getPeasant2().getAxis(org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis.kYLeft);
     	//right = OI.getInstance().getPeasant2().getAxis(org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis.kYRight);
     	Drive.getInstance().driveTank(left, right);
+    	
     	//SmartDashboard.putNumber("Gyro", Drive.getInstance().getAngle());
+    	
+    	double jumpingJacks1 = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kX);
+    	double jumpingJacks2 = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);
+    	if(jumpingJacks1*jumpingJacks2<0.0) {
+    		SmartDashboard.putString("Jumping Jacks?", "Jumping Jacks Activated");
+    	} else {
+    		SmartDashboard.putString("Jumping Jacks?", "Jumping Jacks Deactivated");
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -46,7 +46,7 @@ public class SetIntakeSetpoint extends Command{
 	@Override
 	protected void end() {
 		Intake.getInstance().disable();
-		Intake.getInstance().setLift(0);
+		Intake.getInstance().moveIntake(0);
 	}
 
 	//Ends the command if interrupted

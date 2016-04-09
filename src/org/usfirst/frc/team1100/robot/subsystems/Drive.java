@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -26,6 +27,7 @@ public class Drive extends PIDSubsystem{
 	private RobotDrive driveTrain;
 	
 	private AnalogGyro gyro;
+	public AnalogInput tempTest; //Replacing gyro temporarialy remove later
 	
 	private boolean reversed;
 	
@@ -81,7 +83,7 @@ public class Drive extends PIDSubsystem{
 	}
 	
 	public double getAngle() {
-		return gyro.getAngle();
+		return gyro.getAngle(); //Was returning 0?
 
 	}
 
@@ -99,7 +101,8 @@ public class Drive extends PIDSubsystem{
 	
 	@Override
 	protected double returnPIDInput() {
-		return gyro.pidGet();
+return 0.0;
+		//return gyro.pidGet();
 	}
 
 	@Override

@@ -67,7 +67,6 @@ public class CenterYAdjust extends Command{
 	@Override
 	protected void end() {
 		Arm.getInstance().disable();
-		Arm.getInstance().brake();
 	}
 
 	@Override

@@ -39,6 +39,6 @@ public class Climb extends Subsystem{
 	
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Climb controls
+		//climb controls if put on a stick
 	}
 }

@@ -30,10 +30,12 @@ public class UserLiftIntake extends Command{
 	protected void execute() {
 		SmartDashboard.putNumber("Intake Analog", Intake.getInstance().getAnalog());
 		value = OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight);
-		Intake.getInstance().setLift(value);
+		Intake.getInstance().moveIntake(value);
+		
+		
 		/*if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
 			Intake.getInstance().toggleRollers();
-		}*///TODO
+		}*///TODO more ball in tomfoolery
 	}
 
 	@Override
