@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1100.robot.commands.drive;
 
 import org.usfirst.frc.team1100.robot.OI;
+import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,17 +26,23 @@ public class UserDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double left = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
-    	double right = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kY);
-    	if(Drive.getInstance().isReversed()){
-    		left = -left;
-    		right = -right;
+    	double left, right;
+    	if(OI.getMethod()==0||OI.getMethod()==2){
+    		left = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
+        	right = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kY);
     	}
-    	//left = OI.getInstance().getPeasant2().getAxis(org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis.kYLeft);
-    	//right = OI.getInstance().getPeasant2().getAxis(org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis.kYRight);
+    	else if(OI.getMethod()==1){
+    		left = OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft);
+    		right = OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYRight);
+    	}
+    	else{
+    		left = 0;
+    		right = 0;
+    	}
+ 
     	Drive.getInstance().driveTank(left, right);
     	
-    	//SmartDashboard.putNumber("Gyro", Drive.getInstance().getAngle());
+    	SmartDashboard.putNumber("Gyro", Drive.getInstance().getAngle());
     	
     	double jumpingJacks1 = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kX);
     	double jumpingJacks2 = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);

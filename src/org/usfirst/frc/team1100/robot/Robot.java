@@ -2,7 +2,11 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightBackward;
-import org.usfirst.frc.team1100.robot.commands.auto.SetFireAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.LowShootLowBarAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.old.DriveStraightForward;
+import org.usfirst.frc.team1100.robot.commands.auto.old.LowBarAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.old.PortcullisAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.old.SpyBotFire;
 import org.usfirst.frc.team1100.robot.subsystems.Arm;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -52,21 +56,22 @@ public class Robot extends IterativeRobot {
 		server.setQuality(40);
 		server.startAutomaticCapture("cam2");
 		
-		/*autoChuse= new SendableChooser();
-		autoChuse.addDefault("Low Bar", new LowBarAuto());
-		autoChuse.addObject("Forwards Defense", new DriveStraightForward());
-		autoChuse.addObject("Backwards Defense", new DriveStraightBackward());
-		autoChuse.addObject("SpyBot-Fires boulder", new SpyBotFire());
-		autoChuse.addObject("Portcullis Auto -- Experimental", new PortcullisAuto());
-		autoChuse.addObject("Low Bar then Low Fire", new LowShootLowBarAuto());
-		SmartDashboard.putData("AutoThomas", autoChuse);
-		*/
+//		autoChuse= new SendableChooser();
+//		autoChuse.addDefault("Low Bar", new LowBarAuto());
+//		autoChuse.addObject("Forwards Defense", new DriveStraightForward());
+//		autoChuse.addObject("Backwards Defense", new DriveStraightBackward());
+//		autoChuse.addObject("SpyBot-Fires boulder", new SpyBotFire());
+//		autoChuse.addObject("Portcullis Auto -- Experimental", new PortcullisAuto());
+//		autoChuse.addObject("Low Bar then Low Fire", new LowShootLowBarAuto());
+//		SmartDashboard.putData("AutoThomas", autoChuse);
+		
 		/*
 		fireInAutoChoose = new SendableChooser();
 		fireInAutoChoose.addObject("Fire at end of auto", new SetFireAuto(true));
 		fireInAutoChoose.addObject("Do not fire at end of auto", new SetFireAuto(false));
 		SmartDashboard.putData("Fire in Auto", fireInAutoChoose);
 		*/
+    	
     }
 	
 	public void disabledPeriodic() {
@@ -74,20 +79,18 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-    	Shooter.getInstance().setInAuto(true);
-        //autonomousCommand = (Command)autoChuse.getSelected();
-    	autonomousCommand = new DriveStraightBackward();
-        SmartDashboard.putString("Test", autonomousCommand.toString()+"Test");
-        //((Command)fireInAutoChoose.getSelected()).start();
-        new SetFireAuto(false).start();
-        if (autonomousCommand != null) autonomousCommand.start();
+		autonomousCommand=new LowShootLowBarAuto();
+		if(!Drive.getInstance().getAutoS()){
+		autonomousCommand=new DriveStraightBackward();
+		}
+    	autonomousCommand.start();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
+    	Scheduler.getInstance().run();
     }
 
     public void teleopInit() {
@@ -95,7 +98,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-    	Shooter.getInstance().setInAuto(false);
+    	//Shooter.getInstance().setInAuto(false);
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 

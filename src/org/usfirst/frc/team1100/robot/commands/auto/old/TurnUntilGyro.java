@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.auto;
+package org.usfirst.frc.team1100.robot.commands.auto.old;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 
@@ -24,9 +24,9 @@ public class TurnUntilGyro extends Command {
     protected void execute() {
     	double gyroNumber = Drive.getInstance().getAngle();
 	    if(90<gyroNumber-10) {
-	    	Drive.getInstance().driveTank(0, Drive.PORTCULLIS_SPEED);
+	    	Drive.getInstance().driveTank(Drive.AUTOSPEED_SLOW, -Drive.AUTOSPEED_SLOW);
 	    } else if(90>gyroNumber+10) {
-	    	Drive.getInstance().driveTank(Drive.PORTCULLIS_SPEED, 0);
+	    	Drive.getInstance().driveTank(-Drive.AUTOSPEED_SLOW, Drive.AUTOSPEED_SLOW);
 	    } else {
 	    	finished = true;
 	    }

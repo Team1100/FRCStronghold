@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.auto;
+package org.usfirst.frc.team1100.robot.commands.auto.old;
 
 import org.usfirst.frc.team1100.robot.commands.arm.ArmToSetpoint;
 import org.usfirst.frc.team1100.robot.commands.arm.MoveToResetEncoder;

@@ -6,6 +6,7 @@ import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -22,7 +23,7 @@ public class Drive extends PIDSubsystem{
 	private Victor LeftBackVictor;
 	
 	public static final double AUTOSPEED = .85;
-	public static final double PORTCULLIS_SPEED = 0.67;
+	public static final double AUTOSPEED_SLOW = 0.67;
 	
 	private RobotDrive driveTrain;
 	
@@ -37,6 +38,8 @@ public class Drive extends PIDSubsystem{
 	
 	private static final double TOLERANCE = 1;
 	private static final double MAX_SPEED = .5;
+	
+	private DigitalInput autoSwitch;
 	
 	public static Drive getInstance() {// make drive accessible from anywhere
 		if (drive == null)
@@ -58,11 +61,16 @@ public class Drive extends PIDSubsystem{
 
 		driveTrain = new RobotDrive(LeftFrontVictor, LeftBackVictor, RightFrontVictor, RightBackVictor);
 		
+		autoSwitch = new DigitalInput(RobotMap.D_AUTO_S);
 		
 		gyro = new AnalogGyro(RobotMap.D_GYRO);
 		gyro.reset();
 	}
 
+	public boolean getAutoS(){
+		return autoSwitch.get();
+	}
+	
 	public void driveTank(double left, double right) {
 		if(!reversed)driveTrain.tankDrive(left, right);
 	}

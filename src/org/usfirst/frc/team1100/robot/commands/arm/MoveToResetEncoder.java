@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MoveToResetEncoder extends CommandGroup{
 	public MoveToResetEncoder(){
-		addSequential(new MoveArmCommand(.9, 1));
+		addSequential(new MoveArmCommand(.9, 1.5));
 		addSequential(new ResetEncoder());
 	}
 }

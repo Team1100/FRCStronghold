@@ -16,13 +16,16 @@ public class LiftIntake extends Command{
 	public LiftIntake(double timeout, double value){
 		this.timeout = timeout;
 		this.value = value;
-		
+		setTimeout(timeout);
 		requires(Intake.getInstance());
+	}
+	
+	public LiftIntake(double value){
+		this.value = value;
 	}
 	
 	@Override
 	protected void initialize() {
-		setTimeout(timeout);
 		
 	}
 
@@ -34,7 +37,8 @@ public class LiftIntake extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut();
+		if(timeout!=0)return isTimedOut();
+		else return false;
 	}
 
 	@Override

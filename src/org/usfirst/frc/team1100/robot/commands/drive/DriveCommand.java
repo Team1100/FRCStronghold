@@ -18,6 +18,7 @@ public class DriveCommand extends Command {
 	 * @param time - duration of movement in seconds
 	 */
     public DriveCommand(double left, double right, double time) {
+    	System.out.println("Constructing DriveCommand");
         requires(Drive.getInstance());
         this.left = left;
         this.right = right;
@@ -31,6 +32,7 @@ public class DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Driving: " + left + " " + right);
     	Drive.getInstance().driveTank(left, right);
     }
 

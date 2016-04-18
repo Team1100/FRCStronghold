@@ -129,7 +129,7 @@ public class Intake extends PIDSubsystem {
 	}
 
 	public void moveIntake(double value){
-		if(getAnalog()<POS_DOWN&&value>0){ 
+		/*if(getAnalog()<POS_DOWN&&value>0){ 
 			//lift.set(0);
 			//return;
 		}
@@ -140,7 +140,7 @@ public class Intake extends PIDSubsystem {
 		if(Math.abs(value)>MAX_SPEED){
 			if(value>0)value = MAX_SPEED;
 			else if(value<0)value = -MAX_SPEED;
-		}
+		}*/
 		/*if(limitTop.get()&&lift.get()>0){
 			lift.set(0);
 			return;
@@ -148,7 +148,7 @@ public class Intake extends PIDSubsystem {
 		if(this.isMagSwitchOn()&&!magUsed){
 			//(new SetLEDCommand(false, true, false)).start();
 			magUsed = true;
-			new PauseLift().start();
+			//new PauseLift().start();
 		} else if(!this.isMagSwitchOn()&&magUsed){
 			//(new SetLEDCommand(false, false, false)).start();
 			magUsed = false;

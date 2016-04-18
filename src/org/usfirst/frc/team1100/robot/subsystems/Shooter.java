@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,6 +20,9 @@ public class Shooter extends Subsystem {
 	private DoubleSolenoid latch;// controls/releases the fill
 	private DoubleSolenoid reset;// pulls back kicker to reset
 
+	private Solenoid flashlight;//aim that sh*t
+	private Solenoid flashlight1;
+	
 	private boolean autoFire;
 	private boolean isInAuto;
 	
@@ -40,8 +44,17 @@ public class Shooter extends Subsystem {
 		fill = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_FILL_PNEUMATIC_A, RobotMap.S_FILL_PNEUMATIC_B);
 		latch = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_LATCH_PNEUMATIC_A, RobotMap.S_LATCH_PNEUMATIC_B);
 		reset = new DoubleSolenoid(RobotMap.S_PCM, RobotMap.S_RESET_PNEUMATIC_A, RobotMap.S_RESET_PNEUMATIC_B);
+		
+		flashlight = new Solenoid(RobotMap.L_PCM, RobotMap.S_FLASHLIGHT);
+		flashlight1 = new Solenoid(RobotMap.S_PCM, RobotMap.S_FLASHLIGHT_A);
+		
 		autoFire = false;
 		isInAuto = false;
+	}
+	
+	public void toggleLight(){
+		flashlight.set(!flashlight.get());
+		flashlight1.set(!flashlight1.get());
 	}
 	
 	public boolean shootInAuto(){

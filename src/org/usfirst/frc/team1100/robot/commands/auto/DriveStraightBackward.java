@@ -7,9 +7,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DriveStraightBackward extends CommandGroup{
 	public DriveStraightBackward(){
-		//addSequential(new CommandsForEveryAuto());
-		addSequential(new DriveCommand(-Drive.AUTOSPEED, -Drive.AUTOSPEED, 2.5));
-		//addSequential(new TurnCommand(180));
-		//addSequential(new FireThenReset());
+		addSequential(new DriveCommand(-Drive.AUTOSPEED, -Drive.AUTOSPEED, 3));
 	}
 }

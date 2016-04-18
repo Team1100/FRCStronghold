@@ -3,10 +3,11 @@ package org.usfirst.frc.team1100.robot;
 import org.usfirst.frc.team1100.robot.commands.arm.ArmToSetpoint;
 import org.usfirst.frc.team1100.robot.commands.arm.MoveToResetEncoder;
 import org.usfirst.frc.team1100.robot.commands.arm.ToggleBrakeCommand;
+import org.usfirst.frc.team1100.robot.commands.intake.LiftIntake;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleLEDCommand;
-import org.usfirst.frc.team1100.robot.commands.intake.ToggleRollerCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.TurnRollers;
+import org.usfirst.frc.team1100.robot.commands.shooter.ToggleLight;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenReset;
 import org.usfirst.frc.team1100.robot.commands.shooter.groups.FireThenResetSimultIntake;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
@@ -20,32 +21,50 @@ import org.usfirst.frc.team1100.robot.subsystems.Intake;
 public class OI{
 	public static OI oi;
 	
+	private static int method;
+
 	public static OI getInstance(){
 		if(oi==null)
 			oi = new OI();
 		return oi;
 	}
 	
+	public static void setTwoDriver(){
+		oi = null;
+		OI.getInstance();
+	}
+	public static void setOneDriver(boolean controller){
+		oi = null;
+		oi = new OI(controller);
+	}
+	
 	private AttackThree LeftStick;
 	private AttackThree RightStick;
 	private XboxController Peasant/*, Peasant2*/;
+	
+	public static final boolean XBOX = true;
+	public static final boolean STICKS = false;
 	
 	/**
 	 * Called by Robot Initialization. 
 	 * Creates joysticks and button assignments.
 	 */
+	
 	private OI(){
+		
+		setMethod(0);
+		
 		//Joystick Init
 		LeftStick = new AttackThree(RobotMap.J_LEFT, .1);
 		RightStick = new AttackThree(RobotMap.J_RIGHT, .1);
 		Peasant = new XboxController(RobotMap.J_X, .2); //Help! Help! I'm being repressed!
-		//Peasant2 = new XboxController(0, .2); //Help! Help! I'm being repressed!
+		
 		
 		//Button Assignments
 		
 		Peasant.getButtonX().whenPressed(new FireThenReset());
 		Peasant.getButtonB().whenPressed(new FireThenResetSimultIntake());
-		Peasant.getButtonY().whenPressed(new ToggleRollerCommand());
+		Peasant.getButtonY().whileHeld(new TurnRollers(-Intake.ROLL_SPEED));
 		Peasant.getButtonA().whileHeld(new TurnRollers(Intake.ROLL_SPEED));
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
 		Peasant.getButtonLeftBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_UP));
@@ -55,6 +74,10 @@ public class OI{
 		Peasant.getButtonLeftStick().whenPressed(new ArmToSetpoint(Arm.POS_DEFENSES));
 		Peasant.getButtonStart().whenPressed(new ArmToSetpoint(Arm.POS_RAMP));
 		Peasant.getButtonBack().whenPressed(new ArmToSetpoint(Arm.POS_MIDDLE));
+		
+		RightStick.getButton(2).whenPressed(new ToggleLight());
+		
+		RightStick.getButton(6).whenPressed(new ChangeDriveMode());
 		
 		LeftStick.getButton(5).whenPressed(new ToggleBrakeCommand());
 		RightStick.getButton(8).whenPressed(new ToggleLEDCommand(0));
@@ -73,6 +96,31 @@ public class OI{
 		Peasant.getButtonX().whenPressed(new SetLatchCommand(Value.kReverse));
 		Peasant.getButtonStart().whenPressed(new FireThenReset());
 		*/
+	}
+	
+	private OI(boolean controller){
+		if(XBOX){
+			setMethod(1);
+			//just xbox assignments
+			RightStick.getButton(6).whenPressed(new ChangeDriveMode());
+			
+			Peasant.getButtonX().whenPressed(new FireThenReset());
+			Peasant.getButtonB().whenPressed(new FireThenResetSimultIntake());
+			Peasant.getButtonY().whileHeld(new TurnRollers(-Intake.ROLL_SPEED));
+			Peasant.getButtonA().whileHeld(new TurnRollers(Intake.ROLL_SPEED));
+			
+			Peasant.getButtonRightStick().whenPressed(new MoveToResetEncoder());
+			Peasant.getButtonLeftStick().whenPressed(new ArmToSetpoint(Arm.POS_DEFENSES));
+			Peasant.getButtonStart().whenPressed(new ArmToSetpoint(Arm.POS_RAMP));
+			Peasant.getButtonBack().whenPressed(new ArmToSetpoint(Arm.POS_MIDDLE));
+			
+			Peasant.getButtonRightBumper().whileHeld(new LiftIntake(.9));
+			Peasant.getButtonLeftBumper().whileHeld(new LiftIntake(-.9));
+		}else if(STICKS){
+			setMethod(2);
+			//just sticks assignments
+			RightStick.getButton(6).whenPressed(new ChangeDriveMode());
+		}
 	}
 	/**
 	 * Returns the Left Joystick.
@@ -96,8 +144,12 @@ public class OI{
 	public XboxController getPeasant() {
 		return Peasant;
 	}
-	
-	/*public XboxController getPeasant2() {
-		return Peasant2;
-	}*/
+
+	public static int getMethod() {
+		return method;
+	}
+
+	public static void setMethod(int method) {
+		OI.method = method;
+	}
 }

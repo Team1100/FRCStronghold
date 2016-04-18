@@ -65,7 +65,7 @@ public class Arm extends PIDSubsystem {
 
 		brake = new Solenoid(RobotMap.S_PCM, RobotMap.A_BRAKE);
 		
-		downLimitSwitch = new DigitalInput(RobotMap.A_DOWN_SWITCH);
+		//downLimitSwitch = new DigitalInput(RobotMap.A_DOWN_SWITCH);
 		
 		armRead = new Encoder(RobotMap.A_ARM_ENC_A, RobotMap.A_ARM_ENC_B);
 		armRead.reset();
