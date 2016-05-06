@@ -30,12 +30,12 @@ public class OI{
 	}
 	
 	public static void setTwoDriver(){
-		oi = null;
-		OI.getInstance();
+		/*oi = null;
+		OI.getInstance();*/
 	}
 	public static void setOneDriver(boolean controller){
-		oi = null;
-		oi = new OI(controller);
+		/*oi = null;
+		oi = new OI(controller);*/
 	}
 	
 	private AttackThree LeftStick;
