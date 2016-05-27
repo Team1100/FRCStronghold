@@ -49,7 +49,6 @@ public class RobotMap {
 	private static final int ANALOG_1 = 1;
 	private static final int ANALOG_2 = 2;
 	private static final int ANALOG_3 = 3;
-	private static final int ANALOG_4 = 4;
 	
 	private static final int DIGITAL_0 = 0;
 	private static final int DIGITAL_1 = 1;
@@ -86,12 +85,11 @@ public class RobotMap {
 	public static final int A_ARM_LIFT_MOTOR_2 = MOTOR_5;
 	public static final int A_ARM_ENC_A = DIGITAL_0;
 	public static final int A_ARM_ENC_B = DIGITAL_1;
-	public static final int A_ARM_POTENTIOMETER = ANALOG_2;
+	public static final int A_ARM_POTENTIOMETER = ANALOG_3;
 	public static final int A_BRAKE = PNEUM_6;
 	//public static final int A_DOWN_SWITCH = DIGITAL_2;
 	//[I]NTAKE
 	public static final int I_INTAKE_ROLLER = MOTOR_4;
-	public static final int I_INTAKE_LIFT = MOTOR_1;
 	public static final int I_INTAKE_LIFT_POTENTIOMETER = ANALOG_1;
 	public static final int I_BALL_IN = DIGITAL_4; 
 	public static final int I_LIMIT_SWITCH_TOP = DIGITAL_5;
@@ -105,8 +103,7 @@ public class RobotMap {
 	public static final int J_RIGHT = USB_1;
 	public static final int J_X = USB_2;
 	//[U]LTRASONIC
-	public static final int U_EZ3 = ANALOG_3;//t
-	public static final int U_EZ1 = ANALOG_4;//t
+	public static final int U_EZ3 = ANALOG_2;
 	//[E]XTRAFORCLARITY
 	public static final int E_POWER_DISTRIBUTION_PANEL = CAN_0;
 	//[L]IGHTS

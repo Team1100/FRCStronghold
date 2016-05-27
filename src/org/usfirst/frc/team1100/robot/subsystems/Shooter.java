@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Uses pneumatics to kick boulders into enemy towers (or our own towers. or
@@ -55,6 +56,10 @@ public class Shooter extends Subsystem {
 	public void toggleLight(){
 		flashlight.set(!flashlight.get());
 		flashlight1.set(!flashlight1.get());
+		if(flashlight.get() || flashlight1.get())
+			SmartDashboard.putString("Flashlight status", "Enabled");
+		else
+			SmartDashboard.putString("Flashlight status", "Disabled");
 	}
 	
 	public boolean shootInAuto(){

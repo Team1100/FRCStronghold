@@ -22,7 +22,7 @@ public class Drive extends PIDSubsystem{
 	private Victor LeftFrontVictor;
 	private Victor LeftBackVictor;
 	
-	public static final double AUTOSPEED = .85;
+	public static final double AUTOSPEED = 0.9;
 	public static final double AUTOSPEED_SLOW = 0.67;
 	
 	private RobotDrive driveTrain;

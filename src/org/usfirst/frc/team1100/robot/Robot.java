@@ -2,11 +2,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightBackward;
-import org.usfirst.frc.team1100.robot.commands.auto.LowShootLowBarAuto;
-import org.usfirst.frc.team1100.robot.commands.auto.old.DriveStraightForward;
-import org.usfirst.frc.team1100.robot.commands.auto.old.LowBarAuto;
-import org.usfirst.frc.team1100.robot.commands.auto.old.PortcullisAuto;
-import org.usfirst.frc.team1100.robot.commands.auto.old.SpyBotFire;
+import org.usfirst.frc.team1100.robot.commands.auto.HighGoalTurnAuto;
 import org.usfirst.frc.team1100.robot.subsystems.Arm;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -19,7 +15,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -79,10 +74,12 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		autonomousCommand=new LowShootLowBarAuto();
+		autonomousCommand=new HighGoalTurnAuto();
 		if(!Drive.getInstance().getAutoS()){
-		autonomousCommand=new DriveStraightBackward();
+			autonomousCommand=new DriveStraightBackward();
 		}
+		//autonomousCommand=new HighGoalAuto();
+		
     	autonomousCommand.start();
     }
 

@@ -36,6 +36,11 @@ public class UserLiftIntake extends Command{
 		
 		Intake.getInstance().moveIntake(value);
 		
+		if(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kRightTrigger)!=0){
+			Intake.getInstance().moveRoller(-Intake.ROLL_SPEED);
+		}else{
+			Intake.getInstance().moveRoller(0);
+		}
 		/*if(Intake.getInstance().ballIn()&&Intake.getInstance().rollersOn()){
 			Intake.getInstance().toggleRollers();
 		}*///TODO more ball in tomfoolery

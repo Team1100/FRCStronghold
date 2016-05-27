@@ -1,20 +1,17 @@
 
 package org.usfirst.frc.team1100.robot.subsystems;
 
-import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.arm.ToggleBrakeCommand;
 import org.usfirst.frc.team1100.robot.commands.arm.UserMoveArm;
-import org.usfirst.frc.team1100.robot.input.XboxController;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Uses pneumatics to kick boulders into enemy towers (or our own towers. or
@@ -114,9 +111,11 @@ public class Arm extends PIDSubsystem {
 			arm2.set(0);
 			return;
 		}*/
+		/*
 		if(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kYLeft)!=0) {
 			setBrake(OFF); 
 		}
+		*/
 		arm1.set(value);
 		arm2.set(value);
 	}
@@ -127,6 +126,10 @@ public class Arm extends PIDSubsystem {
 	
 	public void brakeToggle(){
 		brake.set(!brake.get());
+		if(brake.get())
+			SmartDashboard.putString("Brake status", "Enabled");
+		else
+			SmartDashboard.putString("Brake status", "Disabled");
 	}
 	
 	public void initDefaultCommand() {

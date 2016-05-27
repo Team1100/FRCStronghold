@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Brakeoff extends Command{
 
 	public Brakeoff(){
-		requires(org.usfirst.frc.team1100.robot.subsystems.Arm.getInstance());
+		requires(Arm.getInstance());
 	}
 	boolean f;
 	@Override

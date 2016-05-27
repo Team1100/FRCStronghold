@@ -36,14 +36,11 @@ public class UserMoveArm extends Command{
 			}else value = 0;
 			Arm.getInstance().moveArm(value);
 		}
-		if(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kRightTrigger)!=0){
-			//Arm.getInstance().brakeToggle();
-			Arm.getInstance().setBrake(Arm.ON);
-		}
+		
 		if(OI.getInstance().getPeasant().getAxis(XboxController.XboxAxis.kLeftTrigger)!=0){
-			Arm.getInstance().setBrake(Arm.OFF);
+			//Arm.getInstance().setBrake(Arm.OFF);
 		}
-			
+		
 		SmartDashboard.putBoolean("Arm Brake", !Arm.getInstance().getBrake());
 		SmartDashboard.putNumber("Arm Encoder", Arm.getInstance().getEncValue());
 	}

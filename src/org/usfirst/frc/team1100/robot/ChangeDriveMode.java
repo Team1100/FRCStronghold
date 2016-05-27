@@ -13,8 +13,10 @@ public class ChangeDriveMode extends Command{
 
 	@Override
 	protected void execute() {
-		if(OI.getMethod()==2)OI.setMethod(0);
-		else OI.setMethod(OI.getMethod()+1);
+		if(OI.getMethod()==2)
+			OI.setMethod(0);
+		else
+			OI.setMethod(OI.getMethod()+1);
 		SmartDashboard.putNumber("Drive Mode", OI.getMethod());
 		f = true;
 	}

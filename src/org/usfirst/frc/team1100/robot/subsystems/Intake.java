@@ -158,7 +158,7 @@ public class Intake extends PIDSubsystem {
 			return;
 		}
 		if(Math.abs(value)>.1)
-			lift.set(value);
+			lift.set(-1*value);
 		else
 			lift.set(0);
 	}

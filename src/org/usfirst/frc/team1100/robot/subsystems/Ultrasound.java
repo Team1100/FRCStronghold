@@ -10,19 +10,17 @@ import org.usfirst.frc.team1100.robot.commands.ultrasound.PollSensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Ultrasound extends Subsystem {
 	
-	private AnalogInput EZ1;
 	private AnalogInput EZ3;
 	private final int SAMPLE_SIZE = 100;
 	private static Ultrasound ultrasound;
-
-	private Queue<Double> dataEZ1;
+	
 	private Queue<Double> dataEZ3; 
 	
 	private double EZ3Distance;
-	private double EZ1Distance;
 	
 	public static Ultrasound getInstance() {
 		if (ultrasound == null)
@@ -31,43 +29,34 @@ public class Ultrasound extends Subsystem {
 	}
 
 	public Ultrasound() {
-		EZ1 = new AnalogInput(RobotMap.U_EZ1);
 		EZ3 = new AnalogInput(RobotMap.U_EZ3);
 
-		dataEZ1 = new LinkedList<Double>();
-		dataEZ3 = new LinkedList<Double>();; 
+		dataEZ3 = new LinkedList<Double>();;
 	}
 
 	public void setDistanceEZ3() {
-		double value = getMode(dataEZ3);
-		dataEZ3.clear();
-		EZ3Distance =  distanceEZ3(value);
+		
 	}
 	
 	public void setDistanceEZ1() {
-		double value = getMode(dataEZ1);
-		dataEZ1.clear();
-		EZ1Distance = distanceEZ1(value);
+		
 	}
 	
 	public double getEZ3Distance(){
 		return EZ3Distance;
 	}
 	
-	public double getEZ1Distance(){
-		return EZ1Distance;
-	}
-	
 	public void addEZ3Data(){
-		dataEZ3.add((double) EZ3.getValue());
-		if(dataEZ3.size()>SAMPLE_SIZE)
-			dataEZ3.poll();
+		SmartDashboard.putNumber("EZ3 Ultrasonic Readout", EZ3.getValue());
+		SmartDashboard.putNumber("EZ3 Ultrasonic Distance", distanceEZ3(EZ3.getValue()));
 	}
 	
 	public void addEZ1Data(){
-		dataEZ1.add((double) EZ1.getValue());
-		if(dataEZ1.size()>SAMPLE_SIZE)
-			dataEZ1.poll();
+		
+	}
+	
+	public double getCurrentReading() {
+		return EZ3.getValue();
 	}
 
 	private double distanceEZ3(double value) {

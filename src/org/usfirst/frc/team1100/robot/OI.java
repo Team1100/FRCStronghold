@@ -1,8 +1,11 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.FireInHigh;
 import org.usfirst.frc.team1100.robot.commands.arm.ArmToSetpoint;
 import org.usfirst.frc.team1100.robot.commands.arm.MoveToResetEncoder;
 import org.usfirst.frc.team1100.robot.commands.arm.ToggleBrakeCommand;
+import org.usfirst.frc.team1100.robot.commands.auto.old.InterruptDrive;
+import org.usfirst.frc.team1100.robot.commands.drive.DriveBackwardsUntilUltrasonicCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.LiftIntake;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSetpoint;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleLEDCommand;
@@ -69,15 +72,19 @@ public class OI{
 		Peasant.getButtonRightBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_DOWN));
 		Peasant.getButtonLeftBumper().whenPressed(new SetIntakeSetpoint(Intake.POS_UP));
 		
-		Peasant.getButtonRightStick().whenPressed(new MoveToResetEncoder());
+		//Peasant.getButtonRightStick().whenPressed(new MoveToResetEncoder());
 		
-		Peasant.getButtonLeftStick().whenPressed(new ArmToSetpoint(Arm.POS_DEFENSES));
+		Peasant.getButtonLeftStick().whenPressed(new ToggleBrakeCommand());
 		Peasant.getButtonStart().whenPressed(new ArmToSetpoint(Arm.POS_RAMP));
 		Peasant.getButtonBack().whenPressed(new ArmToSetpoint(Arm.POS_MIDDLE));
 		
 		RightStick.getButton(2).whenPressed(new ToggleLight());
-		
+		RightStick.getButton(3).whenPressed(new DriveBackwardsUntilUltrasonicCommand());
 		RightStick.getButton(6).whenPressed(new ChangeDriveMode());
+		
+		RightStick.getButton(10).whenPressed(new DriveBackwardsUntilUltrasonicCommand());;
+		RightStick.getButton(11).whenPressed(new FireInHigh());
+		LeftStick.getButton(11).whenPressed(new InterruptDrive());
 		
 		LeftStick.getButton(5).whenPressed(new ToggleBrakeCommand());
 		RightStick.getButton(8).whenPressed(new ToggleLEDCommand(0));
