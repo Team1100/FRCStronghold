@@ -2,6 +2,8 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.FireInHigh;
 import org.usfirst.frc.team1100.robot.commands.arm.ArmToSetpoint;
+import org.usfirst.frc.team1100.robot.commands.arm.Brakeoff;
+import org.usfirst.frc.team1100.robot.commands.arm.Brakeonn;
 import org.usfirst.frc.team1100.robot.commands.arm.MoveToResetEncoder;
 import org.usfirst.frc.team1100.robot.commands.arm.ToggleBrakeCommand;
 import org.usfirst.frc.team1100.robot.commands.auto.old.InterruptDrive;
@@ -78,9 +80,8 @@ public class OI{
 		Peasant.getButtonStart().whenPressed(new ArmToSetpoint(Arm.POS_RAMP));
 		Peasant.getButtonBack().whenPressed(new ArmToSetpoint(Arm.POS_MIDDLE));
 		
-		RightStick.getButton(2).whenPressed(new ToggleLight());
-		RightStick.getButton(3).whenPressed(new DriveBackwardsUntilUltrasonicCommand());
-		RightStick.getButton(6).whenPressed(new ChangeDriveMode());
+		
+		//RightStick.getButton(6).whenPressed(new ChangeDriveMode());
 		
 		RightStick.getButton(10).whenPressed(new DriveBackwardsUntilUltrasonicCommand());;
 		RightStick.getButton(11).whenPressed(new FireInHigh());
@@ -90,6 +91,14 @@ public class OI{
 		RightStick.getButton(8).whenPressed(new ToggleLEDCommand(0));
 		RightStick.getButton(9).whenPressed(new ToggleLEDCommand(1));
 		RightStick.getButton(10).whenPressed(new ToggleLEDCommand(2));
+		
+		LeftStick.getButton(4).whenPressed(new Brakeoff());
+		LeftStick.getButton(5).whenPressed(new Brakeonn());
+		RightStick.getButton(1).whenPressed(new FireThenReset());
+		LeftStick.getButton(3).whenPressed(new TurnRollers(-Intake.ROLL_SPEED));
+		LeftStick.getButton(2).whenPressed(new TurnRollers(Intake.ROLL_SPEED));
+		RightStick.getButton(2).whenPressed(new ToggleLight());
+		RightStick.getButton(3).whenPressed(new DriveBackwardsUntilUltrasonicCommand());
 		//RightStick.getButton(6).whenPressed(new StartGrip());
 		//RightStick.getButton(5).whenPressed(new ToggleDirection());
 		

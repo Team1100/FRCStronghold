@@ -95,6 +95,7 @@ public class RobotMap {
 	public static final int I_LIMIT_SWITCH_TOP = DIGITAL_5;
 	public static final int I_LIMIT_SWITCH_BOT = DIGITAL_6;
 	public static final int I_MAG_SWITCH = DIGITAL_9;
+	public static final int I_INTAKE_LIFT = MOTOR_1;
 	//[C]LIMB
 	public static final int C_HOOK_EXTEND_MOTOR_1 = MOTOR_8;
 	public static final int C_HOOK_EXTEND_MOTOR_2 = MOTOR_9;

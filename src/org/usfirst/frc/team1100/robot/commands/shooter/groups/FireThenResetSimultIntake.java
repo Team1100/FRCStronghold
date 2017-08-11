@@ -13,7 +13,7 @@ public class FireThenResetSimultIntake extends CommandGroup{
 	 */
 	public FireThenResetSimultIntake(){
 		addParallel(new LiftIntake(.3, -.7));
-		//addSequential(new WaitCommand(0.4));
+		addSequential(new WaitCommand(0.4));
 		addSequential(new SetLatchCommand(Value.kReverse));
 		addSequential(new WaitCommand(1));
 		addSequential(new ResetShooterCommandGroup());

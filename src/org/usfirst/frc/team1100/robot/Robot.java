@@ -2,7 +2,9 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.auto.DriveStraightBackward;
+import org.usfirst.frc.team1100.robot.commands.auto.HighGoalAuto;
 import org.usfirst.frc.team1100.robot.commands.auto.HighGoalTurnAuto;
+import org.usfirst.frc.team1100.robot.commands.auto.LowShootLowBarAuto;
 import org.usfirst.frc.team1100.robot.subsystems.Arm;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -48,8 +50,9 @@ public class Robot extends IterativeRobot {
 		
 		//USB Camera Initialization
 		CameraServer server = CameraServer.getInstance();
-		server.setQuality(40);
-		server.startAutomaticCapture("cam2");
+		//TODO not rlly this will never be done
+		//server.setQuality(40);
+		//server.startAutomaticCapture("cam2");
 		
 //		autoChuse= new SendableChooser();
 //		autoChuse.addDefault("Low Bar", new LowBarAuto());
@@ -74,12 +77,16 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		autonomousCommand=new HighGoalTurnAuto();
-		if(!Drive.getInstance().getAutoS()){
+    	Command low = new LowShootLowBarAuto();
+    	Command back = new DriveStraightBackward();
+    	Command highS = new HighGoalAuto();
+    	Command highT = new HighGoalTurnAuto();
+		autonomousCommand = back;
+		/*if(!Drive.getInstance().getAutoS()){
 			autonomousCommand=new DriveStraightBackward();
-		}
+		}/*
 		//autonomousCommand=new HighGoalAuto();
-		
+		*/
     	autonomousCommand.start();
     }
 

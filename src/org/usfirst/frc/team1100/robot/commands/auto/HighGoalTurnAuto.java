@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class HighGoalTurnAuto extends CommandGroup {
     
     public  HighGoalTurnAuto() {
-        addSequential(new DriveCommand(0.7,0.7,2));//cross defense
+        addSequential(new DriveCommand(0.9,0.9,2));//cross defense
         
         /*
         addSequential(new DriveCommand(.8,0,.5));//turn right
